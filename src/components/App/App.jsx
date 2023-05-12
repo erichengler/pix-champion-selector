@@ -15,9 +15,8 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
-import LoginPage from '../LoginPage/LoginPage';
-import RegisterPage from '../RegisterPage/RegisterPage';
+import LoginPage from '../Login/LoginPage/LoginPage';
+import RegisterPage from '../Register/RegisterPage/RegisterPage';
 
 import './App.css';
 
@@ -57,14 +56,6 @@ function App() {
 						path="/user"
 					>
 						<UserPage />
-					</ProtectedRoute>
-
-					<ProtectedRoute
-						// logged in shows InfoPage else shows LoginPage
-						exact
-						path="/info"
-					>
-						<InfoPage />
 					</ProtectedRoute>
 
 					<Route
@@ -111,7 +102,7 @@ function App() {
 
 					{/* If none of the other routes matched, we will show a 404. */}
 					<Route>
-						<h1>404</h1>
+						<h1>404 - Page not found</h1>
 					</Route>
 				</Switch>
 				<Footer />

@@ -9,7 +9,9 @@ function AboutPage() {
 	return (
 		<div className="container">
 			<div>
-				<p>This about page is for anyone to read!</p>
+				<p>This application was designed and developed by Erich Engler.</p>
+				<br />
+				<p>More information coming soon!</p>
 			</div>
 		</div>
 	);
