@@ -17,8 +17,9 @@ import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import LoginPage from '../Login/LoginPage/LoginPage';
 import RegisterPage from '../Register/RegisterPage/RegisterPage';
-import ChampionsPage from '../ChampionsPage/ChampionsPage';
+import ChampionsPage from '../ChampionList/ChampionList';
 import FavoritesPage from '../FavoritesPage/FavoritesPage';
+import DetailsPage from '../ChampionDetails/ChampionDetails';
 
 import './App.css';
 
@@ -60,12 +61,19 @@ function App() {
 						<UserPage />
 					</ProtectedRoute>
 
+					{/* Champion List Page */}
 					<ProtectedRoute exact path="/champions">
 						<ChampionsPage />
 					</ProtectedRoute>
 
+					{/* Favorites Page */}
 					<ProtectedRoute exact path="/favorites">
 						<FavoritesPage />
+					</ProtectedRoute>
+
+					{/* Details Page */}
+					<ProtectedRoute exact path="/details/:id">
+						<DetailsPage />
 					</ProtectedRoute>
 
 					<Route

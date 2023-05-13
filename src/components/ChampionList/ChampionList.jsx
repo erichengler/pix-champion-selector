@@ -1,5 +1,8 @@
 import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+
+import ChampionItem from '../ChampionItem/ChampionItem';
 
 function ChampionsPage() {
 
@@ -9,6 +12,12 @@ function ChampionsPage() {
 	}, []);
 
 	const dispatch = useDispatch();
+	const history = useHistory();
+
+	// Brings user back to Home view
+	const backToHome = () => {
+		history.push('/');
+	}
 
 	// Storing all champions
 	const champions = useSelector(store => store.champions);
@@ -20,14 +29,15 @@ function ChampionsPage() {
 			{/* Maps through all champions */}
 			{
 				champions.map((champion) => (
-					<img
-						key={champion.id}
-						src={champion.portrait}
-						alt={champion.name}
-						style={{ padding: '5px' }}
-					/>
+					<ChampionItem 
+						key={champion.id} 
+						champion={champion} />
 				))
 			}
+			<br /><br /><br />
+
+			{/* Back to Home Button */}
+			<button onClick={backToHome}>Back</button>
 		</div>
 	);
 }
