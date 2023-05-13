@@ -5,10 +5,10 @@ function* fetchAllChampions() {
     // get all champions from the DB
     try {
         const champions = yield axios.get('/api/champion');
-        console.log('get all champions:', champions.data);
+        console.log('get champions:', champions.data);
         yield put({ type: 'SET_CHAMPIONS', payload: champions.data });
     } catch {
-        console.log('Get all champions error');
+        console.log('Get champions error');
     }
 }
 
