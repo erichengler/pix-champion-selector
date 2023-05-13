@@ -17,7 +17,7 @@ function UserPage() {
 			By Class:
 			<br />
 			<select id="classFilter">
-				<option value="0" selected>All Classes</option>
+				<option value="0">All Classes</option>
 				<option value="1">Enchanter</option>
 				<option value="2">Catcher</option>
 				<option value="3">Juggernaut</option>
@@ -53,7 +53,7 @@ function UserPage() {
 			</select>
 			&nbsp; to &nbsp;
 			{/* Max Difficulty */}
-			<select>
+			<select value={10}>
 				<option value="1">1</option>
 				<option value="2">2</option>
 				<option value="3">3</option>
@@ -63,7 +63,7 @@ function UserPage() {
 				<option value="7">7</option>
 				<option value="8">8</option>
 				<option value="9">9</option>
-				<option value="10" selected>10</option>
+				<option value="10">10</option>
 			</select>
 			<br /><br />
 
@@ -71,7 +71,7 @@ function UserPage() {
 			By Region:
 			<br />
 			<select>
-				<option value="0" selected>All Regions</option>
+				<option value="0">All Regions</option>
 				<option value="1">Bandle City</option>
 				<option value="2">Bilgewater</option>
 				<option value="3">Demacia</option>
