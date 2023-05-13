@@ -8,12 +8,24 @@ function* fetchAllChampions() {
         console.log('get all champions:', champions.data);
         yield put({ type: 'SET_CHAMPIONS', payload: champions.data });
     } catch {
-        console.log('get all champions error');
+        console.log('Get all champions error');
+    }
+}
+
+function* fetchThisChampion(action) {
+    // get this champion from the DB
+    try {
+        console.log(`Get this champion with ID: ${action.payload}`);
+        const champion = yield axios.get(`/api/champion/details?id=${action.payload}`);
+        yield put({ type: 'SET_CHAMPION', payload: champion.data });
+    } catch {
+        console.log('Get this champion error');
     }
 }
 
 function* championSaga() {
     yield takeEvery('FETCH_CHAMPIONS', fetchAllChampions);
+    yield takeEvery('FETCH_THIS_CHAMPION', fetchThisChampion);
 }
 
 export default championSaga;

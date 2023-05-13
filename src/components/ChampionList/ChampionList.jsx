@@ -14,7 +14,7 @@ function ChampionsPage() {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
-	// Brings user back to Home view
+	// Brings user back to Home (UserPage)
 	const backToHome = () => {
 		history.push('/');
 	}
