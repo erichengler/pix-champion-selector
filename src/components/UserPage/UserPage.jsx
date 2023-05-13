@@ -38,10 +38,17 @@ function UserPage() {
 	}
 	// --------- END of handleChange ---------
 
-	// TODO: Send newFilter to server in this function 
-	// TODO: (store in reducer?)
+	// TODO: Send newFilter to server and store in reducer
 	const roll = () => {
-		console.log(newFilter);
+		console.log('Filter:', newFilter);
+		// Dispatch to send filter goes here
+		setFilter({
+			class: '',
+			minDifficulty: '1',
+			maxDifficulty: '10',
+			region: '',
+			notes: ''
+		});
 		history.push('/champions');
 	}
 
@@ -60,20 +67,20 @@ function UserPage() {
 			By Class:
 			<br />
 			<select id="classFilter" onChange={handleClassChange}>
-				<option value="0">All Classes</option>
-				<option value="1">Enchanter</option>
-				<option value="2">Catcher</option>
-				<option value="3">Juggernaut</option>
-				<option value="4">Diver</option>
-				<option value="5">Burst</option>
-				<option value="6">Battlemage</option>
-				<option value="7">Artillery</option>
-				<option value="8">Marksman</option>
-				<option value="9">Assassin</option>
-				<option value="10">Skirmisher</option>
-				<option value="11">Vanguard</option>
-				<option value="12">Warden</option>
-				<option value="13">Specialist</option>
+				<option value="">All Classes</option>
+				<option value="Enchanter">Enchanter</option>
+				<option value="Catcher">Catcher</option>
+				<option value="Juggernaut">Juggernaut</option>
+				<option value="Diver">Diver</option>
+				<option value="Burst">Burst</option>
+				<option value="Battlemage">Battlemage</option>
+				<option value="Artillery">Artillery</option>
+				<option value="Marksman">Marksman</option>
+				<option value="Assassin">Assassin</option>
+				<option value="Skirmisher">Skirmisher</option>
+				<option value="Vanguard">Vanguard</option>
+				<option value="Warden">Warden</option>
+				<option value="Specialist">Specialist</option>
 			</select>
 			<br /><br />
 
@@ -116,21 +123,21 @@ function UserPage() {
 			By Region:
 			<br />
 			<select onChange={handleRegionChange}>
-				<option value="0">All Regions</option>
-				<option value="1">Bandle City</option>
-				<option value="2">Bilgewater</option>
-				<option value="3">Demacia</option>
-				<option value="4">Ionia</option>
-				<option value="5">Ixtal</option>
-				<option value="6">Noxus</option>
-				<option value="7">Piltover</option>
-				<option value="8">Shadow Isles</option>
-				<option value="9">Shurima</option>
-				<option value="10">Targon</option>
-				<option value="11">The Freljord</option>
-				<option value="12">The Void</option>
-				<option value="13">Zaun</option>
-				<option value="13">Runeterra</option>
+				<option value="">All Regions</option>
+				<option value="Bandle City">Bandle City</option>
+				<option value="Bilgewater">Bilgewater</option>
+				<option value="Demacia">Demacia</option>
+				<option value="Ionia">Ionia</option>
+				<option value="Ixtal">Ixtal</option>
+				<option value="Noxus">Noxus</option>
+				<option value="Piltover">Piltover</option>
+				<option value="Shadow Isles">Shadow Isles</option>
+				<option value="Shurima">Shurima</option>
+				<option value="Targon">Targon</option>
+				<option value="The Freljord">The Freljord</option>
+				<option value="The Void">The Void</option>
+				<option value="Zaun">Zaun</option>
+				<option value="Runeterra">Runeterra</option>
 			</select>
 			<br /><br />
 
