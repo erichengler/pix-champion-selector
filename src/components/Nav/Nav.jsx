@@ -28,6 +28,14 @@ function Nav() {
 							Home
 						</Link>
 
+						<Link className="navLink" to="/champions">
+							Champions
+						</Link>
+
+						<Link className="navLink" to="/favorites">
+							Favorites
+						</Link>
+
 						<LogOutButton className="navLink" />
 					</>
 				)}

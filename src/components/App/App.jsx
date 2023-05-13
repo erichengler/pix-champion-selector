@@ -17,6 +17,8 @@ import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import LoginPage from '../Login/LoginPage/LoginPage';
 import RegisterPage from '../Register/RegisterPage/RegisterPage';
+import ChampionsPage from '../ChampionsPage/ChampionsPage';
+import FavoritesPage from '../FavoritesPage/FavoritesPage';
 
 import './App.css';
 
@@ -47,15 +49,23 @@ function App() {
 					</Route>
 
 					{/* For protected routes, the view could show one of several things on the same route.
-            Visiting localhost:3000/user will show the UserPage if the user is logged in.
-            If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
-            Even though it seems like they are different pages, the user is always on localhost:3000/user */}
+            		Visiting localhost:3000/user will show the UserPage if the user is logged in.
+            		If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
+            		Even though it seems like they are different pages, the user is always on localhost:3000/user */}
 					<ProtectedRoute
 						// logged in shows UserPage else shows LoginPage
 						exact
 						path="/user"
 					>
 						<UserPage />
+					</ProtectedRoute>
+
+					<ProtectedRoute exact path="/champions">
+						<ChampionsPage />
+					</ProtectedRoute>
+
+					<ProtectedRoute exact path="/favorites">
+						<FavoritesPage />
 					</ProtectedRoute>
 
 					<Route
@@ -95,7 +105,7 @@ function App() {
 							// redirect them to the /user page
 							<Redirect to="/user" />
 							:
-							// Otherwise, show the Landing page
+							// Otherwise, show the Login page
 							<LoginPage />
 						}
 					</Route>
