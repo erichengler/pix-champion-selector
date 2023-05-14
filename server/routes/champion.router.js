@@ -1,9 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');
+const {
+	rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 
 // GET champions
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     // Query to get all champions
     const queryText = `SELECT * FROM champions ORDER BY name ASC;`;
     pool.query(queryText)
@@ -17,7 +20,7 @@ router.get('/', (req, res) => {
 });
 
 // GET this champion
-router.get('/details', (req, res) => {
+router.get('/details', rejectUnauthenticated, (req, res) => {
     const championId = req.query.id;
     // Query to get a specific champion based on id
     const queryText = `SELECT * FROM champions WHERE id = $1;`;

@@ -38,10 +38,16 @@ function DetailsPage() {
                 <span>{champion[0].title}</span>
                 <br /><br />
 
+                {/* Favorite, Notes, Blacklist */}
+                <button>Favorite</button> &nbsp;
+                <button>Notes</button> &nbsp;
+                <button>Blacklist</button> &nbsp;
+                <br />
+
                 {/* Champion Image */}
                 <img
                     src={champion[0].image}
-                    style={{ width: '500px', border: '2px solid black' }}
+                    style={{ width: '500px', border: '1px solid black' }}
                 />
                 <br />
 

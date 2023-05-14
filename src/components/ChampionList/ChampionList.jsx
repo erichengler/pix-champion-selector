@@ -19,6 +19,11 @@ function ChampionsPage() {
 		history.push('/');
 	}
 
+	// Brings user to result page
+	const roll = () => {
+		history.push('/result')
+	}
+
 	// Storing all champions
 	const champions = useSelector(store => store.champions);
 
@@ -38,6 +43,10 @@ function ChampionsPage() {
 
 			{/* Back to Home Button */}
 			<button onClick={backToHome}>Back</button>
+			&nbsp; &nbsp;
+
+			{/* Roll from list button */}
+			<button onClick={roll}>Roll</button>
 		</div>
 	);
 }

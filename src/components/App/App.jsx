@@ -20,6 +20,7 @@ import RegisterPage from '../Register/RegisterPage/RegisterPage';
 import ChampionsPage from '../ChampionList/ChampionList';
 import FavoritesPage from '../FavoritesPage/FavoritesPage';
 import DetailsPage from '../ChampionDetails/ChampionDetails';
+import ResultPage from '../ResultPage/ResultPage';
 
 import './App.css';
 
@@ -74,6 +75,11 @@ function App() {
 					{/* Details Page */}
 					<ProtectedRoute exact path="/details/:id">
 						<DetailsPage />
+					</ProtectedRoute>
+
+					{/* Result Page */}
+					<ProtectedRoute exact path="/result">
+						<ResultPage />
 					</ProtectedRoute>
 
 					<Route
