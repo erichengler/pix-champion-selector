@@ -14,18 +14,23 @@ function ChampionsPage() {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
+	// Storing all champions
+	const champions = useSelector(store => store.champions);
+
 	// Brings user back to Home (UserPage)
 	const backToHome = () => {
 		history.push('/');
 	}
 
+	// Sets random result from full champion list
 	// Brings user to result page
 	const roll = () => {
+		const random = Math.floor(Math.random() * champions.length);
+		console.log(champions[random]);
+		dispatch({ type: 'SET_RESULT', payload: champions[random] });
+
 		history.push('/result')
 	}
-
-	// Storing all champions
-	const champions = useSelector(store => store.champions);
 
 	return (
 		<div className="container">
@@ -34,8 +39,8 @@ function ChampionsPage() {
 			{/* Maps through all champions */}
 			{
 				champions.map((champion) => (
-					<ChampionItem 
-						key={champion.id} 
+					<ChampionItem
+						key={champion.id}
 						champion={champion} />
 				))
 			}

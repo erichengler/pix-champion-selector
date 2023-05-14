@@ -15,8 +15,8 @@ function* fetchAllChampions() {
 function* fetchThisChampion(action) {
     // get this champion from the DB
     try {
-        console.log(`Get this champion with ID: ${action.payload}`);
         const champion = yield axios.get(`/api/champion/details?id=${action.payload}`);
+        console.log(`Get this champion with ID: ${action.payload}`);
         yield put({ type: 'SET_CHAMPION', payload: champion.data });
     } catch {
         console.log('Get this champion error');
