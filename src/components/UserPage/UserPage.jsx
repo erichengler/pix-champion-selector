@@ -1,15 +1,25 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from "react-router-dom";
-import { useDispatch } from 'react-redux';
 
 function UserPage() {
 
 	// Storing user information
 	const user = useSelector((store) => store.user);
 
+	// Storing all champions
+	const champions = useSelector((store) => store.champions);
+
+	// Storing filtered champions
+	const filteredChampions = useSelector((store) => store.filteredChampions);
+
 	const history = useHistory();
 	const dispatch = useDispatch();
+
+	// GET all champions from database
+	useEffect(() => {
+		dispatch({ type: 'FETCH_CHAMPIONS' });
+	}, []);
 
 	// User filter
 	let [newFilter, setFilter] = useState({
@@ -51,11 +61,16 @@ function UserPage() {
 		});
 	}
 
-	// TODO: Send newFilter to server and store in reducer
+	// ! Use newFilter to add champions to filteredChampions reducer
 	const roll = (event) => {
 		event.preventDefault();
 		console.log('Rolling with this filter:', newFilter);
-		// Dispatch to send filter goes here
+
+	// ! FILTER WITH forEach GOES HERE
+
+		console.log('Filtered List:', filteredChampions);
+		// Dispatch to 'SET_FILTERED_CHAMPIONS' using newFilter
+		dispatch({ type: 'SET_FILTERED_CHAMPIONS', payload: filteredChampions });
 		setFilter({
 			class: '',
 			minDifficulty: '1',
@@ -69,18 +84,17 @@ function UserPage() {
 	return (
 		<div className="container">
 
-			{/* Welcome, user information */}
+			{/* Welcome, User Information */}
 			<h2>Welcome, {user.username}!</h2>
 			<p>Your ID is: {user.id}</p>
 			<br /><br />
 
+			{/* Champions Filter */}
 			<form id='filterForm'>
-				{/* Champions Filter */}
 				<h3>Filter Champions</h3>
 
 				{/* Filter by Class */}
-				By Class:
-				<br />
+				By Class: &nbsp;
 				<select id="classFilter" onChange={handleClassChange}>
 					<option value="">All Classes</option>
 					<option value="Enchanter">Enchanter</option>
@@ -97,6 +111,45 @@ function UserPage() {
 					<option value="Warden">Warden</option>
 					<option value="Specialist">Specialist</option>
 				</select>
+				<br />
+
+				{/* Link to Classes Info */}
+				<a 
+					href="https://leagueoflegends.fandom.com/wiki/Champion_classes"
+					target="_blank"
+				>	
+					Read about classes
+				</a>
+				<br /><br />
+
+				{/* Filter by Region */}
+				By Region: &nbsp;
+				<select onChange={handleRegionChange}>
+					<option value="">All Regions</option>
+					<option value="Bandle City">Bandle City</option>
+					<option value="Bilgewater">Bilgewater</option>
+					<option value="Demacia">Demacia</option>
+					<option value="Ionia">Ionia</option>
+					<option value="Ixtal">Ixtal</option>
+					<option value="Noxus">Noxus</option>
+					<option value="Piltover">Piltover</option>
+					<option value="Shadow Isles">Shadow Isles</option>
+					<option value="Shurima">Shurima</option>
+					<option value="Targon">Targon</option>
+					<option value="The Freljord">The Freljord</option>
+					<option value="The Void">The Void</option>
+					<option value="Zaun">Zaun</option>
+					<option value="Runeterra">Runeterra</option>
+				</select>
+				<br />
+
+				{/* Link to Regions info */}
+				<a 
+					href="https://universe.leagueoflegends.com/en_US/regions"
+					target="_blank"
+				>
+					Read about regions
+				</a>
 				<br /><br />
 
 				{/* Filter by Difficulty */}
@@ -134,28 +187,6 @@ function UserPage() {
 				</select>
 				<br /><br />
 
-				{/* Filter by Region */}
-				By Region:
-				<br />
-				<select onChange={handleRegionChange}>
-					<option value="">All Regions</option>
-					<option value="Bandle City">Bandle City</option>
-					<option value="Bilgewater">Bilgewater</option>
-					<option value="Demacia">Demacia</option>
-					<option value="Ionia">Ionia</option>
-					<option value="Ixtal">Ixtal</option>
-					<option value="Noxus">Noxus</option>
-					<option value="Piltover">Piltover</option>
-					<option value="Shadow Isles">Shadow Isles</option>
-					<option value="Shurima">Shurima</option>
-					<option value="Targon">Targon</option>
-					<option value="The Freljord">The Freljord</option>
-					<option value="The Void">The Void</option>
-					<option value="Zaun">Zaun</option>
-					<option value="Runeterra">Runeterra</option>
-				</select>
-				<br /><br />
-
 				{/* Filter by Notes */}
 				By Notes:
 				<br />
@@ -165,7 +196,6 @@ function UserPage() {
 				{/* Buttons */}
 				<button onClick={resetFilters}>Reset</button> &nbsp;
 				<button onClick={roll}>Roll</button>
-
 			</form>
 		</div>
 	);

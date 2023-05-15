@@ -33,4 +33,9 @@ router.get('/details', rejectUnauthenticated, (req, res) => {
         })
 });
 
+// GET filtered list of champions
+router.get('/filteredList', rejectUnauthenticated, (req, res) => {
+    console.log(req.body);
+})
+
 module.exports = router;

@@ -36,6 +36,12 @@ function ChampionsPage() {
 		<div className="container">
 			<h2>Champion List</h2>
 
+			{/* Search by name */}
+			<label for="championSearch">Search by Name:</label>
+			<br />
+			<input type="search" id="championSearch" />
+			<br/> <br />
+
 			{/* Maps through all champions */}
 			{
 				champions.map((champion) => (
