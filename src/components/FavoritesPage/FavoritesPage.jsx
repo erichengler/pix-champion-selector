@@ -8,7 +8,7 @@ function FavoritesPage() {
     const favorites = useSelector(store => store.favorites);
     // ! IDEA: CHANGE GET REQUEST QUERYTEXT FOR FAVORITES TO A JOIN THAT 
     // ! ALSO GETS CHAMPION INFORMATION FROM CHAMPIONS TABLE
-            
+
     const dispatch = useDispatch();
 
     // Fetch favorites on page load
@@ -27,43 +27,56 @@ function FavoritesPage() {
 
     return (
         <div>
-            {/* ------- Checking reducer ------- */}
-            {favorites.length === 0 ? (
+            {/* ------- Checking champions reducer ------- */}
+            {champions.length === 0 ? (
                 <div className="container">
-                    <h2>No favorites...</h2>
+                    <h2>Loading...</h2>
                 </div>
             ) : (
 
-                <div className="container">
-                    <h2>Favorites</h2>
+                // ------- Checking favorites reducer -------
+                favorites.length === 0 ? (
+                    <div className="container">
+                        <h2>No Favorites</h2>
+                    </div>
+                ) : (
 
-                    {/* ------- Mapping through favorites and ------- */}
-                    {/* ------- matching by champion_id ------- */}
-                    {
-                        favorites.map(favorite => {
-                            return <div key={favorite.id}>
+                    <div className="container">
+                        <h2>Favorites</h2>
 
-                                {/* ------- Matching champion name ------- */}
-                                {champions[favorite.champion_id - 1].name}
+                        {/* ------- Mapping through favorites and ------- */}
+                        {/* ------- matching by champion_id ------- */}
+                        {
+                            favorites.map(favorite => {
+                                let favChampion = champions[favorite.champion_id - 1];
+                                return <div key={favorite.id}>
+                                    
 
-                                {/* Notes and remove buttons */}
-                                &nbsp; &nbsp; &nbsp; &nbsp;
-                                <button>Notes</button>
-                                &nbsp; &nbsp; &nbsp; &nbsp;
-                                <button onClick={() => removeFavorite(favorite)}>Remove</button>
-                                <br />
+                                    {/* ------- Matching champion name ------- */}
+                                    {favChampion.name}
 
-                                {/* ------- Matching champion image ------- */}
-                                <img
-                                    src={champions[favorite.champion_id - 1].image}
-                                    style={{ width: '400px' }}
-                                />
-                                <br /><br /><br />
-                            </div>
-                        })
-                    }
-                </div>
-            )}
+                                    {/* Notes and remove buttons */}
+                                    &nbsp; &nbsp; &nbsp; &nbsp;
+                                    <button>Notes</button>
+                                    &nbsp; &nbsp; &nbsp; &nbsp;
+                                    <button 
+                                        onClick={() => removeFavorite(favorite)}>
+                                            Remove
+                                    </button>
+                                    <br />
+
+                                    {/* ------- Matching champion image ------- */}
+                                    <img
+                                        src={favChampion.image}
+                                        style={{ width: '400px' }}
+                                    />
+                                    <br /><br /><br />
+                                </div>
+                            })
+                        }
+                    </div>
+                ))
+            }
         </div>
     );
 }

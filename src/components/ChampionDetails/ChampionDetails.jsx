@@ -2,6 +2,8 @@ import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from 'react';
 
+import NotesModal from "../NotesModal/NotesModal";
+
 function DetailsPage() {
 
     let { id } = useParams();
@@ -44,9 +46,9 @@ function DetailsPage() {
                 <br /><br />
 
                 {/* ------- Favorite, Notes, Blacklist ------- */}
-                <button onClick={addFavorite}>Favorite</button> &nbsp;
-                <button>Notes</button> &nbsp;
-                <button>Blacklist</button> &nbsp;
+                <button onClick={addFavorite}>Favorite</button> &nbsp; &nbsp;
+                <NotesModal /> &nbsp; &nbsp;
+                <button>Blacklist</button> &nbsp; &nbsp;
                 <br />
 
                 {/* ------- Champion Image ------- */}
