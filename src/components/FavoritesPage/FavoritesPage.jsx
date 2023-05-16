@@ -6,7 +6,9 @@ function FavoritesPage() {
     // Storing champions, favorites
     const champions = useSelector(store => store.champions);
     const favorites = useSelector(store => store.favorites);
-
+    // ! IDEA: CHANGE GET REQUEST QUERYTEXT FOR FAVORITES TO A JOIN THAT 
+    // ! ALSO GETS CHAMPION INFORMATION FROM CHAMPIONS TABLE
+            
     const dispatch = useDispatch();
 
     // Fetch favorites on page load
@@ -20,13 +22,6 @@ function FavoritesPage() {
             `Are you sure you want to remove ${champions[event.champion_id - 1].name} from your favorites?`
         )) {
             dispatch({ type: 'REMOVE_FAVORITE', payload: { params: { id: event.id } } });
-            
-            // Temporary method of reloading favorites after deleting
-            // FETCH_FAVORITES dispatch isnt working (probly because of the .map)
-            window.location.reload();
-            // ! IDEA: CHANGE GET REQUEST QUERYTEXT FOR FAVORITES TO A JOIN THAT 
-            // ! ALSO GETS CHAMPION INFORMATION FROM CHAMPIONS TABLE
-            
         }
     }
 

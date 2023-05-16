@@ -40,8 +40,9 @@ router.get('/details', rejectUnauthenticated, (req, res) => {
 router.get('/favorites', rejectUnauthenticated, (req, res) => {
     console.log('In GET favorites');
     // Query to get all favorites
-    const queryText = `SELECT * FROM favorites ORDER BY id ASC;`;
-    pool.query(queryText)
+    const queryText = `SELECT * FROM favorites WHERE user_id = $1 
+    ORDER BY id ASC;`;
+    pool.query(queryText, [req.user.id])
         .then(result => {
             res.send(result.rows);
         })
@@ -75,7 +76,7 @@ router.delete('/favorites', rejectUnauthenticated, (req, res) => {
     WHERE "user_id" = $1 AND "id" = $2;`;
     pool.query(queryText, [req.user.id, req.query.id])
         .then(result => {
-
+            res.sendStatus(200);
         })
         .catch(error => {
             console.log('ERROR in DELETE favorite', error);
