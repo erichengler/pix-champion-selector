@@ -46,6 +46,22 @@ router.get('/favorites', rejectUnauthenticated, (req, res) => {
             console.log('ERROR in GET favorites:', error);
             res.sendStatus(500);
         })
-})
+});
+
+// POST favorite
+router.post('/favorites', (req, res) => {
+    console.log(req.body);
+    // Query to post champion to favorites db based on id
+    const queryText = `INSERT INTO favorites ("user_id", "champion_id")
+    VALUES ($1, $2);`;
+    pool.query(queryText, [req.user.id, req.body.id])
+        .then(result => {
+            res.sendStatus(200);
+        })
+        .catch(error => {
+            console.log('ERROR in POST favorite', error);
+            res.sendStatus(500);
+        })
+});
 
 module.exports = router;

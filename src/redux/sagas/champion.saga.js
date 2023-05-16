@@ -35,10 +35,21 @@ function* fetchFavorites() {
     }
 }
 
+function* addFavorite (action) {
+    // Post champion to favorites DB
+    try {
+        yield axios.post('/api/champion/favorites', action.payload);
+        yield put({ type: 'FETCH_FAVORITES' });
+    } catch (error) {
+        console.log('Error in addFavorite generator');
+    }
+}
+
 function* championSaga() {
     yield takeEvery('FETCH_CHAMPIONS', fetchAllChampions);
     yield takeEvery('FETCH_THIS_CHAMPION', fetchThisChampion);
     yield takeEvery('FETCH_FAVORITES', fetchFavorites);
+    yield takeEvery('ADD_FAVORITE', addFavorite);
 }
 
 export default championSaga;

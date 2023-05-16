@@ -33,6 +33,12 @@ function FavoritesPage() {
 
                                 {/* ------- Matching champion name ------- */}
                                 {champions[favorite.champion_id - 1].name}
+
+                                {/* Notes and remove buttons */}
+                                &nbsp; &nbsp; &nbsp; &nbsp; 
+                                <button>Notes</button>
+                                &nbsp; &nbsp; &nbsp; &nbsp;
+                                <button>Remove</button>
                                 <br />
 
                                 {/* ------- Matching champion image ------- */}

@@ -23,7 +23,8 @@ function DetailsPage() {
     }
 
     const addFavorite = () => {
-        // ! dispatch to add favorite goes here
+        dispatch({ type: 'ADD_FAVORITE', payload: {id} });
+        alert(`${champion[0].name} has been added to your favorites.`);
     }
 
     return (
