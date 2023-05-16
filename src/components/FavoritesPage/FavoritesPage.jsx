@@ -15,16 +15,33 @@ function FavoritesPage() {
         dispatch({ type: 'FETCH_FAVORITES' });
     }, []);
 
+    const removeFavorite = (event) => {
+        if (confirm(
+            `Are you sure you want to remove ${champions[event.champion_id - 1].name} from your favorites?`
+        )) {
+            dispatch({ type: 'REMOVE_FAVORITE', payload: { params: { id: event.id } } });
+            
+            // Temporary method of reloading favorites after deleting
+            // FETCH_FAVORITES dispatch isnt working (probly because of the .map)
+            window.location.reload();
+            // ! IDEA: CHANGE GET REQUEST QUERYTEXT FOR FAVORITES TO A JOIN THAT 
+            // ! ALSO GETS CHAMPION INFORMATION FROM CHAMPIONS TABLE
+            
+        }
+    }
+
     return (
         <div>
-            {/* ------- Checking reducer before loading ------- */}
-            {champions.length === 0 || favorites.length === 0 ? (
-                <h2>Loading...</h2>
+            {/* ------- Checking reducer ------- */}
+            {favorites.length === 0 ? (
+                <div className="container">
+                    <h2>No favorites...</h2>
+                </div>
             ) : (
 
                 <div className="container">
                     <h2>Favorites</h2>
-                    
+
                     {/* ------- Mapping through favorites and ------- */}
                     {/* ------- matching by champion_id ------- */}
                     {
@@ -35,10 +52,10 @@ function FavoritesPage() {
                                 {champions[favorite.champion_id - 1].name}
 
                                 {/* Notes and remove buttons */}
-                                &nbsp; &nbsp; &nbsp; &nbsp; 
+                                &nbsp; &nbsp; &nbsp; &nbsp;
                                 <button>Notes</button>
                                 &nbsp; &nbsp; &nbsp; &nbsp;
-                                <button>Remove</button>
+                                <button onClick={() => removeFavorite(favorite)}>Remove</button>
                                 <br />
 
                                 {/* ------- Matching champion image ------- */}
