@@ -4,6 +4,7 @@ import user from './user.reducer';
 import champions from './champions.reducer'
 import thisChampion from './thisChampion.reducer';
 import result from './result.reducer';
+import favorites from './favorites.reducer';
 import filteredChampions from './filteredChampions.reducer';
 
 // rootReducer is the primary reducer for our entire project
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   champions,
   thisChampion,
   filteredChampions,
+  favorites,
   result,
 });
 

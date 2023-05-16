@@ -22,6 +22,10 @@ function DetailsPage() {
         history.push('/champions');
     }
 
+    const addFavorite = () => {
+        // ! dispatch to add favorite goes here
+    }
+
     return (
         <div>
             {/* ------- Checking reducer before loading ------- */}
@@ -39,7 +43,7 @@ function DetailsPage() {
                 <br /><br />
 
                 {/* ------- Favorite, Notes, Blacklist ------- */}
-                <button>Favorite</button> &nbsp;
+                <button onClick={addFavorite}>Favorite</button> &nbsp;
                 <button>Notes</button> &nbsp;
                 <button>Blacklist</button> &nbsp;
                 <br />
