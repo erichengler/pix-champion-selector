@@ -47,7 +47,9 @@ function DetailsPage() {
 
                 {/* ------- Favorite, Notes, Blacklist ------- */}
                 <button onClick={addFavorite}>Favorite</button> &nbsp; &nbsp;
-                <NotesModal /> &nbsp; &nbsp;
+                <NotesModal 
+                    champion={champion}
+                /> &nbsp; &nbsp;
                 <button>Blacklist</button> &nbsp; &nbsp;
                 <br />
 
