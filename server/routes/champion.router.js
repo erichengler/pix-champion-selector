@@ -30,12 +30,22 @@ router.get('/details', rejectUnauthenticated, (req, res) => {
         })
         .catch(error => {
             console.log('ERROR in GET this champion', error);
+            res.sendStatus(500);
         })
 });
 
-// GET filtered list of champions
-router.get('/filteredList', rejectUnauthenticated, (req, res) => {
-    console.log(req.body);
+// GET favorites
+router.get('/favorites', rejectUnauthenticated, (req, res) => {
+    // Query to get all favorites
+    const queryText = `SELECT * FROM favorites ORDER BY id ASC;`;
+    pool.query(queryText)
+        .then(result => {
+            res.send(result.rows);
+        })
+        .catch(error => {
+            console.log('ERROR in GET favorites:', error);
+            res.sendStatus(500);
+        })
 })
 
 module.exports = router;

@@ -6,7 +6,7 @@ import ChampionItem from '../ChampionItem/ChampionItem';
 
 function ChampionsPage() {
 
-	// GET all champions from database
+	// ------- GET all champions from database -------
 	useEffect(() => {
 		dispatch({ type: 'FETCH_CHAMPIONS' });
 	}, []);
@@ -14,21 +14,21 @@ function ChampionsPage() {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
-	// Storing all champions
+	// ------- Storing champions, filteredChampions -------
 	const champions = useSelector(store => store.champions);
+	const filteredChampions = useSelector(store => store.filteredChampions);
 
-	// Brings user back to Home (UserPage)
+	// ------- Brings user back to Home -------
 	const backToHome = () => {
 		history.push('/');
 	}
 
-	// Sets random result from full champion list
-	// Brings user to result page
+	// ------- Sets random result from full champion list -------
 	const roll = () => {
 		const random = Math.floor(Math.random() * champions.length);
 		console.log(champions[random]);
 		dispatch({ type: 'SET_RESULT', payload: champions[random] });
-
+		// ------- Brings user to result page -------
 		history.push('/result')
 	}
 
@@ -36,13 +36,13 @@ function ChampionsPage() {
 		<div className="container">
 			<h2>Champion List</h2>
 
-			{/* Search by name */}
+			{/* ------- Search by Name ------- */}
 			<label for="championSearch">Search by Name:</label>
 			<br />
 			<input type="search" id="championSearch" />
 			<br/> <br />
 
-			{/* Maps through all champions */}
+			{/* ------- Maps through all champions ------- */}
 			{
 				champions.map((champion) => (
 					<ChampionItem
@@ -52,11 +52,11 @@ function ChampionsPage() {
 			}
 			<br /><br /><br />
 
-			{/* Back to Home Button */}
+			{/* ------- Back to home button ------- */}
 			<button onClick={backToHome}>Back</button>
 			&nbsp; &nbsp;
 
-			{/* Roll from list button */}
+			{/* ------- Roll button ------- */}
 			<button onClick={roll}>Roll</button>
 		</div>
 	);

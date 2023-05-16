@@ -4,24 +4,18 @@ import { useHistory } from "react-router-dom";
 
 function UserPage() {
 
-	// Storing user information
+	// --------- Storing ---------
 	const user = useSelector((store) => store.user);
-
-	// Storing all champions
 	const champions = useSelector((store) => store.champions);
-
-	// Storing filtered champions
 	const filteredChampions = useSelector((store) => store.filteredChampions);
 
 	const history = useHistory();
 	const dispatch = useDispatch();
 
-	// GET all champions from database
-	useEffect(() => {
-		dispatch({ type: 'FETCH_CHAMPIONS' });
-	}, []);
+	// --------- GET Champions From Database ---------
+	useEffect( () => { dispatch({ type: 'FETCH_CHAMPIONS' }); }, [] );
 
-	// User filter
+	// --------- Storing User Filters ---------
 	let [newFilter, setFilter] = useState({
 		class: '',
 		minDifficulty: '1',
@@ -29,6 +23,19 @@ function UserPage() {
 		region: '',
 		notes: ''
 	});
+
+	// --------- Reset User Filters ---------
+	const resetFilters = (event) => {
+		event.preventDefault();
+		document.getElementById("filterForm").reset();
+		setFilter({
+			class: '',
+			minDifficulty: '1',
+			maxDifficulty: '10',
+			region: '',
+			notes: ''
+		});
+	}
 
 	// --------- START of handleChange ---------
 	const handleClassChange = (event) => {
@@ -48,25 +55,12 @@ function UserPage() {
 	}
 	// --------- END of handleChange ---------
 
-	// Resets filters to default values
-	const resetFilters = (event) => {
-		event.preventDefault();
-		document.getElementById("filterForm").reset();
-		setFilter({
-			class: '',
-			minDifficulty: '1',
-			maxDifficulty: '10',
-			region: '',
-			notes: ''
-		});
-	}
-
 	// ! Use newFilter to add champions to filteredChampions reducer
 	const roll = (event) => {
 		event.preventDefault();
 		console.log('Rolling with this filter:', newFilter);
 
-	// ! FILTER WITH forEach GOES HERE
+		// ! FILTER WITH forEach GOES HERE
 
 		console.log('Filtered List:', filteredChampions);
 		// Dispatch to 'SET_FILTERED_CHAMPIONS' using newFilter
@@ -84,16 +78,16 @@ function UserPage() {
 	return (
 		<div className="container">
 
-			{/* Welcome, User Information */}
+			{/* ------- Welcome, User Information ------- */}
 			<h2>Welcome, {user.username}!</h2>
 			<p>Your ID is: {user.id}</p>
 			<br /><br />
 
-			{/* Champions Filter */}
+			{/* ------- Champions Filter ------- */}
 			<form id='filterForm'>
 				<h3>Filter Champions</h3>
 
-				{/* Filter by Class */}
+				{/* ------- Filter by Class ------- */}
 				By Class: &nbsp;
 				<select id="classFilter" onChange={handleClassChange}>
 					<option value="">All Classes</option>
@@ -113,16 +107,16 @@ function UserPage() {
 				</select>
 				<br />
 
-				{/* Link to Classes Info */}
-				<a 
+				{/* ------- Link to Classes Info ------- */}
+				<a
 					href="https://leagueoflegends.fandom.com/wiki/Champion_classes"
 					target="_blank"
-				>	
+				>
 					Read about classes
 				</a>
 				<br /><br />
 
-				{/* Filter by Region */}
+				{/* ------- Filter by Region ------- */}
 				By Region: &nbsp;
 				<select onChange={handleRegionChange}>
 					<option value="">All Regions</option>
@@ -143,8 +137,8 @@ function UserPage() {
 				</select>
 				<br />
 
-				{/* Link to Regions info */}
-				<a 
+				{/* ------- Link to Regions info ------- */}
+				<a
 					href="https://universe.leagueoflegends.com/en_US/regions"
 					target="_blank"
 				>
@@ -152,12 +146,12 @@ function UserPage() {
 				</a>
 				<br /><br />
 
-				{/* Filter by Difficulty */}
+				{/* ------- Filter by Difficulty ------- */}
 				By Difficulty:
 				<br />
 				From &nbsp;
 
-				{/* Minimum Difficulty */}
+				{/* ------- Minimum Difficulty ------- */}
 				<select onChange={handleMinDifficultyChange}>
 					<option value="1">1</option>
 					<option value="2">2</option>
@@ -172,7 +166,7 @@ function UserPage() {
 				</select>
 				&nbsp; to &nbsp;
 
-				{/* Maximum Difficulty */}
+				{/* ------- Maximum Difficulty ------- */}
 				<select defaultValue={10} onChange={handleMaxDifficultyChange}>
 					<option value="1">1</option>
 					<option value="2">2</option>
@@ -187,13 +181,13 @@ function UserPage() {
 				</select>
 				<br /><br />
 
-				{/* Filter by Notes */}
+				{/* ------- Filter by Notes ------- */}
 				By Notes:
 				<br />
 				<input type="text" onChange={handleNotesChange} />
 				<br /><br />
 
-				{/* Buttons */}
+				{/* ------- Buttons ------- */}
 				<button onClick={resetFilters}>Reset</button> &nbsp;
 				<button onClick={roll}>Roll</button>
 			</form>

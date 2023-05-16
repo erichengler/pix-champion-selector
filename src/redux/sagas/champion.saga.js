@@ -24,21 +24,9 @@ function* fetchThisChampion(action) {
     }
 }
 
-function* fetchFilteredChampions() {
-    // get filtered champions from the DB
-    try {
-        const filteredList = yield axios.get('/api/champion/filteredList');
-        console.log('get filtered champions:', filteredList.data);
-        yield put({ type:'SET_FILTERED_CHAMPIONS', payload: filteredList.data });
-    } catch {
-        console.log('Get filtered list error');
-    }
-}
-
 function* championSaga() {
     yield takeEvery('FETCH_CHAMPIONS', fetchAllChampions);
     yield takeEvery('FETCH_THIS_CHAMPION', fetchThisChampion);
-    yield takeEvery('FETCH_FILTERED_CHAMPIONS', fetchFilteredChampions)
 }
 
 export default championSaga;

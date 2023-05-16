@@ -8,50 +8,50 @@ function DetailsPage() {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    // GET this champion
+    // ------- GET this champion -------
     useEffect(() => {
         console.log(champion)
         dispatch({ type: 'FETCH_THIS_CHAMPION', payload: id });
     }, []);
 
-    // Storing current champion
+    // ------- Storing current champion -------
     const champion = useSelector((store) => store.thisChampion);
 
-    // Brings user back to Champion List
+    // ------- Brings user back to Champion List -------
     const backToList = () => {
         history.push('/champions');
     }
 
     return (
         <div>
-            {/* Checking reducer before loading */}
+            {/* ------- Checking reducer before loading ------- */}
             {champion.length === 0 ? (
                 <h2>Loading...</h2>
             ) : (
 
                 <div className="container">
 
-                {/* Champion Name */}
+                {/* ------- Champion Name ------- */}
                 <h2>{champion[0].name}</h2>
 
-                {/* Champion Title */}
+                {/* ------- Champion Title ------- */}
                 <span>{champion[0].title}</span>
                 <br /><br />
 
-                {/* Favorite, Notes, Blacklist */}
+                {/* ------- Favorite, Notes, Blacklist ------- */}
                 <button>Favorite</button> &nbsp;
                 <button>Notes</button> &nbsp;
                 <button>Blacklist</button> &nbsp;
                 <br />
 
-                {/* Champion Image */}
+                {/* ------- Champion Image ------- */}
                 <img
                     src={champion[0].image}
                     style={{ width: '500px', border: '1px solid black' }}
                 />
                 <br />
 
-                {/* Champion Class, Difficulty and Region */}
+                {/* ------- Class, Difficulty and Region ------- */}
                 <span>
                     Class: {champion[0].class} &nbsp; • &nbsp;
                     Difficulty: {champion[0].difficulty} &nbsp; • &nbsp;
@@ -59,7 +59,7 @@ function DetailsPage() {
                 </span>
                 <br /><br />
 
-                {/* Champion Lore */}
+                {/* ------- Champion Lore ------- */}
                 <div
                     style={{ width: '500px' }}
                 >
@@ -67,11 +67,9 @@ function DetailsPage() {
                 </div>
                 <br /><br />
 
-                {/* Back to Champion List Button */}
+                {/* ------- Back Button ------- */}
                 <button onClick={backToList}>Back</button>
-
             </div>
-
             )}
         </div>
     );
