@@ -6,7 +6,10 @@ function* fetchChampions() {
     try {
         const champions = yield axios.get('/api/champion');
         // console.log('Get champions:', champions.data);
-        yield put({ type: 'SET_CHAMPIONS', payload: champions.data });
+        yield put({ 
+            type: 'SET_CHAMPIONS', 
+            payload: champions.data 
+        });
     } catch {
         console.log('Error in fetchChampions generator');
     }
@@ -16,9 +19,13 @@ function* fetchChampions() {
 function* fetchThisChampion(action) {
     try {
         // ------- Based on ID -------
-        const champion = yield axios.get(`/api/champion/details?id=${action.payload}`);
+        const champion = yield axios.get(
+            `/api/champion/details?id=${action.payload}`);
         // console.log(`Get this champion with ID: ${action.payload}`);
-        yield put({ type: 'SET_CHAMPION', payload: champion.data });
+        yield put({ 
+            type: 'SET_CHAMPION', 
+            payload: champion.data
+        });
     } catch {
         console.log('Error in fetchThisChampion generator');
     }
@@ -27,9 +34,12 @@ function* fetchThisChampion(action) {
 // ------- Get user's favorites from the DB -------
 function* fetchFavorites() {
     try {
-        const favorites = yield axios.get('/api/champion/favorites');
+        const favorites = yield axios.get(
+            '/api/champion/favorites');
         // console.log('Get favorites:', favorites.data);
-        yield put({ type: 'SET_FAVORITES', payload: favorites.data });
+        yield put({ 
+            type: 'SET_FAVORITES', 
+            payload: favorites.data });
     } catch {
         console.log('Error in fetchFavorites generator');
     }
@@ -38,7 +48,9 @@ function* fetchFavorites() {
 // ------- Post champion to favorites DB -------
 function* addFavorite (action) {
     try {
-        yield axios.post('/api/champion/favorites', action.payload);
+        yield axios.post(
+            '/api/champion/favorites', 
+            action.payload);
     } catch {
         console.log('Error in addFavorite generator');
     }
@@ -47,7 +59,9 @@ function* addFavorite (action) {
 // ------- Remove champion from favorites DB -------
 function* removeFavorite (action) {
     try {
-        yield axios.delete('/api/champion/favorites', action.payload);
+        yield axios.delete(
+            '/api/champion/favorites', 
+            action.payload);
         yield put({ type: 'FETCH_FAVORITES' });
     } catch {
         console.log('Error in removeFavorite generator');
@@ -59,7 +73,10 @@ function* fetchNotes() {
     try {
         const notes = yield axios.get('/api/champion/notes');
         // console.log('Get notes:', notes.data);
-        yield put({ type: 'SET_NOTES', payload: notes.data });
+        yield put({ 
+            type: 'SET_NOTES', 
+            payload: notes.data 
+        });
     } catch {
         console.log('Error in fetchNotes generator');
     }
@@ -69,7 +86,8 @@ function* fetchNotes() {
 function* fetchThisNote (action) {
     try {
         // ------- Based on ID -------
-        const note = yield axios.get(`/api/champion/thisnote?id=${action.payload}`);
+        const note = yield axios.get(
+            `/api/champion/thisnote?id=${action.payload}`);
         // console.log(`Get this note with champion ID: ${action.payload}`);
         yield put({ type: 'SET_NOTE', payload: note.data });
     } catch {
