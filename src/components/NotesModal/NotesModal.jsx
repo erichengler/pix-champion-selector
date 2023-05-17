@@ -60,16 +60,19 @@ function NotesModal({ champion, favChampion, id }) {
     // ------- Creates notes for the champion -------
     const createNotes = (event) => {
         // ------- Grabs note from modal textfield -------
-        let note = event.target.parentElement.children[1].value
+        let note = event.target.parentElement.children[1].value;
         // TODO: Check which prop was sent, send favChampion.id as payload instead if on favorites page
-        dispatch({ type: 'ADD_NOTE', payload: {id: id, note: note } });
+        dispatch({ type: 'ADD_NOTE', payload: { id: id, note: note } });
         location.reload();
     }
 
     // ------- Updates notes for the champion -------
     const updateNotes = (event) => {
-        // TODO: Dispatch to UPDATE_NOTE goes here (PUT)
-        handleClose();
+        // ------- Grabs note from modal textfield -------
+        let note = event.target.parentElement.children[1].value;
+        // TODO: Check which prop was sent, send favChampion.id as payload instead if on favorites page
+        dispatch({ type: 'EDIT_NOTE', payload: { id: id, note: note } });
+        location.reload();
     }
 
     // ------- Deletes notes for the champion -------

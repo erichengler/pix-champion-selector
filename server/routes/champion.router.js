@@ -9,8 +9,8 @@ const {
 router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('In GET champions');
     // ------- Query to get all champions -------
-    const queryText =
-        `SELECT * FROM champions 
+    const queryText =`
+        SELECT * FROM champions 
         ORDER BY name ASC;`;
     pool.query(queryText)
         .then(result => {
@@ -26,8 +26,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 router.get('/details', rejectUnauthenticated, (req, res) => {
     console.log('In GET this champion');
     // ------- Query to get champion based on id -------
-    const queryText =
-        `SELECT * FROM champions 
+    const queryText =`
+        SELECT * FROM champions 
         WHERE id = $1;`;
     pool.query(queryText, [req.query.id])
         .then(result => {
@@ -43,8 +43,8 @@ router.get('/details', rejectUnauthenticated, (req, res) => {
 router.get('/favorites', rejectUnauthenticated, (req, res) => {
     console.log('In GET favorites');
     // ------- Query to get all favorites -------
-    const queryText =
-        `SELECT * FROM favorites 
+    const queryText =`
+        SELECT * FROM favorites 
         WHERE user_id = $1 
         ORDER BY id ASC;`;
     pool.query(queryText, [req.user.id])
@@ -61,8 +61,8 @@ router.get('/favorites', rejectUnauthenticated, (req, res) => {
 router.post('/favorites', rejectUnauthenticated, (req, res) => {
     console.log('In POST favorite');
     // ------- Query to post champion based on id -------
-    const queryText =
-        `INSERT INTO favorites 
+    const queryText =`
+        INSERT INTO favorites 
         ("user_id", "champion_id")
         VALUES ($1, $2);`;
     pool.query(queryText, [req.user.id, req.body.id])
@@ -79,8 +79,8 @@ router.post('/favorites', rejectUnauthenticated, (req, res) => {
 router.delete('/favorites', rejectUnauthenticated, (req, res) => {
     console.log('In DELETE favorite');
     // ------- Query to delete champion based on id -------
-    const queryText =
-        `DELETE FROM favorites
+    const queryText =`
+        DELETE FROM favorites
         WHERE "user_id" = $1 AND "id" = $2;`;
     pool.query(queryText, [req.user.id, req.query.id])
         .then(result => {
@@ -96,8 +96,8 @@ router.delete('/favorites', rejectUnauthenticated, (req, res) => {
 router.get('/notes', rejectUnauthenticated, (req, res) => {
     console.log('In GET this note');
     // ------- Query to get note based on id -------
-    const queryText =
-        `SELECT * FROM notes 
+    const queryText =`
+        SELECT * FROM notes 
         WHERE "user_id" = $1 AND "champion_id" = $2;`;
     pool.query(queryText, [req.user.id, req.query.id])
         .then(result => {
@@ -113,8 +113,8 @@ router.get('/notes', rejectUnauthenticated, (req, res) => {
 router.post('/notes', rejectUnauthenticated, (req, res) => {
     console.log('In POST note');
     // ------- Query to post note to DB -------
-    const queryText =
-        `INSERT INTO notes 
+    const queryText =`
+        INSERT INTO notes 
         ("user_id", "champion_id", "note")
         VALUES ($1, $2, $3);`
     pool.query(queryText,
@@ -131,9 +131,9 @@ router.post('/notes', rejectUnauthenticated, (req, res) => {
 // ------- DELETE from notes -------
 router.delete('/notes/:id', rejectUnauthenticated, (req, res) => {
     console.log('In DELETE note');
-    // ------- Query to delete champion based on id -------
-    const queryText =
-        `DELETE FROM notes
+    // ------- Query to delete note based on id -------
+    const queryText =`
+        DELETE FROM notes
         WHERE "user_id" = $1 AND "champion_id" = $2;`;
     pool.query(queryText, [req.user.id, req.params.id])
         .then(result => {
@@ -144,5 +144,24 @@ router.delete('/notes/:id', rejectUnauthenticated, (req, res) => {
             res.sendStatus(500);
         })
 });
+
+// ------- UPDATE note -------
+router.put('/notes', rejectUnauthenticated, (req, res) => {
+    console.log('In UPDATE note', req.body);
+    // ------- Query to update note based on id -------
+    const queryText = `
+        UPDATE notes
+        SET "note" = $1
+        WHERE "user_id" = $2 AND "champion_id" = $3;`;
+    pool.query(queryText, 
+        [req.body.note, req.user.id, req.body.id])
+        .then(result => {
+            res.sendStatus(200);
+        })
+        .catch(error => {
+            console.log('ERROR in UPDATE note', error);
+            res.sendStatus(500);
+        })
+})
 
 module.exports = router;

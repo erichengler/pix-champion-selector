@@ -84,6 +84,15 @@ function* removeNote (action) {
     }
 }
 
+// ------- Edit note in notes DB -------
+function* editNote (action) {
+    try {
+        yield axios.put('/api/champion/notes', action.payload);
+    } catch {
+        console.log('Error in editNote generator');
+    }
+}
+
 function* championSaga() {
     yield takeEvery('FETCH_CHAMPIONS', fetchAllChampions);
     yield takeEvery('FETCH_THIS_CHAMPION', fetchThisChampion);
@@ -93,6 +102,7 @@ function* championSaga() {
     yield takeEvery('FETCH_THIS_NOTE', fetchNote);
     yield takeEvery('ADD_NOTE', addNote);
     yield takeEvery('REMOVE_NOTE', removeNote);
+    yield takeEvery('EDIT_NOTE', editNote);
 }
 
 export default championSaga;
