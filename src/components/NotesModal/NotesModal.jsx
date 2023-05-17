@@ -37,12 +37,6 @@ function NotesModal({ champion, favChampion, id }) {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    // ------- Saves user's notes to the DB -------
-    const saveNotes = (event) => {
-        // TODO: Dispatch to ADD_NOTES goes here
-        handleClose();
-    }
-
     // ------- Checks which prop was sent -------
     // ------- then returns champion's name -------
     const notesHeader = () => {
@@ -63,9 +57,27 @@ function NotesModal({ champion, favChampion, id }) {
         }
     }
 
+    // ------- Creates notes for the champion -------
+    const createNotes = (event) => {
+        // TODO: Dispatch to ADD_NOTE goes here (POST)
+        handleClose();
+    }
+
+    // ------- Updates notes for the champion -------
+    const updateNotes = (event) => {
+        // TODO: Dispatch to UPDATE_NOTE goes here (PUT)
+        handleClose();
+    }
+
+    // ------- Deletes notes for the champion -------
+    const deleteNotes = (event) => {
+        // TODO: Dispatch to UPDATE_NOTE goes here (PUT)
+        handleClose();
+    }
+
     return (
-        <div>
-            {/* ------- Checking reducer before loading ------- */}
+        <>
+            {/* ------- Checking for an existing note ------- */}
             {thisNote.length === 0 ? (
                 // ------- Add Note button, opens Modal -------
                 <button onClick={handleOpen}>Add Note</button>
@@ -102,12 +114,26 @@ function NotesModal({ champion, favChampion, id }) {
                         </textarea>
                         <br />
 
-                        {/* ------- Modal save button ------- */}
-                        <button onClick={(event) => saveNotes(event)}>Save</button>
+                        {/* ------- Checking for an existing note ------- */}
+                        {thisNote.length === 0 ? (
+                            <>
+                                {/* ------- Cancel button cancels note creation ------- */}
+                                <button onClick={handleClose}>Cancel</button> &nbsp;
+                                {/* ------- Submit button creates note ------- */}
+                                <button onClick={(event) => createNotes(event)}>Submit</button>
+                            </>
+                        ) : (
+                            <>
+                                {/* ------- Delete button deletes note ------- */}
+                                <button onClick={(event) => deleteNotes(event)}>Delete</button> &nbsp;
+                                {/* ------- Save button updates note ------- */}
+                                <button onClick={(event) => updateNotes(event)}>Save</button>
+                            </>
+                        )}
                     </Box>
                 </Modal>
             </>
-        </div>
+        </>
     )
 }
 export default NotesModal;
