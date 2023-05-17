@@ -5,10 +5,10 @@ const {
     rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
 
-// GET champions
+// ------- GET champions -------
 router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('In GET champions');
-    // Query to get all champions
+    // ------- Query to get all champions -------
     const queryText = `SELECT * FROM champions ORDER BY name ASC;`;
     pool.query(queryText)
         .then(result => {
@@ -20,13 +20,12 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         })
 });
 
-// GET this champion
+// ------- GET this champion -------
 router.get('/details', rejectUnauthenticated, (req, res) => {
     console.log('In GET this champion');
-    const championId = req.query.id;
-    // Query to get a specific champion based on id
+    // ------- Query to get champion based on id -------
     const queryText = `SELECT * FROM champions WHERE id = $1;`;
-    pool.query(queryText, [championId])
+    pool.query(queryText, [req.query.id])
         .then(result => {
             res.send(result.rows);
         })
@@ -36,10 +35,10 @@ router.get('/details', rejectUnauthenticated, (req, res) => {
         })
 });
 
-// GET favorites
+// ------- GET favorites -------
 router.get('/favorites', rejectUnauthenticated, (req, res) => {
     console.log('In GET favorites');
-    // Query to get all favorites
+    // ------- Query to get all favorites -------
     const queryText = `SELECT * FROM favorites WHERE user_id = $1 
     ORDER BY id ASC;`;
     pool.query(queryText, [req.user.id])
@@ -52,10 +51,10 @@ router.get('/favorites', rejectUnauthenticated, (req, res) => {
         })
 });
 
-// POST favorite
+// ------- POST to favorites -------
 router.post('/favorites', rejectUnauthenticated, (req, res) => {
     console.log('In POST favorite');
-    // Query to post champion to favorites db based on id
+    // ------- Query to post champion based on id -------
     const queryText = `INSERT INTO favorites ("user_id", "champion_id")
     VALUES ($1, $2);`;
     pool.query(queryText, [req.user.id, req.body.id])
@@ -68,10 +67,10 @@ router.post('/favorites', rejectUnauthenticated, (req, res) => {
         })
 });
 
-// DELETE favorite
+// ------- DELETE from favorites -------
 router.delete('/favorites', rejectUnauthenticated, (req, res) => {
     console.log('In DELETE favorite');
-    // Query to delete champion from favorites db based on id
+    // ------- Query to delete champion based on id -------
     const queryText = `DELETE FROM favorites
     WHERE "user_id" = $1 AND "id" = $2;`;
     pool.query(queryText, [req.user.id, req.query.id])
@@ -80,6 +79,22 @@ router.delete('/favorites', rejectUnauthenticated, (req, res) => {
         })
         .catch(error => {
             console.log('ERROR in DELETE favorite', error);
+            res.sendStatus(500);
+        })
+});
+
+// ------- GET this note -------
+router.get('/notes', rejectUnauthenticated, (req, res) => {
+    console.log('In GET this note');
+    // ------- Query to get note based on id -------
+    const queryText = `SELECT * FROM notes 
+    WHERE "user_id" = $1 AND "champion_id" = $2;`;
+    pool.query(queryText, [req.user.id, req.query.id])
+        .then(result => {
+            res.send(result.rows);
+        })
+        .catch(error => {
+            console.log('ERROR in GET this note', error);
             res.sendStatus(500);
         })
 });

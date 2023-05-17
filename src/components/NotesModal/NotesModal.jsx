@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 // ------- MaterialUI Imports -------
 import Box from '@mui/material/Box';
@@ -17,7 +18,17 @@ const style = {
     p: 4,
 };
 
-function NotesModal({ champion, favChampion }) {
+function NotesModal({ champion, favChampion, id }) {
+
+    const dispatch = useDispatch();
+
+    // ------- Fetch this note -------
+    useEffect(() => {
+        dispatch({ type: 'FETCH_THIS_NOTE', payload: id });
+    }, []);
+
+    // ------- Storing note -------
+    const thisNote = useSelector(store => store.thisNote);
 
     // ------- Storing modal status -------
     const [open, setOpen] = useState(false);
@@ -42,44 +53,61 @@ function NotesModal({ champion, favChampion }) {
         }
     }
 
+    // ------- Check if a note exists, then -------
+    // ------- set to defaultValue of textfield -------
+    const defaultNote = () => {
+        if (thisNote.length === 0) {
+            return '';
+        } else {
+            return thisNote[0].note
+        }
+    }
+
     return (
-        <>
-            {/* ------- Notes button ------- */}
-            <button onClick={handleOpen}>Notes</button>
+        <div>
+            {/* ------- Checking reducer before loading ------- */}
+            {thisNote.length === 0 ? (
+                // ------- Add Note button, opens Modal -------
+                <button onClick={handleOpen}>Add Note</button>
+            ) : (
+                // ------- Edit Note button, opens Modal -------
+                <button onClick={handleOpen}>Edit Note</button>
+            )}
 
-            {/* ------- Modal ------- */}
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <Box sx={style}>
+            <>
+                {/* ------- Modal ------- */}
+                <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <Box sx={style}>
 
-                    {/* ------- Modal header ------- */}
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Notes for {notesHeader()}
-                    </Typography>
+                        {/* ------- Modal header ------- */}
+                        <Typography id="modal-modal-title" variant="h6" component="h2">
+                            Notes for {notesHeader()}
+                        </Typography>
 
-                    {/* ------- Modal textfield ------- */}
-                    <textarea rows={10} cols={35}
-                        defaultValue='Existing note goes here'
-                        style={{ 
-                            border: '1px solid black', 
-                            fontSize: '16px',
-                            maxWidth: '500px',
-                            maxHeight: '280px'
-                        }}
-                    >
-                    </textarea>
-                    <br />
+                        {/* ------- Modal textfield ------- */}
+                        <textarea rows={10} cols={35}
+                            defaultValue={defaultNote()}
+                            style={{
+                                border: '1px solid black',
+                                fontSize: '16px',
+                                maxWidth: '500px',
+                                maxHeight: '280px'
+                            }}
+                        >
+                        </textarea>
+                        <br />
 
-                    {/* ------- Modal save button ------- */}
-                    <button onClick={(event) => saveNotes(event)}>Save</button>
-                </Box>
-            </Modal>
-        </>
-    );
+                        {/* ------- Modal save button ------- */}
+                        <button onClick={(event) => saveNotes(event)}>Save</button>
+                    </Box>
+                </Modal>
+            </>
+        </div>
+    )
 }
-
 export default NotesModal;

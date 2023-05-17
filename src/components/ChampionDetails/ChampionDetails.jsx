@@ -10,13 +10,13 @@ function DetailsPage() {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    // ------- GET this champion -------
+    // ------- Fetch this champion -------
     useEffect(() => {
         dispatch({ type: 'FETCH_THIS_CHAMPION', payload: id });
     }, []);
 
-    // ------- Storing current champion -------
-    const champion = useSelector((store) => store.thisChampion);
+    // ------- Storing this champion -------
+    const champion = useSelector(store => store.thisChampion);
 
     // ------- Brings user back to Champion List -------
     const backToList = () => {
@@ -49,6 +49,7 @@ function DetailsPage() {
                 <button onClick={addFavorite}>Favorite</button> &nbsp; &nbsp;
                 <NotesModal 
                     champion={champion}
+                    id={id}
                 /> &nbsp; &nbsp;
                 <button>Blacklist</button> &nbsp; &nbsp;
                 <br />

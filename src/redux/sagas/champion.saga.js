@@ -15,6 +15,7 @@ function* fetchAllChampions() {
 // ------- Get this champion from the DB -------
 function* fetchThisChampion(action) {
     try {
+        // ------- Based on ID -------
         const champion = yield axios.get(`/api/champion/details?id=${action.payload}`);
         console.log(`Get this champion with ID: ${action.payload}`);
         yield put({ type: 'SET_CHAMPION', payload: champion.data });
@@ -57,6 +58,7 @@ function* removeFavorite (action) {
 // ------- Get a note from the DB -------
 function* fetchNote (action) {
     try {
+        // ------- Based on ID -------
         const note = yield axios.get(`/api/champion/notes?id=${action.payload}`);
         console.log(`Get this note with champion ID: ${action.payload}`);
         yield put({ type: 'SET_NOTE', payload: note.data });
@@ -71,7 +73,7 @@ function* championSaga() {
     yield takeEvery('FETCH_FAVORITES', fetchFavorites);
     yield takeEvery('ADD_FAVORITE', addFavorite);
     yield takeEvery('REMOVE_FAVORITE', removeFavorite);
-    yield takeEvery('FETCH_NOTE', fetchNote);
+    yield takeEvery('FETCH_THIS_NOTE', fetchNote);
 
 }
 
