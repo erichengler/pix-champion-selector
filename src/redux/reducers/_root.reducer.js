@@ -6,6 +6,7 @@ import thisChampion from './thisChampion.reducer';
 import result from './result.reducer';
 import favorites from './favorites.reducer';
 import filteredChampions from './filteredChampions.reducer';
+import thisNote from './thisNote.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   thisChampion,
   filteredChampions,
   favorites,
+  thisNote,
   result,
 });
 

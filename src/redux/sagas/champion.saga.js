@@ -1,9 +1,8 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
-import filteredChampions from '../reducers/filteredChampions.reducer';
 
+// ------- Get all champions from the DB -------
 function* fetchAllChampions() {
-    // Get all champions from the DB
     try {
         const champions = yield axios.get('/api/champion');
         console.log('Get champions:', champions.data);
@@ -13,8 +12,8 @@ function* fetchAllChampions() {
     }
 }
 
+// ------- Get this champion from the DB -------
 function* fetchThisChampion(action) {
-    // Get this champion from the DB
     try {
         const champion = yield axios.get(`/api/champion/details?id=${action.payload}`);
         console.log(`Get this champion with ID: ${action.payload}`);
@@ -24,8 +23,8 @@ function* fetchThisChampion(action) {
     }
 }
 
+// ------- Get user's favorites from the DB -------
 function* fetchFavorites() {
-    // Get user's favorites from the DB
     try {
         const favorites = yield axios.get('/api/champion/favorites');
         console.log('Get favorites:', favorites.data);
@@ -35,8 +34,8 @@ function* fetchFavorites() {
     }
 }
 
+// ------- Post champion to favorites DB -------
 function* addFavorite (action) {
-    // Post champion to favorites DB
     try {
         yield axios.post('/api/champion/favorites', action.payload);
         yield put({ type: 'FETCH_FAVORITES' });
@@ -45,13 +44,24 @@ function* addFavorite (action) {
     }
 }
 
+// ------- Remove champion from favorites DB -------
 function* removeFavorite (action) {
-    // Remove champion from favorites DB
     try {
         yield axios.delete('/api/champion/favorites', action.payload);
         yield put({ type: 'FETCH_FAVORITES' });
-    } catch (error) {
-        console.log('Error in removeFavorite generator', error);
+    } catch {
+        console.log('Error in removeFavorite generator');
+    }
+}
+
+// ------- Get a note from the DB -------
+function* fetchNote (action) {
+    try {
+        const note = yield axios.get(`/api/champion/notes?id=${action.payload}`);
+        console.log(`Get this note with champion ID: ${action.payload}`);
+        yield put({ type: 'SET_NOTE', payload: note.data });
+    } catch {
+        console.log('Error in fetchNote generator');
     }
 }
 
@@ -61,6 +71,8 @@ function* championSaga() {
     yield takeEvery('FETCH_FAVORITES', fetchFavorites);
     yield takeEvery('ADD_FAVORITE', addFavorite);
     yield takeEvery('REMOVE_FAVORITE', removeFavorite);
+    yield takeEvery('FETCH_NOTE', fetchNote);
+
 }
 
 export default championSaga;

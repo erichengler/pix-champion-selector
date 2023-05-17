@@ -32,8 +32,8 @@ function NotesModal({ champion, favChampion }) {
         handleClose();
     }
 
-    // ------- Checks which prop was sent, then -------
-    // ------- displays champion's name in notes -------
+    // ------- Checks which prop was sent -------
+    // ------- then returns champion's name -------
     const notesHeader = () => {
         if (favChampion === undefined) {
             return champion[0].name;
@@ -63,9 +63,12 @@ function NotesModal({ champion, favChampion }) {
 
                     {/* ------- Modal textfield ------- */}
                     <textarea rows={10} cols={35}
+                        defaultValue='Existing note goes here'
                         style={{ 
                             border: '1px solid black', 
-                            fontSize: '16px'
+                            fontSize: '16px',
+                            maxWidth: '500px',
+                            maxHeight: '280px'
                         }}
                     >
                     </textarea>
