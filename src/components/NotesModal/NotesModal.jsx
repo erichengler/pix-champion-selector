@@ -73,9 +73,10 @@ function NotesModal({ champion, favChampion, id }) {
     }
 
     // ------- Deletes notes for the champion -------
-    const deleteNotes = (event) => {
-        // TODO: Dispatch to UPDATE_NOTE goes here (PUT)
-        handleClose();
+    const deleteNotes = () => {
+        // TODO: Check which prop was sent, send favChampion.id as payload instead if on favorites page
+        dispatch({ type: 'REMOVE_NOTE', payload: id });
+        location.reload();
     }
 
     return (
@@ -128,9 +129,9 @@ function NotesModal({ champion, favChampion, id }) {
                         ) : (
                             <>
                                 {/* ------- Delete button deletes note ------- */}
-                                <button onClick={(event) => deleteNotes(event)}>Delete</button> &nbsp;
+                                <button onClick={deleteNotes}>Delete</button> &nbsp;
                                 {/* ------- Save button updates note ------- */}
-                                <button onClick={(event) => updateNotes(event)}>Save</button>
+                                <button onClick={updateNotes}>Save</button>
                             </>
                         )}
                     </Box>

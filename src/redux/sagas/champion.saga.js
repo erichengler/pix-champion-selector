@@ -75,6 +75,15 @@ function* addNote (action) {
     }
 }
 
+// ------- Remove note from notes DB -------
+function* removeNote (action) {
+    try {
+        yield axios.delete(`/api/champion/notes/${action.payload}`);
+    } catch {
+        console.log('Error in removeNote generator');
+    }
+}
+
 function* championSaga() {
     yield takeEvery('FETCH_CHAMPIONS', fetchAllChampions);
     yield takeEvery('FETCH_THIS_CHAMPION', fetchThisChampion);
@@ -83,7 +92,7 @@ function* championSaga() {
     yield takeEvery('REMOVE_FAVORITE', removeFavorite);
     yield takeEvery('FETCH_THIS_NOTE', fetchNote);
     yield takeEvery('ADD_NOTE', addNote);
-
+    yield takeEvery('REMOVE_NOTE', removeNote);
 }
 
 export default championSaga;

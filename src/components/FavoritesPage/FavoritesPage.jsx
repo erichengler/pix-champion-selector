@@ -35,7 +35,10 @@ function FavoritesPage() {
         if (confirm(
             `Are you sure you want to remove ${champions[event.champion_id - 1].name} from your favorites?`
         )) {
-            dispatch({ type: 'REMOVE_FAVORITE', payload: { params: { id: event.id } } });
+            dispatch({ 
+                type: 'REMOVE_FAVORITE', 
+                payload: { params: { id: event.id } } 
+            });
         }
     }
 
