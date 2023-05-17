@@ -2,13 +2,13 @@ import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
 // ------- Get all champions from the DB -------
-function* fetchAllChampions() {
+function* fetchChampions() {
     try {
         const champions = yield axios.get('/api/champion');
         // console.log('Get champions:', champions.data);
         yield put({ type: 'SET_CHAMPIONS', payload: champions.data });
     } catch {
-        console.log('Error in fetchAllChampions generator');
+        console.log('Error in fetchChampions generator');
     }
 }
 
@@ -54,15 +54,26 @@ function* removeFavorite (action) {
     }
 }
 
-// ------- Get a note from the DB -------
-function* fetchNote (action) {
+// ------- Get all notes from the DB -------
+function* fetchNotes() {
+    try {
+        const notes = yield axios.get('/api/champion/notes');
+        // console.log('Get notes:', notes.data);
+        yield put({ type: 'SET_NOTES', payload: notes.data });
+    } catch {
+        console.log('Error in fetchNotes generator');
+    }
+}
+
+// ------- Get this note from the DB -------
+function* fetchThisNote (action) {
     try {
         // ------- Based on ID -------
-        const note = yield axios.get(`/api/champion/notes?id=${action.payload}`);
+        const note = yield axios.get(`/api/champion/thisnote?id=${action.payload}`);
         // console.log(`Get this note with champion ID: ${action.payload}`);
         yield put({ type: 'SET_NOTE', payload: note.data });
     } catch {
-        console.log('Error in fetchNote generator');
+        console.log('Error in fetchThisNote generator');
     }
 }
 
@@ -94,12 +105,13 @@ function* editNote (action) {
 }
 
 function* championSaga() {
-    yield takeEvery('FETCH_CHAMPIONS', fetchAllChampions);
+    yield takeEvery('FETCH_CHAMPIONS', fetchChampions);
     yield takeEvery('FETCH_THIS_CHAMPION', fetchThisChampion);
     yield takeEvery('FETCH_FAVORITES', fetchFavorites);
     yield takeEvery('ADD_FAVORITE', addFavorite);
     yield takeEvery('REMOVE_FAVORITE', removeFavorite);
-    yield takeEvery('FETCH_THIS_NOTE', fetchNote);
+    yield takeEvery('FETCH_NOTES', fetchNotes);
+    yield takeEvery('FETCH_THIS_NOTE', fetchThisNote);
     yield takeEvery('ADD_NOTE', addNote);
     yield takeEvery('REMOVE_NOTE', removeNote);
     yield takeEvery('EDIT_NOTE', editNote);

@@ -5,9 +5,9 @@ const {
     rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
 
-// ------- GET champions -------
+// ------- GET all champions -------
 router.get('/', rejectUnauthenticated, (req, res) => {
-    console.log('In GET champions');
+    console.log('In GET all champions');
     // ------- Query to get all champions -------
     const queryText =`
         SELECT * FROM champions 
@@ -92,8 +92,25 @@ router.delete('/favorites', rejectUnauthenticated, (req, res) => {
         })
 });
 
-// ------- GET this note -------
+// ------- GET all notes -------
 router.get('/notes', rejectUnauthenticated, (req, res) => {
+    console.log('In GET all notes');
+    // ------- Query to get all champions -------
+    const queryText =`
+        SELECT * FROM notes
+        WHERE "user_id" = $1;`;
+    pool.query(queryText, [req.user.id])
+        .then(result => {
+            res.send(result.rows);
+        })
+        .catch(error => {
+            console.log('ERROR in GET all notes:', error);
+            res.sendStatus(500);
+        })
+});
+
+// ------- GET this note -------
+router.get('/thisnote', rejectUnauthenticated, (req, res) => {
     console.log('In GET this note');
     // ------- Query to get note based on id -------
     const queryText =`

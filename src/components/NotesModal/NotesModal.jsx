@@ -24,7 +24,7 @@ function NotesModal({ champion, favChampion, id }) {
 
     // ------- Fetch this note based on id -------
     useEffect(() => {
-        dispatch({ type: 'FETCH_THIS_NOTE', payload: id });
+            dispatch({ type: 'FETCH_THIS_NOTE', payload: id });
     }, []);
 
     // ------- Storing this note -------
@@ -50,10 +50,15 @@ function NotesModal({ champion, favChampion, id }) {
     // ------- Check if a note exists, then -------
     // ------- set to defaultValue of textfield -------
     const defaultNote = () => {
-        if (thisNote.length === 0) {
-            return '';
-        } else {
-            return thisNote[0].note
+        if (favChampion === undefined) {
+            // ! Replace thisNote with champion.notes.note
+            if (thisNote.length === 0) {
+                return '';
+            } else {
+                return thisNote[0].note
+            }
+        } else if (champion === undefined) {
+            
         }
     }
 
@@ -62,7 +67,9 @@ function NotesModal({ champion, favChampion, id }) {
         // ------- Grabs note from modal textfield -------
         let note = event.target.parentElement.children[1].value;
         // TODO: Check which prop was sent, send favChampion.id as payload instead if on favorites page
-        dispatch({ type: 'ADD_NOTE', payload: { id: id, note: note } });
+        dispatch({ 
+            type: 'ADD_NOTE', 
+            payload: { id: champion[0].id, note: note } });
         location.reload();
     }
 
@@ -71,20 +78,25 @@ function NotesModal({ champion, favChampion, id }) {
         // ------- Grabs note from modal textfield -------
         let note = event.target.parentElement.children[1].value;
         // TODO: Check which prop was sent, send favChampion.id as payload instead if on favorites page
-        dispatch({ type: 'EDIT_NOTE', payload: { id: id, note: note } });
+        dispatch({ 
+            type: 'EDIT_NOTE', 
+            payload: { id: champion[0].id, note: note } });
         location.reload();
     }
 
     // ------- Deletes notes for the champion -------
     const deleteNotes = () => {
         // TODO: Check which prop was sent, send favChampion.id as payload instead if on favorites page
-        dispatch({ type: 'REMOVE_NOTE', payload: id });
+        dispatch({ 
+            type: 'REMOVE_NOTE', 
+            payload: champion[0].id });
         location.reload();
     }
 
     return (
         <>
             {/* ------- Checking for an existing note ------- */}
+            {/* Replace thisNote with champion.notes.note */}
             {thisNote.length === 0 ? (
                 // ------- Add Note button, opens Modal -------
                 <button onClick={handleOpen}>Add Note</button>
@@ -122,6 +134,7 @@ function NotesModal({ champion, favChampion, id }) {
                         <br />
 
                         {/* ------- Checking for an existing note ------- */}
+                        // ! Replace thisNote with champion.notes.note
                         {thisNote.length === 0 ? (
                             <>
                                 {/* ------- Cancel button cancels note creation ------- */}
