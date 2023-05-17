@@ -36,7 +36,7 @@ function ChampionsPage() {
 		<div className="container">
 			<h2>Champion List</h2>
 
-			{/* ------- Search by Name ------- */}
+			{/* ------- Search by name ------- */}
 			<label htmlFor="championSearch">Search by Name:</label>
 			<br />
 			<input type="search" id="championSearch" />

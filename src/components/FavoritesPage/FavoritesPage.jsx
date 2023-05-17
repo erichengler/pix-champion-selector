@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import NotesModal from '../NotesModal/NotesModal';
 
 function FavoritesPage() {
 
@@ -11,12 +12,13 @@ function FavoritesPage() {
 
     const dispatch = useDispatch();
 
-    // Fetch favorites on page load
+    // ------- Fetch champions and favorites -------
     useEffect(() => {
         dispatch({ type: 'FETCH_CHAMPIONS' });
         dispatch({ type: 'FETCH_FAVORITES' });
     }, []);
 
+    // ------- Remove favorite from DB -------
     const removeFavorite = (event) => {
         if (confirm(
             `Are you sure you want to remove ${champions[event.champion_id - 1].name} from your favorites?`
@@ -55,9 +57,11 @@ function FavoritesPage() {
                                     {/* ------- Matching champion name ------- */}
                                     {favChampion.name}
 
-                                    {/* Notes and remove buttons */}
+                                    {/* ------- Notes and remove buttons ------- */}
                                     &nbsp; &nbsp; &nbsp; &nbsp;
-                                    <button>Notes</button>
+                                    <NotesModal 
+                                        favChampion={favChampion}
+                                    />
                                     &nbsp; &nbsp; &nbsp; &nbsp;
                                     <button 
                                         onClick={() => removeFavorite(favorite)}>

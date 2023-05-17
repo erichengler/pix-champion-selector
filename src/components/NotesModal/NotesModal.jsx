@@ -4,8 +4,8 @@ import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { fontSize } from '@mui/system';
 
+// ------- Modal styling -------
 const style = {
     position: 'absolute',
     top: '50%',
@@ -17,23 +17,37 @@ const style = {
     p: 4,
 };
 
-function NotesModal({ champion }) {
+function NotesModal({ champion, favChampion }) {
 
-    // Storing modal status
+    // ------- Storing modal status -------
     const [open, setOpen] = useState(false);
 
-    // HandleChange for modal
+    // ------- HandleChange for modal -------
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    // Saves user's notes to the DB
+    // ------- Saves user's notes to the DB -------
     const saveNotes = (event) => {
         // TODO: Dispatch to ADD_NOTES goes here
+        handleClose();
+    }
+
+    // ------- Checks which prop was sent, then -------
+    // ------- displays champion's name in notes -------
+    const notesHeader = () => {
+        if (favChampion === undefined) {
+            return champion[0].name;
+        } else if (champion === undefined) {
+            return favChampion.name;
+        }
     }
 
     return (
         <>
+            {/* ------- Notes button ------- */}
             <button onClick={handleOpen}>Notes</button>
+
+            {/* ------- Modal ------- */}
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -41,11 +55,23 @@ function NotesModal({ champion }) {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
+
+                    {/* ------- Modal header ------- */}
                     <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Notes for {champion[0].name}
+                        Notes for {notesHeader()}
                     </Typography>
-                    <textarea rows={8} cols={40}></textarea>
+
+                    {/* ------- Modal textfield ------- */}
+                    <textarea rows={10} cols={35}
+                        style={{ 
+                            border: '1px solid black', 
+                            fontSize: '16px'
+                        }}
+                    >
+                    </textarea>
                     <br />
+
+                    {/* ------- Modal save button */}
                     <button onClick={(event) => saveNotes(event)}>Save</button>
                 </Box>
             </Modal>

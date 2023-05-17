@@ -12,7 +12,6 @@ function DetailsPage() {
 
     // ------- GET this champion -------
     useEffect(() => {
-        console.log(champion)
         dispatch({ type: 'FETCH_THIS_CHAMPION', payload: id });
     }, []);
 
@@ -24,6 +23,7 @@ function DetailsPage() {
         history.push('/champions');
     }
 
+    // ------- Adds a champion to the favorites list -------
     const addFavorite = () => {
         dispatch({ type: 'ADD_FAVORITE', payload: {id} });
         alert(`${champion[0].name} has been added to your favorites.`);
@@ -38,14 +38,14 @@ function DetailsPage() {
 
                 <div className="container">
 
-                {/* ------- Champion Name ------- */}
+                {/* ------- Champion name ------- */}
                 <h2>{champion[0].name}</h2>
 
-                {/* ------- Champion Title ------- */}
+                {/* ------- Champion title ------- */}
                 <span>{champion[0].title}</span>
                 <br /><br />
 
-                {/* ------- Favorite, Notes, Blacklist ------- */}
+                {/* ------- Favorite, notes, blacklist ------- */}
                 <button onClick={addFavorite}>Favorite</button> &nbsp; &nbsp;
                 <NotesModal 
                     champion={champion}
@@ -53,14 +53,14 @@ function DetailsPage() {
                 <button>Blacklist</button> &nbsp; &nbsp;
                 <br />
 
-                {/* ------- Champion Image ------- */}
+                {/* ------- Champion image ------- */}
                 <img
                     src={champion[0].image}
                     style={{ width: '500px', border: '1px solid black' }}
                 />
                 <br />
 
-                {/* ------- Class, Difficulty and Region ------- */}
+                {/* ------- Class, difficulty and region ------- */}
                 <span>
                     Class: {champion[0].class} &nbsp; • &nbsp;
                     Difficulty: {champion[0].difficulty} &nbsp; • &nbsp;
@@ -68,7 +68,7 @@ function DetailsPage() {
                 </span>
                 <br /><br />
 
-                {/* ------- Champion Lore ------- */}
+                {/* ------- Champion lore ------- */}
                 <div
                     style={{ width: '500px' }}
                 >
@@ -76,7 +76,7 @@ function DetailsPage() {
                 </div>
                 <br /><br />
 
-                {/* ------- Back Button ------- */}
+                {/* ------- Back button ------- */}
                 <button onClick={backToList}>Back</button>
             </div>
             )}
