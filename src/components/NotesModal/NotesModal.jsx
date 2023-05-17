@@ -71,7 +71,7 @@ function NotesModal({ champion, favChampion }) {
                     </textarea>
                     <br />
 
-                    {/* ------- Modal save button */}
+                    {/* ------- Modal save button ------- */}
                     <button onClick={(event) => saveNotes(event)}>Save</button>
                 </Box>
             </Modal>
