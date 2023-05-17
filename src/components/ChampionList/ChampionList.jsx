@@ -26,7 +26,7 @@ function ChampionsPage() {
 	// ------- Sets random result from full champion list -------
 	const roll = () => {
 		const random = Math.floor(Math.random() * champions.length);
-		console.log(champions[random]);
+		console.log('hi', champions[random]);
 		dispatch({ type: 'SET_RESULT', payload: champions[random] });
 		// ------- Brings user to result page -------
 		history.push('/result')

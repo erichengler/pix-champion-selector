@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import NotesModal from '../NotesModal/NotesModal';
 
@@ -11,12 +12,23 @@ function FavoritesPage() {
     // ! ALSO GETS CHAMPION INFORMATION FROM CHAMPIONS TABLE
 
     const dispatch = useDispatch();
+    const history = useHistory();
 
     // ------- Fetch champions and favorites -------
     useEffect(() => {
         dispatch({ type: 'FETCH_CHAMPIONS' });
         dispatch({ type: 'FETCH_FAVORITES' });
     }, []);
+
+    // ------- Brings user back to Home -------
+    const backToHome = () => {
+        history.push('/');
+    }
+
+    // ------- Sets random result from favorites list -------
+    const roll = () => {
+    
+    }
 
     // ------- Remove favorite from DB -------
     const removeFavorite = (event) => {
@@ -52,20 +64,20 @@ function FavoritesPage() {
                             favorites.map(favorite => {
                                 let favChampion = champions[favorite.champion_id - 1];
                                 return <div key={favorite.id}>
-                                    
+
 
                                     {/* ------- Matching champion name ------- */}
                                     {favChampion.name}
 
                                     {/* ------- Notes and remove buttons ------- */}
                                     &nbsp; &nbsp; &nbsp; &nbsp;
-                                    <NotesModal 
+                                    <NotesModal
                                         favChampion={favChampion}
                                     />
                                     &nbsp; &nbsp; &nbsp; &nbsp;
-                                    <button 
+                                    <button
                                         onClick={() => removeFavorite(favorite)}>
-                                            Remove
+                                        Remove
                                     </button>
                                     <br />
 
@@ -78,6 +90,12 @@ function FavoritesPage() {
                                 </div>
                             })
                         }
+                        {/* ------- Back to home button ------- */}
+                        <button onClick={backToHome}>Back</button>
+                        &nbsp; &nbsp;
+
+                        {/* ------- Roll button ------- */}
+                        <button onClick={roll}>Roll</button>
                     </div>
                 ))
             }

@@ -22,12 +22,12 @@ function NotesModal({ champion, favChampion, id }) {
 
     const dispatch = useDispatch();
 
-    // ------- Fetch this note -------
+    // ------- Fetch this note based on id -------
     useEffect(() => {
         dispatch({ type: 'FETCH_THIS_NOTE', payload: id });
     }, []);
 
-    // ------- Storing note -------
+    // ------- Storing this note -------
     const thisNote = useSelector(store => store.thisNote);
 
     // ------- Storing modal status -------
@@ -59,8 +59,11 @@ function NotesModal({ champion, favChampion, id }) {
 
     // ------- Creates notes for the champion -------
     const createNotes = (event) => {
-        // TODO: Dispatch to ADD_NOTE goes here (POST)
-        handleClose();
+        // ------- Grabs note from modal textfield -------
+        let note = event.target.parentElement.children[1].value
+        // TODO: Check which prop was sent, send favChampion.id as payload instead if on favorites page
+        dispatch({ type: 'ADD_NOTE', payload: {id: id, note: note } });
+        location.reload();
     }
 
     // ------- Updates notes for the champion -------
@@ -97,7 +100,7 @@ function NotesModal({ champion, favChampion, id }) {
                     <Box sx={style}>
 
                         {/* ------- Modal header ------- */}
-                        <Typography id="modal-modal-title" variant="h6" component="h2">
+                        <Typography variant="h6">
                             Notes for {notesHeader()}
                         </Typography>
 
@@ -120,7 +123,7 @@ function NotesModal({ champion, favChampion, id }) {
                                 {/* ------- Cancel button cancels note creation ------- */}
                                 <button onClick={handleClose}>Cancel</button> &nbsp;
                                 {/* ------- Submit button creates note ------- */}
-                                <button onClick={(event) => createNotes(event)}>Submit</button>
+                                <button onClick={createNotes}>Submit</button>
                             </>
                         ) : (
                             <>
