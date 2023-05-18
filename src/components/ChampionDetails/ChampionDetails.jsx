@@ -45,12 +45,16 @@ function DetailsPage() {
                 <span>{champion[0].title}</span>
                 <br /><br />
 
-                {/* ------- Favorite, notes, blacklist ------- */}
+                {/* ------- Favorite button ------- */}
                 <button onClick={addFavorite}>Favorite</button> &nbsp; &nbsp;
+
+                {/* ------- Notes button ------- */}
                 <NotesModal 
                     champion={champion}
                     id={id}
                 /> &nbsp; &nbsp;
+                
+                {/* ------- Blacklist button ------- */}
                 <button>Blacklist</button> &nbsp; &nbsp;
                 <br />
 

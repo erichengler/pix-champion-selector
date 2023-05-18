@@ -76,6 +76,10 @@ function NotesModal({ champion, favorite, name, id }) {
     const createNotes = (event) => {
         // ------- Grabs note from modal textfield -------
         let note = event.target.parentElement.children[1].value;
+        if (note === '') {
+            alert('Cannot create empty note.')
+            return;
+        }
         // ------- Checking what page we're on -------
         if (favorite === undefined) {
             dispatch({
