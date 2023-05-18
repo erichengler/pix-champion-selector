@@ -1,12 +1,10 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import RollButton from '../RollButton/RollButton';
 
 function ResultPage() {
 
-    const dispatch = useDispatch();
     const history = useHistory();
 
     // ------- Storing result, champions, favorites -------
@@ -24,10 +22,10 @@ function ResultPage() {
             <p>Pix thinks you should play...</p>
 
             {/* Random result name */}
-            <h2>{result.name}</h2>
+            <h2>{result.champion.name}</h2>
 
             {/* Random result image */}
-            <img src={result.image} style={{width: '700px'}} />
+            <img src={result.champion.image} style={{width: '700px'}} />
             <br /><br />
 
             {/* Back to Home Button */}
