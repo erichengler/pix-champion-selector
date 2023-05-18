@@ -1,13 +1,11 @@
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+
 import NotesModal from '../NotesModal/NotesModal';
+import RollButton from '../RollButton/RollButton';
 
 function FavoritesPage() {
-
-    // Storing champions, favorites
-    const champions = useSelector(store => store.champions);
-    const favorites = useSelector(store => store.favorites);
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -18,21 +16,14 @@ function FavoritesPage() {
         dispatch({ type: 'FETCH_FAVORITES' });
     }, []);
 
+    // Storing champions, favorites
+    const champions = useSelector(store => store.champions);
+    const favorites = useSelector(store => store.favorites);
+
     // ------- Brings user back to Home -------
     const backToHome = () => {
         history.push('/');
     }
-
-    // ------- Sets random result from favorites list -------
-	const roll = () => {
-		const random = Math.floor(Math.random() * favorites.length);
-        const result = favorites[random]
-		dispatch({ 
-            type: 'SET_RESULT', 
-            payload: champions[result.champion_id - 1] });
-		// ------- Brings user to result page -------
-		history.push('/result')
-	}
 
     // ------- Remove favorite from DB -------
     const removeFavorite = (event) => {
@@ -103,7 +94,10 @@ function FavoritesPage() {
                         &nbsp; &nbsp;
 
                         {/* ------- Roll button ------- */}
-                        <button onClick={roll}>Roll</button>
+                        <RollButton 
+                            champions={champions}
+                            favorites={favorites}
+                        />
                     </div>
                 ))
             }

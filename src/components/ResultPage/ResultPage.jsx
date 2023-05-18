@@ -1,29 +1,23 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+
+import RollButton from '../RollButton/RollButton';
 
 function ResultPage() {
 
     const dispatch = useDispatch();
     const history = useHistory();
 
-    // Storing randomized champion result
+    // ------- Storing result, champions, favorites -------
     const result = useSelector(store => store.result);
-    // Storing all champions
 	const champions = useSelector(store => store.champions);
+    const favorites = useSelector(store => store.favorites);
 
     // Brings user back to Home (UserPage)
 	const backToHome = () => {
 		history.push('/');
 	}
-
-    console.log(result);
-
-    // Roll again - get another random champion
-    const reroll = () => {
-		const random = Math.floor(Math.random() * champions.length);
-		console.log(champions[random]);
-		dispatch({ type: 'SET_RESULT', payload: champions[random] });
-    }
 
 	return (
 		<div className="container">
@@ -41,7 +35,11 @@ function ResultPage() {
             &nbsp; &nbsp;
 
             {/* Reroll Button */}
-            <button onClick={reroll}>Reroll</button>
+            <RollButton 
+                result={result}
+                champions={champions}
+                favorites={favorites}
+            />
 		</div>
 	);
 }

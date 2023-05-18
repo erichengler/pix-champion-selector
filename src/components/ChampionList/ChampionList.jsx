@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import ChampionItem from '../ChampionItem/ChampionItem';
+import RollButton from '../RollButton/RollButton';
 
 function ChampionsPage() {
 
@@ -30,15 +31,6 @@ function ChampionsPage() {
 	// ------- Brings user back to Home -------
 	const backToHome = () => {
 		history.push('/');
-	}
-
-	// ------- Sets random result from full champion list -------
-	// ! Change champions to filteredChampions when filter is working
-	const roll = () => {
-		const random = Math.floor(Math.random() * champions.length);
-		dispatch({ type: 'SET_RESULT', payload: champions[random] });
-		// ------- Brings user to result page -------
-		history.push('/result')
 	}
 
 	return (
@@ -69,7 +61,10 @@ function ChampionsPage() {
 			&nbsp; &nbsp;
 
 			{/* ------- Roll button ------- */}
-			<button onClick={roll}>Roll</button>
+			{/* ! CHANGE champions to filtered champions when filter works ! */}
+			<RollButton 
+				champions={champions}
+			/>
 		</div>
 	);
 }
