@@ -35,7 +35,7 @@ function FavoritesPage() {
         )) {
             dispatch({ 
                 type: 'REMOVE_FAVORITE', 
-                payload: { params: { id: event.id } } 
+                payload: { params: { id: event.champion_id } } 
             });
         }
     }

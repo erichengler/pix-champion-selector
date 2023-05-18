@@ -22,8 +22,6 @@ function NotesModal({ champion, favorite, name, id }) {
 
     const dispatch = useDispatch();
 
-    console.log('hi', favorite);
-
     // ------- Fetch this note based on id -------
     // ------- if on champion details page
     if (favorite === undefined) {

@@ -85,7 +85,7 @@ router.delete('/favorites', rejectUnauthenticated, (req, res) => {
     // ------- Query to delete champion based on id -------
     const queryText =`
         DELETE FROM favorites
-        WHERE "user_id" = $1 AND "id" = $2;`;
+        WHERE "user_id" = $1 AND "champion_id" = $2;`;
     pool.query(queryText, [req.user.id, req.query.id])
         .then(result => {
             res.sendStatus(200);

@@ -25,8 +25,18 @@ function DetailsPage() {
 
     // ------- Adds a champion to the favorites list -------
     const addFavorite = () => {
-        dispatch({ type: 'ADD_FAVORITE', payload: {id} });
+        dispatch({ type: 'ADD_FAVORITE', payload: { id: id } });
         alert(`${champion[0].name} has been added to your favorites.`);
+    }
+
+    // ------- Remove favorite from DB -------
+    const removeFavorite = () => {
+        if (confirm(
+            `Are you sure you want to remove ${champion[0].name} from your favorites?`
+        )) {
+            dispatch({type: 'REMOVE_FAVORITE', payload: { params: { id: id } }
+            });
+        }
     }
 
     return (
@@ -38,52 +48,52 @@ function DetailsPage() {
 
                 <div className="container">
 
-                {/* ------- Champion name ------- */}
-                <h2>{champion[0].name}</h2>
+                    {/* ------- Champion name ------- */}
+                    <h2>{champion[0].name}</h2>
 
-                {/* ------- Champion title ------- */}
-                <span>{champion[0].title}</span>
-                <br /><br />
+                    {/* ------- Champion title ------- */}
+                    <span>{champion[0].title}</span>
+                    <br /><br />
 
-                {/* ------- Favorite button ------- */}
-                <button onClick={addFavorite}>Favorite</button> &nbsp; &nbsp;
+                    {/* ------- Favorite button ------- */}
+                    <button onClick={addFavorite}>Favorite</button> &nbsp; &nbsp;
 
-                {/* ------- Notes button ------- */}
-                <NotesModal 
-                    champion={champion}
-                    id={id}
-                /> &nbsp; &nbsp;
-                
-                {/* ------- Blacklist button ------- */}
-                <button>Blacklist</button> &nbsp; &nbsp;
-                <br />
+                    {/* ------- Notes button ------- */}
+                    <NotesModal
+                        champion={champion}
+                        id={id}
+                    /> &nbsp; &nbsp;
 
-                {/* ------- Champion image ------- */}
-                <img
-                    src={champion[0].image}
-                    style={{ width: '500px', border: '1px solid black' }}
-                />
-                <br />
+                    {/* ------- Blacklist button ------- */}
+                    <button>Blacklist</button> &nbsp; &nbsp;
+                    <br />
 
-                {/* ------- Class, difficulty and region ------- */}
-                <span>
-                    Class: {champion[0].class} &nbsp; • &nbsp;
-                    Difficulty: {champion[0].difficulty} &nbsp; • &nbsp;
-                    Region: {champion[0].region}
-                </span>
-                <br /><br />
+                    {/* ------- Champion image ------- */}
+                    <img
+                        src={champion[0].image}
+                        style={{ width: '500px', border: '1px solid black' }}
+                    />
+                    <br />
 
-                {/* ------- Champion lore ------- */}
-                <div
-                    style={{ width: '500px' }}
-                >
-                    {champion[0].lore}
+                    {/* ------- Class, difficulty and region ------- */}
+                    <span>
+                        Class: {champion[0].class} &nbsp; • &nbsp;
+                        Difficulty: {champion[0].difficulty} &nbsp; • &nbsp;
+                        Region: {champion[0].region}
+                    </span>
+                    <br /><br />
+
+                    {/* ------- Champion lore ------- */}
+                    <div
+                        style={{ width: '500px' }}
+                    >
+                        {champion[0].lore}
+                    </div>
+                    <br /><br />
+
+                    {/* ------- Back button ------- */}
+                    <button onClick={backToList}>Back</button>
                 </div>
-                <br /><br />
-
-                {/* ------- Back button ------- */}
-                <button onClick={backToList}>Back</button>
-            </div>
             )}
         </div>
     );
