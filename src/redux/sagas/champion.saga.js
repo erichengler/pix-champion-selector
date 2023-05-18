@@ -68,20 +68,6 @@ function* removeFavorite (action) {
     }
 }
 
-// ------- Get all notes from the DB -------
-function* fetchNotes() {
-    try {
-        const notes = yield axios.get('/api/champion/notes');
-        // console.log('Get notes:', notes.data);
-        yield put({ 
-            type: 'SET_NOTES', 
-            payload: notes.data 
-        });
-    } catch {
-        console.log('Error in fetchNotes generator');
-    }
-}
-
 // ------- Get this note from the DB -------
 function* fetchThisNote (action) {
     try {
@@ -128,7 +114,6 @@ function* championSaga() {
     yield takeEvery('FETCH_FAVORITES', fetchFavorites);
     yield takeEvery('ADD_FAVORITE', addFavorite);
     yield takeEvery('REMOVE_FAVORITE', removeFavorite);
-    yield takeEvery('FETCH_NOTES', fetchNotes);
     yield takeEvery('FETCH_THIS_NOTE', fetchThisNote);
     yield takeEvery('ADD_NOTE', addNote);
     yield takeEvery('REMOVE_NOTE', removeNote);

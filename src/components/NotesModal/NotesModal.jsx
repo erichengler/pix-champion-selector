@@ -51,7 +51,6 @@ function NotesModal({ champion, favChampion, id }) {
     // ------- set to defaultValue of textfield -------
     const defaultNote = () => {
         if (favChampion === undefined) {
-            // ! Replace thisNote with champion.notes.note
             if (thisNote.length === 0) {
                 return '';
             } else {
@@ -134,7 +133,6 @@ function NotesModal({ champion, favChampion, id }) {
                         <br />
 
                         {/* ------- Checking for an existing note ------- */}
-                        // ! Replace thisNote with champion.notes.note
                         {thisNote.length === 0 ? (
                             <>
                                 {/* ------- Cancel button cancels note creation ------- */}
