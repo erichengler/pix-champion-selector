@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -18,15 +18,24 @@ function ChampionsPage() {
 	const champions = useSelector(store => store.champions);
 	const filteredChampions = useSelector(store => store.filteredChampions);
 
+	// ------- Search query state -------
+	const [searchQuery, setSearchQuery] = useState('');
+
+	// ------- Filter champions using search query -------
+	// ! Change champions.filter to filteredChampions.filter when filter is working
+	const filteredChampionsBySearch = champions.filter((champion) => 
+		champion.name.toLowerCase().includes(searchQuery.toLowerCase())
+	);
+
 	// ------- Brings user back to Home -------
 	const backToHome = () => {
 		history.push('/');
 	}
 
 	// ------- Sets random result from full champion list -------
+	// ! Change champions to filteredChampions when filter is working
 	const roll = () => {
 		const random = Math.floor(Math.random() * champions.length);
-		console.log('hi', champions[random]);
 		dispatch({ type: 'SET_RESULT', payload: champions[random] });
 		// ------- Brings user to result page -------
 		history.push('/result')
@@ -37,14 +46,17 @@ function ChampionsPage() {
 			<h2>Champion List</h2>
 
 			{/* ------- Search by name ------- */}
-			<label htmlFor="championSearch">Search by Name:</label>
-			<br />
-			<input type="search" id="championSearch" />
-			<br/> <br />
+			<input
+				type="text"
+				value={searchQuery}
+				onChange={(e) => setSearchQuery(e.target.value)}
+				placeholder="Search champions..."
+			/>
+			<br /> <br />
 
 			{/* ------- Maps through all champions ------- */}
 			{
-				champions.map((champion) => (
+				filteredChampionsBySearch.map((champion) => (
 					<ChampionItem
 						key={champion.id}
 						champion={champion} />
