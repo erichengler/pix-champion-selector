@@ -74,6 +74,7 @@ function NotesModal({ champion, favorite, name, id }) {
     const createNotes = (event) => {
         // ------- Grabs note from modal textfield -------
         let note = event.target.parentElement.children[1].value;
+        // ------- Prevents creating an empty note -------
         if (note === '') {
             alert('Cannot create empty note.')
             return;
@@ -97,6 +98,11 @@ function NotesModal({ champion, favorite, name, id }) {
     const updateNotes = (event) => {
         // ------- Grabs note from modal textfield -------
         let note = event.target.parentElement.children[1].value;
+        // ------- Prevents updating to an empty note -------
+        if (note === '') {
+            alert('Cannot update to an empty note.')
+            return;
+        }
         // ------- Checking what page we're on -------
         if (favorite === undefined) {
             dispatch({
@@ -123,7 +129,7 @@ function NotesModal({ champion, favorite, name, id }) {
         } else if (champion === undefined) {
             dispatch({
                 type: 'REMOVE_NOTE',
-                payload: favorite.champion_id 
+                payload: favorite.champion_id
             });
         }
         location.reload();
@@ -133,23 +139,17 @@ function NotesModal({ champion, favorite, name, id }) {
         <>
             {/* ------- Checking what page we're on ------- */}
             {favorite === undefined ? (
-                // ------- Checking for an existing note -------
-                thisNote.length === 0 ? (
-                    // ------- Add Note button, opens Modal -------
-                    <button onClick={handleOpen}>Add Note</button>
-                ) : (
-                    // ------- Edit Note button, opens Modal -------
-                    <button onClick={handleOpen}>Edit Note</button>
-                )
+                // ------- Add note or Edit note button -------
+                <button onClick={handleOpen}>
+                    {/* ------- Checking if a note exists ------- */}
+                    {thisNote.length === 0 ? 'Add Note' : 'Edit Note'}
+                </button>
             ) : (
-                // ------- Checking for an existing note -------
-                favorite.note == undefined ? (
-                    // ------- Add Note button, opens Modal -------
-                    <button onClick={handleOpen}>Add Note</button>
-                ) : (
-                    // ------- Edit Note button, opens Modal -------
-                    <button onClick={handleOpen}>Edit Note</button>
-                )
+                // ------- Add note or Edit note button -------
+                <button onClick={handleOpen}>
+                    {/* ------- Checking if a note exists ------- */}
+                    {favorite.note == undefined ? 'Add Note' : 'Edit Note'}
+                </button>
             )}
 
             {/* ------- Modal ------- */}
@@ -178,41 +178,36 @@ function NotesModal({ champion, favorite, name, id }) {
                     >
                     </textarea>
                     <br />
+
                     {/* ------- Checking what page we're on ------- */}
                     {favorite === undefined ? (
-                        // ------- Checking for an existing note -------
-                        thisNote.length === 0 ? (
-                            <>
-                                {/* ------- Cancel Button ------- */}                                
-                                <button onClick={handleClose}>Cancel</button> &nbsp;
-                                {/* ------- Submit Button ------- */}
-                                <button onClick={createNotes}>Submit</button>
-                            </>
-                        ) : (
-                            <>
-                                {/* ------- Delete Button ------- */}
-                                <button onClick={deleteNotes}>Delete</button> &nbsp;
-                                {/* ------- Save Button ------- */}
-                                <button onClick={updateNotes}>Save</button>
-                            </>
-                        )
+                        <>
+                            {/* ------- Cancel or Delete button ------- */}
+                            <button
+                                onClick={thisNote.length === 0 ? handleClose : deleteNotes}>
+                                {thisNote.length === 0 ? 'Cancel' : 'Delete'}
+                            </button>
+
+                            {/* ------- Submit or Save button ------- */}
+                            <button
+                                onClick={thisNote.length === 0 ? createNotes : updateNotes}>
+                                {thisNote.length === 0 ? 'Submit' : 'Save'}
+                            </button>
+                        </>
                     ) : (
-                        // ------- Checking for an existing note -------
-                        favorite.note == undefined ? (
-                            <>
-                                {/* ------- Cancel Button ------- */}
-                                <button onClick={handleClose}>Cancel</button> &nbsp;
-                                {/* ------- Submit Button ------- */}
-                                <button onClick={createNotes}>Submit</button>
-                            </>
-                        ) : (
-                            <>
-                                {/* ------- Delete Button ------- */}
-                                <button onClick={deleteNotes}>Delete</button> &nbsp;
-                                {/* ------- Save Button ------- */}
-                                <button onClick={updateNotes}>Save</button>
-                            </>
-                        )
+                        <>
+                            {/* ------- Cancel or Delete button ------- */}
+                            <button
+                                onClick={favorite.note == undefined ? handleClose : deleteNotes}>
+                                {favorite.note == undefined ? 'Cancel' : 'Delete'}
+                            </button>
+
+                            {/* ------- Submit or Save button ------- */}
+                            <button
+                                onClick={favorite.note == undefined ? createNotes : updateNotes}>
+                                {favorite.note == undefined ? 'Submit' : 'Save'}
+                            </button>
+                        </>
                     )}
                 </Box>
             </Modal>
