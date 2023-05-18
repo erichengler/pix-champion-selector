@@ -74,6 +74,7 @@ function FavoritesPage() {
                                     &nbsp; &nbsp; &nbsp; &nbsp;
                                     <NotesModal
                                         favorite={favorite}
+                                        name={favChampion.name}
                                     />
                                     &nbsp; &nbsp; &nbsp; &nbsp;
                                     <button

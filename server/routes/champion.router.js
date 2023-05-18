@@ -132,23 +132,6 @@ router.post('/notes', rejectUnauthenticated, (req, res) => {
         })
 });
 
-// ------- DELETE from notes -------
-router.delete('/notes/:id', rejectUnauthenticated, (req, res) => {
-    console.log('In DELETE note');
-    // ------- Query to delete note based on id -------
-    const queryText =`
-        DELETE FROM notes
-        WHERE "user_id" = $1 AND "champion_id" = $2;`;
-    pool.query(queryText, [req.user.id, req.params.id])
-        .then(result => {
-            res.sendStatus(200);
-        })
-        .catch(error => {
-            console.log('ERROR in DELETE favorite', error);
-            res.sendStatus(500);
-        })
-});
-
 // ------- UPDATE note -------
 router.put('/notes', rejectUnauthenticated, (req, res) => {
     console.log('In UPDATE note', req.body);
@@ -166,6 +149,25 @@ router.put('/notes', rejectUnauthenticated, (req, res) => {
             console.log('ERROR in UPDATE note', error);
             res.sendStatus(500);
         })
-})
+});
+
+// ------- DELETE from notes -------
+router.delete('/notes/:id', rejectUnauthenticated, (req, res) => {
+    console.log('In DELETE note');
+    // ------- Query to delete note based on id -------
+    const queryText =`
+        DELETE FROM notes
+        WHERE "user_id" = $1 AND "champion_id" = $2;`;
+    pool.query(queryText, [req.user.id, req.params.id])
+        .then(result => {
+            res.sendStatus(200);
+        })
+        .catch(error => {
+            console.log('ERROR in DELETE favorite', error);
+            res.sendStatus(500);
+        })
+});
+
+
 
 module.exports = router;
