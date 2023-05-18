@@ -44,9 +44,13 @@ router.get('/favorites', rejectUnauthenticated, (req, res) => {
     console.log('In GET favorites');
     // ------- Query to get all favorites -------
     const queryText =`
-        SELECT * FROM favorites 
-        WHERE user_id = $1 
-        ORDER BY id ASC;`;
+        SELECT favorites.id, favorites.user_id, favorites.champion_id, note
+        FROM favorites
+        LEFT JOIN notes 
+        ON favorites.champion_id = notes.champion_id 
+        AND favorites.user_id = notes.user_id
+        WHERE favorites.user_id = $1
+        ORDER BY favorites.id;`;
     pool.query(queryText, [req.user.id])
         .then(result => {
             res.send(result.rows);

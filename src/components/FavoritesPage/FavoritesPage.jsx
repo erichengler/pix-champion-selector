@@ -8,8 +8,6 @@ function FavoritesPage() {
     // Storing champions, favorites
     const champions = useSelector(store => store.champions);
     const favorites = useSelector(store => store.favorites);
-    // ! IDEA: CHANGE GET REQUEST QUERYTEXT FOR FAVORITES TO A JOIN THAT 
-    // ! ALSO GETS CHAMPION INFORMATION FROM CHAMPIONS TABLE
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -75,7 +73,7 @@ function FavoritesPage() {
                                     {/* ------- Notes and remove buttons ------- */}
                                     &nbsp; &nbsp; &nbsp; &nbsp;
                                     <NotesModal
-                                        favChampion={favChampion}
+                                        favorite={favorite}
                                     />
                                     &nbsp; &nbsp; &nbsp; &nbsp;
                                     <button
