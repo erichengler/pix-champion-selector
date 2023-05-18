@@ -13,23 +13,31 @@ function DetailsPage() {
     // ------- Fetch this champion -------
     useEffect(() => {
         dispatch({ type: 'FETCH_THIS_CHAMPION', payload: id });
+        dispatch({ type: 'FETCH_FAVORITES' });
     }, []);
 
     // ------- Storing this champion -------
     const champion = useSelector(store => store.thisChampion);
+    const favorites = useSelector(store => store.favorites);
+
+    const isFavorite = favorites.some(
+        favorite => favorite.champion_id === champion[0].id);
+
+    console.log(champion, favorites, isFavorite);    
 
     // ------- Brings user back to Champion List -------
     const backToList = () => {
         history.push('/champions');
     }
 
-    // ------- Adds a champion to the favorites list -------
+    // ------- Adds champion to the favorites list -------
     const addFavorite = () => {
         dispatch({ type: 'ADD_FAVORITE', payload: { id: id } });
         alert(`${champion[0].name} has been added to your favorites.`);
+        location.reload();
     }
 
-    // ------- Remove favorite from DB -------
+    // ------- Remove champion from favorites list -------
     const removeFavorite = () => {
         if (confirm(
             `Are you sure you want to remove ${champion[0].name} from your favorites?`
@@ -56,7 +64,9 @@ function DetailsPage() {
                     <br /><br />
 
                     {/* ------- Favorite button ------- */}
-                    <button onClick={addFavorite}>Favorite</button> &nbsp; &nbsp;
+                    <button onClick={isFavorite ? removeFavorite : addFavorite}>
+                        {isFavorite ? 'Unfavorite' : 'Favorite'}
+                    </button> &nbsp; &nbsp;
 
                     {/* ------- Notes button ------- */}
                     <NotesModal
