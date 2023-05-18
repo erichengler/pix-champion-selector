@@ -16,6 +16,8 @@ function ResultPage() {
 		history.push('/');
 	}
 
+    console.log(result);
+
     // Roll again - get another random champion
     const reroll = () => {
 		const random = Math.floor(Math.random() * champions.length);

@@ -24,9 +24,15 @@ function FavoritesPage() {
     }
 
     // ------- Sets random result from favorites list -------
-    const roll = () => {
-    
-    }
+	const roll = () => {
+		const random = Math.floor(Math.random() * favorites.length);
+        const result = favorites[random]
+		dispatch({ 
+            type: 'SET_RESULT', 
+            payload: champions[result.champion_id - 1] });
+		// ------- Brings user to result page -------
+		history.push('/result')
+	}
 
     // ------- Remove favorite from DB -------
     const removeFavorite = (event) => {
