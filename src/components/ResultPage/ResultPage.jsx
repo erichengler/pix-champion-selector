@@ -15,7 +15,6 @@ function ResultPage() {
     // ------- blacklist and favorites -------
 	useEffect(() => {
 		dispatch({ type: 'FETCH_CHAMPIONS' });
-		dispatch({ type: 'FETCH_BLACKLIST' });
 	}, []);
 
     // ------- Storing result, champions, this -------
