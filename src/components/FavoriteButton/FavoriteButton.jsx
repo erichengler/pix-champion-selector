@@ -7,6 +7,10 @@ function FavoriteButton({ champion, favorites, id }) {
 
     const dispatch = useDispatch();
 
+    // ------- Checking if champion is on user's favorites -------
+    const isFavorite = favorites.some(
+        favorite => favorite.champion_id === champion[0].id);
+
     // ------- Adds champion to the user's favorites list -------
     const addFavorite = () => {
         dispatch({ type: 'ADD_FAVORITE', payload: { id: id } });
@@ -18,10 +22,6 @@ function FavoriteButton({ champion, favorites, id }) {
             type: 'REMOVE_FAVORITE', payload: { params: { id: id } }
         });
     }
-
-    // ------- Checking if champion is on user's favorites -------
-    const isFavorite = favorites.some(
-        favorite => favorite.champion_id === champion[0].id);
 
     return (
         <>

@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
 import NotesButton from "../NotesButton/NotesButton";
+import BlacklistButton from "../BlacklistButton/BlacklistButton";
 
 function DetailsPage() {
 
@@ -23,25 +24,9 @@ function DetailsPage() {
     const favorites = useSelector(store => store.favorites);
     const blacklist = useSelector(store => store.blacklist);
 
-    // ------- Checking if champion is on user's blacklist -------
-    const isBlacklist = blacklist.some(
-        blChampion => blChampion.champion_id === champion[0].id);
-
     // ------- Brings user back to Champion List -------
     const backToList = () => {
         history.push('/champions');
-    }
-
-    // ------- Adds champion to the user's blacklist -------
-    const addToBlacklist = () => {
-        dispatch({ type: 'ADD_TO_BLACKLIST', payload: { id: id } });
-    }
-
-    // ------- Remove champion from user's blacklist -------
-    const removeFromBlacklist = () => {
-            dispatch({
-                type: 'REMOVE_FROM_BLACKLIST', payload: { params: { id: id } }
-            });
     }
 
     return (
@@ -74,12 +59,12 @@ function DetailsPage() {
                     /> &nbsp; &nbsp;
 
                     {/* ------- Blacklist button ------- */}
-                    <button onClick={
-                        isBlacklist ? removeFromBlacklist : addToBlacklist
-                    }>
-                        {isBlacklist ? 'Unblacklist' : 'Blacklist'}
-                    </button> &nbsp; &nbsp;
-                    <br />
+                    <BlacklistButton 
+                        champion={champion}
+                        blacklist={blacklist}
+                        id={id}
+                    />
+
 
                     {/* ------- Champion image ------- */}
                     <img
