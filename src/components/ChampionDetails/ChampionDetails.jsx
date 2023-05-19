@@ -2,7 +2,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from 'react';
 
-import NotesModal from "../NotesModal/NotesModal";
+import NotesButton from "../NotesButton/NotesButton";
 
 function DetailsPage() {
 
@@ -83,7 +83,7 @@ function DetailsPage() {
                     </button> &nbsp; &nbsp;
 
                     {/* ------- Notes button ------- */}
-                    <NotesModal
+                    <NotesButton
                         champion={champion}
                         id={id}
                     /> &nbsp; &nbsp;

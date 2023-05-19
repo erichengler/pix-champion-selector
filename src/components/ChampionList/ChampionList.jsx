@@ -7,26 +7,27 @@ import RollButton from '../RollButton/RollButton';
 
 function ChampionsPage() {
 
+	const dispatch = useDispatch();
+	const history = useHistory();
+
 	// ------- GET all champions from database -------
 	useEffect(() => {
 		dispatch({ type: 'FETCH_CHAMPIONS' });
 		dispatch({ type: 'FETCH_BLACKLIST' });
+		dispatch({ type: 'FETCH_FILTERED_CHAMPIONS' });
 	}, []);
-
-	const dispatch = useDispatch();
-	const history = useHistory();
 
 	// ------- Storing champions, filteredChampions and blacklist -------
 	const champions = useSelector(store => store.champions);
-	const filteredChampions = useSelector(store => store.filteredChampions);
 	const blacklist = useSelector(store => store.blacklist);
+	const filteredChampions = useSelector(store => store.filteredChampions);
 
 	// ------- Search query state -------
 	const [searchQuery, setSearchQuery] = useState('');
 
 	// ------- Filter champions using search query -------
 	// ! Change champions.filter to filteredChampions.filter when filter is working
-	const filteredChampionsBySearch = champions.filter((champion) => 
+	const filteredBySearch = champions.filter((champion) => 
 		champion.name.toLowerCase().includes(searchQuery.toLowerCase())
 	);
 
@@ -50,7 +51,7 @@ function ChampionsPage() {
 
 			{/* ------- Maps through all champions ------- */}
 			{
-				filteredChampionsBySearch.map((champion) => (
+				filteredBySearch.map((champion) => (
 					<ChampionItem
 						key={champion.id}
 						champion={champion} />

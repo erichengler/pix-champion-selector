@@ -32,6 +32,20 @@ function* fetchThisChampion(action) {
     }
 }
 
+// ------- Get all filtered champions from champions DB -------
+function* fetchFilteredChampions() {
+    try {
+        const filteredChampions = yield axios.get('/api/champion');
+        // console.log('Get champions:', champions.data);
+        yield put({
+            type: 'SET_FILTERED_CHAMPIONS',
+            payload: filteredChampions.data
+        });
+    } catch {
+        console.log('Error in fetchFilteredChampions generator');
+    }
+}
+
 // ------- Get user's favorites DB -------
 function* fetchFavorites() {
     try {
@@ -157,6 +171,7 @@ function* removeFromBlacklist(action) {
 function* championSaga() {
     yield takeEvery('FETCH_CHAMPIONS', fetchChampions);
     yield takeEvery('FETCH_THIS_CHAMPION', fetchThisChampion);
+    yield takeEvery('FETCH_FILTERED_CHAMPIONS', fetchFilteredChampions)
     yield takeEvery('FETCH_FAVORITES', fetchFavorites);
     yield takeEvery('ADD_FAVORITE', addFavorite);
     yield takeEvery('REMOVE_FAVORITE', removeFavorite);

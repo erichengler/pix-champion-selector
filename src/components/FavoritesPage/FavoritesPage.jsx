@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import NotesModal from '../NotesModal/NotesModal';
+import NotesButton from '../NotesButton/NotesButton';
 import RollButton from '../RollButton/RollButton';
 
 function FavoritesPage() {
@@ -69,7 +69,7 @@ function FavoritesPage() {
 
                                     {/* ------- Notes and remove buttons ------- */}
                                     &nbsp; &nbsp; &nbsp; &nbsp;
-                                    <NotesModal
+                                    <NotesButton
                                         favorite={favorite}
                                         name={favChampion.name}
                                     />
