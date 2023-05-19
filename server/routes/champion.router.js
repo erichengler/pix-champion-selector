@@ -85,7 +85,8 @@ router.delete('/favorites', rejectUnauthenticated, (req, res) => {
     // ------- Query to delete champion based on id -------
     const queryText =`
         DELETE FROM favorites
-        WHERE "user_id" = $1 AND "champion_id" = $2;`;
+        WHERE "user_id" = $1 
+        AND "champion_id" = $2;`;
     pool.query(queryText, [req.user.id, req.query.id])
         .then(result => {
             res.sendStatus(200);
@@ -102,7 +103,8 @@ router.get('/thisnote', rejectUnauthenticated, (req, res) => {
     // ------- Query to get note based on id -------
     const queryText =`
         SELECT * FROM notes 
-        WHERE "user_id" = $1 AND "champion_id" = $2;`;
+        WHERE "user_id" = $1 
+        AND "champion_id" = $2;`;
     pool.query(queryText, [req.user.id, req.query.id])
         .then(result => {
             res.send(result.rows);
@@ -139,7 +141,8 @@ router.put('/notes', rejectUnauthenticated, (req, res) => {
     const queryText = `
         UPDATE notes
         SET "note" = $1
-        WHERE "user_id" = $2 AND "champion_id" = $3;`;
+        WHERE "user_id" = $2 
+        AND "champion_id" = $3;`;
     pool.query(queryText, 
         [req.body.note, req.user.id, req.body.id])
         .then(result => {
@@ -157,13 +160,50 @@ router.delete('/notes/:id', rejectUnauthenticated, (req, res) => {
     // ------- Query to delete note based on id -------
     const queryText =`
         DELETE FROM notes
-        WHERE "user_id" = $1 AND "champion_id" = $2;`;
+        WHERE "user_id" = $1 
+        AND "champion_id" = $2;`;
     pool.query(queryText, [req.user.id, req.params.id])
         .then(result => {
             res.sendStatus(200);
         })
         .catch(error => {
             console.log('ERROR in DELETE favorite', error);
+            res.sendStatus(500);
+        })
+});
+
+// ------- POST to blacklist -------
+router.post('/blacklist', rejectUnauthenticated, (req, res) => {
+    console.log('In POST to blacklist');
+    // ------- Query to post champion based on id -------
+    const queryText =`
+        INSERT INTO blacklist 
+        ("user_id", "champion_id")
+        VALUES ($1, $2);`;
+    pool.query(queryText, [req.user.id, req.body.id])
+        .then(result => {
+            res.sendStatus(200);
+        })
+        .catch(error => {
+            console.log('ERROR in POST to blacklist', error);
+            res.sendStatus(500);
+        })
+});
+
+// ------- DELETE from blacklist -------
+router.delete('/blacklist', rejectUnauthenticated, (req, res) => {
+    console.log('In DELETE from blacklist');
+    // ------- Query to delete champion based on id -------
+    const queryText =`
+        DELETE FROM blacklist
+        WHERE "user_id" = $1 
+        AND "champion_id" = $2;`;
+    pool.query(queryText, [req.user.id, req.query.id])
+        .then(result => {
+            res.sendStatus(200);
+        })
+        .catch(error => {
+            console.log('ERROR in DELETE from blacklist', error);
             res.sendStatus(500);
         })
 });
