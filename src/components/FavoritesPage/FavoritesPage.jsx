@@ -27,14 +27,11 @@ function FavoritesPage() {
 
     // ------- Remove favorite from DB -------
     const removeFavorite = (event) => {
-        if (confirm(
-            `Remove ${champions[event.champion_id - 1].name} from your favorites?`
-        )) {
-            dispatch({ 
-                type: 'REMOVE_FAVORITE', 
-                payload: { params: { id: event.champion_id } } 
-            });
-        }
+        dispatch({
+            type: 'REMOVE_FAVORITE',
+            payload: { params: { id: event.champion_id } }
+        });
+
     }
 
     return (
@@ -94,7 +91,7 @@ function FavoritesPage() {
                         &nbsp; &nbsp;
 
                         {/* ------- Roll button ------- */}
-                        <RollButton 
+                        <RollButton
                             champions={champions}
                             favorites={favorites}
                         />

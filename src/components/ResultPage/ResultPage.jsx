@@ -2,9 +2,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
 
-import RollButton from '../RollButton/RollButton';
 import FavoriteButton from '../FavoriteButton/FavoriteButton';
+import NotesButton from '../NotesButton/NotesButton'
 import BlacklistButton from '../BlacklistButton/BlacklistButton';
+import RollButton from '../RollButton/RollButton';
 
 function ResultPage() {
 
@@ -27,6 +28,8 @@ function ResultPage() {
 		history.push('/');
 	}
 
+    const id = result.champion.id;
+
 	return (
 		<div className="container">
             <p>Pix thinks you should play...</p>
@@ -36,7 +39,11 @@ function ResultPage() {
 
             <FavoriteButton 
                 result={result}
-            /> 
+            />  &nbsp;
+
+            <NotesButton 
+                result={result}
+            />  &nbsp;
 
             <BlacklistButton 
                 result={result}

@@ -42,7 +42,7 @@ function FavoriteButton({ id, result }) {
                 isFavorite ? removeFavorite : addFavorite
             }>
                 {isFavorite ? 'Unfavorite' : 'Favorite'}
-            </button> &nbsp; &nbsp;
+            </button>
         </>
     )
 }

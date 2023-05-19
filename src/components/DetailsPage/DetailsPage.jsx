@@ -44,12 +44,11 @@ function DetailsPage() {
                     {/* ------- Favorite button ------- */}
                     <FavoriteButton 
                         id={id}
-                    />
+                    /> &nbsp; &nbsp;
 
                     {/* ------- Notes button ------- */}
                     <NotesButton
                         champion={champion}
-                        id={id}
                     /> &nbsp; &nbsp;
 
                     {/* ------- Blacklist button ------- */}

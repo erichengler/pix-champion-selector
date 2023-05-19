@@ -71,7 +71,7 @@ router.post('/favorites', rejectUnauthenticated, (req, res) => {
         VALUES ($1, $2);`;
     pool.query(queryText, [req.user.id, req.body.id])
         .then(result => {
-            res.sendStatus(200);
+            res.sendStatus(201);
         })
         .catch(error => {
             console.log('ERROR in POST favorite', error);
@@ -126,7 +126,7 @@ router.post('/notes', rejectUnauthenticated, (req, res) => {
     pool.query(queryText,
         [req.user.id, req.body.id, req.body.note])
         .then(result => {
-            res.sendStatus(200);
+            res.sendStatus(201);
         })
         .catch(error => {
             console.log('ERROR in POST note', error);
@@ -199,7 +199,7 @@ router.post('/blacklist', rejectUnauthenticated, (req, res) => {
         VALUES ($1, $2);`;
     pool.query(queryText, [req.user.id, req.body.id])
         .then(result => {
-            res.sendStatus(200);
+            res.sendStatus(201);
         })
         .catch(error => {
             console.log('ERROR in POST to blacklist', error);

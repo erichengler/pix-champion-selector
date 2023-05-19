@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // ------- MaterialUI Imports -------
@@ -18,17 +18,9 @@ const style = {
     p: 4,
 };
 
-function NotesModal({ champion, favorite, name, id }) {
+function NotesButton({ champion, favorite, name, result }) {
 
     const dispatch = useDispatch();
-
-    // ------- Fetch this note based on id -------
-    // ------- if on champion details page
-    if (favorite === undefined) {
-        useEffect(() => {
-            dispatch({ type: 'FETCH_THIS_NOTE', payload: id });
-        }, []);
-    }
 
     // ------- Storing this note -------
     const thisNote = useSelector(store => store.thisNote);
@@ -43,19 +35,28 @@ function NotesModal({ champion, favorite, name, id }) {
     // ------- Checks which prop was sent -------
     // ------- then returns champion's name -------
     const notesHeader = () => {
-        return (favorite === undefined ? champion[0].name : name )
+        return (result === undefined ?
+            (favorite === undefined ? champion[0].name : name) :
+            result.champion.name
+        );
     }
+
+    // ------- Get ID required based on current page -------
+    const foundId = (result != undefined ? result.champion.id :
+        (
+            favorite === undefined ?
+                champion[0].id :
+                favorite.champion_id
+        )
+    );
 
     // ------- Check if a note exists, then -------
     // ------- set to defaultValue of textfield -------
-    
-
     const defaultNote = () => {
-        if (favorite === undefined) {
-            return (thisNote.length === 0 ? '' : thisNote[0].note)
-        } else if (champion === undefined) {
-            return (favorite.note === undefined ? '' : favorite.note)
-        }
+        return (favorite === undefined ?
+            (thisNote.length === 0 ? '' : thisNote[0].note) :
+            (favorite.note === undefined ? '' : favorite.note)
+        );
     }
 
     // ------- Creates notes for the champion -------
@@ -67,19 +68,11 @@ function NotesModal({ champion, favorite, name, id }) {
             alert('Cannot create empty note.')
             return;
         }
-        // ------- Checking what page we're on -------
-        if (favorite === undefined) {
-            dispatch({
-                type: 'ADD_NOTE',
-                payload: { id: champion[0].id, note: note }
-            });
-        } else if (champion === undefined) {
-            dispatch({
-                type: 'ADD_NOTE',
-                payload: { id: favorite.champion_id, note: note }
-            });
-        }
-        location.reload();
+        dispatch({
+            type: 'ADD_NOTE',
+            payload: { id: foundId, note: note }
+        });
+        handleClose();
     }
 
     // ------- Updates notes for the champion -------
@@ -91,54 +84,32 @@ function NotesModal({ champion, favorite, name, id }) {
             alert('Cannot update to an empty note.')
             return;
         }
-        // ------- Checking what page we're on -------
-        if (favorite === undefined) {
-            dispatch({
-                type: 'EDIT_NOTE',
-                payload: { id: champion[0].id, note: note }
-            });
-        } else if (champion === undefined) {
-            dispatch({
-                type: 'EDIT_NOTE',
-                payload: { id: favorite.champion_id, note: note }
-            });
-        }
-        location.reload();
+        dispatch({
+            type: 'EDIT_NOTE',
+            payload: { id: foundId, note: note }
+        });
+        handleClose();
     }
 
     // ------- Deletes notes for the champion -------
     const deleteNotes = () => {
-        // ------- Checking what page we're on -------
-        if (favorite === undefined) {
-            dispatch({
-                type: 'REMOVE_NOTE',
-                payload: champion[0].id
-            });
-        } else if (champion === undefined) {
-            dispatch({
-                type: 'REMOVE_NOTE',
-                payload: favorite.champion_id
-            });
-        }
-        location.reload();
+        dispatch({
+            type: 'REMOVE_NOTE',
+            payload: foundId
+        });
+        handleClose();
     }
 
     return (
         <>
-            {/* ------- Checking what page we're on ------- */}
-            {favorite === undefined ? (
-                // ------- Add note or Edit note button -------
-                <button onClick={handleOpen}>
-                    {/* ------- Checking if a note exists ------- */}
-                    {thisNote.length === 0 ? 'Add Note' : 'Edit Note'}
-                </button>
-            ) : (
-                // ------- Add note or Edit note button -------
-                <button onClick={handleOpen}>
-                    {/* ------- Checking if a note exists ------- */}
-                    {favorite.note == undefined ? 'Add Note' : 'Edit Note'}
-                </button>
-            )}
+            {/* ------- Add note or Edit note button ------- */}
+            <button onClick={handleOpen}>
+                {favorite === undefined ? 
+                    // ------- Checking if a note exists -------
+                    (thisNote.length === 0 ? 'Add Note' : 'Edit Note') :
+                    (favorite.note == undefined ? 'Add Note' : 'Edit Note')
+                }
+            </button>
 
             {/* ------- Modal ------- */}
             <Modal
@@ -172,13 +143,15 @@ function NotesModal({ champion, favorite, name, id }) {
                         <>
                             {/* ------- Cancel or Delete button ------- */}
                             <button
-                                onClick={thisNote.length === 0 ? handleClose : deleteNotes}>
+                                onClick={thisNote.length === 0 ?
+                                    handleClose : deleteNotes}>
                                 {thisNote.length === 0 ? 'Cancel' : 'Delete'}
                             </button>
 
                             {/* ------- Submit or Save button ------- */}
                             <button
-                                onClick={thisNote.length === 0 ? createNotes : updateNotes}>
+                                onClick={thisNote.length === 0 ?
+                                    createNotes : updateNotes}>
                                 {thisNote.length === 0 ? 'Submit' : 'Save'}
                             </button>
                         </>
@@ -186,13 +159,15 @@ function NotesModal({ champion, favorite, name, id }) {
                         <>
                             {/* ------- Cancel or Delete button ------- */}
                             <button
-                                onClick={favorite.note == undefined ? handleClose : deleteNotes}>
+                                onClick={favorite.note == undefined ?
+                                    handleClose : deleteNotes}>
                                 {favorite.note == undefined ? 'Cancel' : 'Delete'}
                             </button>
 
                             {/* ------- Submit or Save button ------- */}
                             <button
-                                onClick={favorite.note == undefined ? createNotes : updateNotes}>
+                                onClick={favorite.note == undefined ?
+                                    createNotes : updateNotes}>
                                 {favorite.note == undefined ? 'Submit' : 'Save'}
                             </button>
                         </>
@@ -202,4 +177,4 @@ function NotesModal({ champion, favorite, name, id }) {
         </>
     )
 }
-export default NotesModal;
+export default NotesButton;

@@ -102,7 +102,10 @@ function* fetchThisNote(action) {
 // ------- Post note to notes DB -------
 function* addNote(action) {
     try {
-        yield axios.post('/api/champion/notes', action.payload);
+        console.log(action)
+        yield axios.post('/api/champion/notes', action.payload );
+        yield put({ type: 'FETCH_THIS_NOTE', payload: action.payload.id });
+        yield put({ type: 'FETCH_FAVORITES' });
     } catch {
         console.log('Error in addNote generator');
     }
@@ -112,6 +115,8 @@ function* addNote(action) {
 function* removeNote(action) {
     try {
         yield axios.delete(`/api/champion/notes/${action.payload}`);
+        yield put({ type: 'FETCH_THIS_NOTE', payload: action.payload });
+        yield put({ type: 'FETCH_FAVORITES' });
     } catch {
         console.log('Error in removeNote generator');
     }
@@ -121,6 +126,8 @@ function* removeNote(action) {
 function* editNote(action) {
     try {
         yield axios.put('/api/champion/notes', action.payload);
+        yield put({ type: 'FETCH_THIS_NOTE', payload: action.payload.id });
+        yield put({ type: 'FETCH_FAVORITES' });
     } catch {
         console.log('Error in editNote generator');
     }
