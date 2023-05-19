@@ -17,9 +17,9 @@ import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import LoginPage from '../Login/LoginPage/LoginPage';
 import RegisterPage from '../Register/RegisterPage/RegisterPage';
-import ChampionsPage from '../ChampionList/ChampionList';
+import ChampionsPage from '../ChampionsPage/ChampionsPage';
 import FavoritesPage from '../FavoritesPage/FavoritesPage';
-import DetailsPage from '../ChampionDetails/ChampionDetails';
+import DetailsPage from '../DetailsPage/DetailsPage';
 import ResultPage from '../ResultPage/ResultPage';
 
 import './App.css';
