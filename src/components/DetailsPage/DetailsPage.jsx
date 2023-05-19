@@ -2,6 +2,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from 'react';
 
+import FavoriteButton from "../FavoriteButton/FavoriteButton";
 import NotesButton from "../NotesButton/NotesButton";
 
 function DetailsPage() {
@@ -22,10 +23,6 @@ function DetailsPage() {
     const favorites = useSelector(store => store.favorites);
     const blacklist = useSelector(store => store.blacklist);
 
-    // ------- Checking if champion is on user's favorites -------
-    const isFavorite = favorites.some(
-        favorite => favorite.champion_id === champion[0].id);
-
     // ------- Checking if champion is on user's blacklist -------
     const isBlacklist = blacklist.some(
         blChampion => blChampion.champion_id === champion[0].id);
@@ -33,18 +30,6 @@ function DetailsPage() {
     // ------- Brings user back to Champion List -------
     const backToList = () => {
         history.push('/champions');
-    }
-
-    // ------- Adds champion to the user's favorites list -------
-    const addFavorite = () => {
-        dispatch({ type: 'ADD_FAVORITE', payload: { id: id } });
-    }
-
-    // ------- Remove champion from user's favorites list -------
-    const removeFavorite = () => {
-            dispatch({
-                type: 'REMOVE_FAVORITE', payload: { params: { id: id } }
-            });
     }
 
     // ------- Adds champion to the user's blacklist -------
@@ -76,11 +61,11 @@ function DetailsPage() {
                     <br /><br />
 
                     {/* ------- Favorite button ------- */}
-                    <button onClick={
-                        isFavorite ? removeFavorite : addFavorite
-                    }>
-                        {isFavorite ? 'Unfavorite' : 'Favorite'}
-                    </button> &nbsp; &nbsp;
+                    <FavoriteButton 
+                        champion={champion}
+                        favorites={favorites}
+                        id={id}
+                    />
 
                     {/* ------- Notes button ------- */}
                     <NotesButton
