@@ -43,30 +43,18 @@ function NotesModal({ champion, favorite, name, id }) {
     // ------- Checks which prop was sent -------
     // ------- then returns champion's name -------
     const notesHeader = () => {
-        // ------- Checking what page we're on -------
-        if (favorite === undefined) {
-            return champion[0].name;
-        } else if (champion === undefined) {
-            return name;
-        }
+        return (favorite === undefined ? champion[0].name : name )
     }
 
     // ------- Check if a note exists, then -------
     // ------- set to defaultValue of textfield -------
+    
+
     const defaultNote = () => {
-        // ------- Checking what page we're on -------
         if (favorite === undefined) {
-            if (thisNote.length === 0) {
-                return '';
-            } else {
-                return thisNote[0].note
-            }
+            return (thisNote.length === 0 ? '' : thisNote[0].note)
         } else if (champion === undefined) {
-            if (favorite.note === undefined) {
-                return '';
-            } else {
-                return favorite.note
-            }
+            return (favorite.note === undefined ? '' : favorite.note)
         }
     }
 

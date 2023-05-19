@@ -10,14 +10,16 @@ function ChampionsPage() {
 	// ------- GET all champions from database -------
 	useEffect(() => {
 		dispatch({ type: 'FETCH_CHAMPIONS' });
+		dispatch({ type: 'FETCH_BLACKLIST' });
 	}, []);
 
 	const dispatch = useDispatch();
 	const history = useHistory();
 
-	// ------- Storing champions, filteredChampions -------
+	// ------- Storing champions, filteredChampions and blacklist -------
 	const champions = useSelector(store => store.champions);
 	const filteredChampions = useSelector(store => store.filteredChampions);
+	const blacklist = useSelector(store => store.blacklist);
 
 	// ------- Search query state -------
 	const [searchQuery, setSearchQuery] = useState('');

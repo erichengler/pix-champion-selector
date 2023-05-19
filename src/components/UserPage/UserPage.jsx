@@ -7,7 +7,6 @@ function UserPage() {
 	// --------- Storing ---------
 	const user = useSelector((store) => store.user);
 	const champions = useSelector((store) => store.champions);
-	const filteredChampions = useSelector((store) => store.filteredChampions);
 
 	const history = useHistory();
 	const dispatch = useDispatch();
@@ -56,10 +55,11 @@ function UserPage() {
 	// --------- END of handleChange ---------
 
 	// ! Use newFilter to add champions to filteredChampions reducer
-	const roll = (event) => {
+	const filter = (event) => {
 		event.preventDefault();
-		console.log('Rolling with this filter:', newFilter);
+		console.log('Filter champions with this filter:', newFilter);
 
+		const filteredChampions = [];
 		// ! FILTER WITH forEach GOES HERE
 
 		console.log('Filtered List:', filteredChampions);
@@ -72,7 +72,7 @@ function UserPage() {
 			region: '',
 			notes: ''
 		});
-		history.push('/result');
+		history.push('/champions');
 	}
 
 	return (
@@ -189,7 +189,7 @@ function UserPage() {
 
 				{/* ------- Buttons ------- */}
 				<button onClick={resetFilters}>Reset</button> &nbsp;
-				<button onClick={roll}>Roll</button>
+				<button onClick={filter}>Filter</button>
 			</form>
 		</div>
 	);

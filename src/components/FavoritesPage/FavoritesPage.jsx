@@ -28,7 +28,7 @@ function FavoritesPage() {
     // ------- Remove favorite from DB -------
     const removeFavorite = (event) => {
         if (confirm(
-            `Are you sure you want to remove ${champions[event.champion_id - 1].name} from your favorites?`
+            `Remove ${champions[event.champion_id - 1].name} from your favorites?`
         )) {
             dispatch({ 
                 type: 'REMOVE_FAVORITE', 

@@ -10,41 +10,53 @@ function DetailsPage() {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    // ------- Fetch this champion -------
+    // ------- Fetch this champion, favorites and blacklist -------
     useEffect(() => {
         dispatch({ type: 'FETCH_THIS_CHAMPION', payload: id });
         dispatch({ type: 'FETCH_FAVORITES' });
+        dispatch({ type: 'FETCH_BLACKLIST' })
     }, []);
 
-    // ------- Storing this champion -------
+    // ------- Storing this champion, favorites and blacklist -------
     const champion = useSelector(store => store.thisChampion);
     const favorites = useSelector(store => store.favorites);
+    const blacklist = useSelector(store => store.blacklist);
 
+    // ------- Checking if champion is on user's favorites -------
     const isFavorite = favorites.some(
         favorite => favorite.champion_id === champion[0].id);
 
-    console.log(champion, favorites, isFavorite);    
+    // ------- Checking if champion is on user's blacklist -------
+    const isBlacklist = blacklist.some(
+        blChampion => blChampion.champion_id === champion[0].id);
 
     // ------- Brings user back to Champion List -------
     const backToList = () => {
         history.push('/champions');
     }
 
-    // ------- Adds champion to the favorites list -------
+    // ------- Adds champion to the user's favorites list -------
     const addFavorite = () => {
         dispatch({ type: 'ADD_FAVORITE', payload: { id: id } });
-        alert(`${champion[0].name} has been added to your favorites.`);
-        location.reload();
     }
 
-    // ------- Remove champion from favorites list -------
+    // ------- Remove champion from user's favorites list -------
     const removeFavorite = () => {
-        if (confirm(
-            `Are you sure you want to remove ${champion[0].name} from your favorites?`
-        )) {
-            dispatch({type: 'REMOVE_FAVORITE', payload: { params: { id: id } }
+            dispatch({
+                type: 'REMOVE_FAVORITE', payload: { params: { id: id } }
             });
-        }
+    }
+
+    // ------- Adds champion to the user's blacklist -------
+    const addToBlacklist = () => {
+        dispatch({ type: 'ADD_TO_BLACKLIST', payload: { id: id } });
+    }
+
+    // ------- Remove champion from user's blacklist -------
+    const removeFromBlacklist = () => {
+            dispatch({
+                type: 'REMOVE_FROM_BLACKLIST', payload: { params: { id: id } }
+            });
     }
 
     return (
@@ -64,7 +76,9 @@ function DetailsPage() {
                     <br /><br />
 
                     {/* ------- Favorite button ------- */}
-                    <button onClick={isFavorite ? removeFavorite : addFavorite}>
+                    <button onClick={
+                        isFavorite ? removeFavorite : addFavorite
+                    }>
                         {isFavorite ? 'Unfavorite' : 'Favorite'}
                     </button> &nbsp; &nbsp;
 
@@ -75,7 +89,11 @@ function DetailsPage() {
                     /> &nbsp; &nbsp;
 
                     {/* ------- Blacklist button ------- */}
-                    <button>Blacklist</button> &nbsp; &nbsp;
+                    <button onClick={
+                        isBlacklist ? removeFromBlacklist : addToBlacklist
+                    }>
+                        {isBlacklist ? 'Unblacklist' : 'Blacklist'}
+                    </button> &nbsp; &nbsp;
                     <br />
 
                     {/* ------- Champion image ------- */}

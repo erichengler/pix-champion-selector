@@ -54,6 +54,7 @@ function* addFavorite(action) {
         yield axios.post(
             '/api/champion/favorites',
             action.payload);
+        yield put({ type: 'FETCH_FAVORITES' });
     } catch {
         console.log('Error in addFavorite generator');
     }
@@ -117,7 +118,7 @@ function* fetchBlacklist() {
     try {
         const blacklist = yield axios.get(
             '/api/champion/blacklist');
-        // console.log('Get blacklist:', blacklist.data);
+        console.log('Get blacklist:', blacklist.data);
         yield put({
             type: 'SET_BLACKLIST',
             payload: blacklist.data
@@ -134,6 +135,7 @@ function* addToBlacklist(action) {
             '/api/champion/blacklist',
             action.payload
         );
+        yield put({ type: 'FETCH_BLACKLIST' });
     } catch {
         console.log('Error in addToBlacklist generator');
     }
