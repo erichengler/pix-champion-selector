@@ -9,9 +9,8 @@ function RollButton({ favorites, champions, result }) {
     // ------- Picks a random result from either -------
     // ------- filtered champions or favorites -------
     const roll = () => {
-        console.log(favorites === undefined
-            ? 'Rolling from filtered champions'
-            : 'Rolling from favorites')
+        console.log(favorites === undefined ? 
+            'Rolling from filtered champions' : 'Rolling from favorites');
         const random = Math.floor(Math.random()
             * (favorites === undefined ? champions.length : favorites.length));
         dispatch({
@@ -28,17 +27,16 @@ function RollButton({ favorites, champions, result }) {
     // ------- Picks a random result from either -------
     // ------- filtered champions or favorites -------
     const reroll = () => {
-        console.log(result.rerollPool[0].name == undefined
-            ? 'Rerolling from favorites'
-            : 'Rerolling from filtered champions');
-        const random = Math.floor(Math.random() * result.rerollPool.length);
+        const pool = result.rerollPool
+        console.log(pool[0].name == undefined ? 
+            'Rerolling from favorites' : 'Rerolling from filtered champions');
+        const random = Math.floor(Math.random() * pool.length);
         dispatch({
             type: 'SET_RESULT',
             payload: {
-                champion: (result.rerollPool[0].name == undefined
-                    ? champions[result.rerollPool[random].champion_id - 1]
-                    : result.rerollPool[random]),
-                rerollPool: result.rerollPool
+                champion: (pool[0].name == undefined ? 
+                    champions[pool[random].champion_id - 1] : pool[random]),
+                rerollPool: pool
             }
         });
     }

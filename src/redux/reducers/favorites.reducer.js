@@ -1,4 +1,4 @@
-// Used to store favorite champions
+// ------- Stores favorites from server -------
 const favorites = (state = [], action) => {
     switch (action.type) {
         case 'SET_FAVORITES':

@@ -1,4 +1,4 @@
-// Used to store this note for a champion
+// ------- Stores notes from server -------
 const thisNote = (state = [], action) => {
     switch (action.type) {
         case 'SET_NOTE':

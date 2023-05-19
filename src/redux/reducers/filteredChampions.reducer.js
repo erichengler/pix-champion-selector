@@ -1,4 +1,4 @@
-// Used to store filtered champions returned from the server
+// ------- Stores filtered champions from server -------
 const filteredChampions = (state = [], action) => {
     switch (action.type) {
         case 'SET_FILTERED_CHAMPIONS':

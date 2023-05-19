@@ -1,4 +1,4 @@
-// Used to store champions returned from the server
+// ------- Stores all champions from server -------
 const champions = (state = [], action) => {
     switch (action.type) {
         case 'SET_CHAMPIONS':

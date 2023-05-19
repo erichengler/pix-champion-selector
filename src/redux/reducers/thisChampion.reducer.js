@@ -1,4 +1,4 @@
-// Used to store a specific champion returned from the server
+// ------- Stores a champion from server -------
 const thisChampion = (state = [], action) => {
     switch (action.type) {
         case 'SET_CHAMPION':

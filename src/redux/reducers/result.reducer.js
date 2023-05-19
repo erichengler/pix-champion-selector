@@ -1,4 +1,4 @@
-// Used to store randomized champion result
+// ------- Stores result of roll -------
 const result = (state = [], action) => {
     switch (action.type) {
         case 'SET_RESULT':
