@@ -15,13 +15,10 @@ function DetailsPage() {
     // ------- Fetch this champion, favorites and blacklist -------
     useEffect(() => {
         dispatch({ type: 'FETCH_THIS_CHAMPION', payload: id });
-        dispatch({ type: 'FETCH_FAVORITES' });
-        dispatch({ type: 'FETCH_BLACKLIST' })
     }, []);
 
     // ------- Storing this champion, favorites and blacklist -------
     const champion = useSelector(store => store.thisChampion);
-    const blacklist = useSelector(store => store.blacklist);
 
     // ------- Brings user back to Champion List -------
     const backToList = () => {
@@ -57,8 +54,6 @@ function DetailsPage() {
 
                     {/* ------- Blacklist button ------- */}
                     <BlacklistButton 
-                        champion={champion}
-                        blacklist={blacklist}
                         id={id}
                     />
 

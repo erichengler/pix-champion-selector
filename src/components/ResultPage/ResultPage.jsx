@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 
 import RollButton from '../RollButton/RollButton';
 import FavoriteButton from '../FavoriteButton/FavoriteButton';
+import BlacklistButton from '../BlacklistButton/BlacklistButton';
 
 function ResultPage() {
 
@@ -14,7 +15,6 @@ function ResultPage() {
     // ------- blacklist and favorites -------
 	useEffect(() => {
 		dispatch({ type: 'FETCH_CHAMPIONS' });
-        dispatch({ type: 'FETCH_THIS_CHAMPION', payload: result.champion.id });
 		dispatch({ type: 'FETCH_BLACKLIST' });
 	}, []);
 
@@ -22,8 +22,6 @@ function ResultPage() {
     // ------- champion, blacklist, and favorites -------
     const result = useSelector(store => store.result);
 	const champions = useSelector(store => store.champions);
-    const champion = useSelector(store => store.thisChampion);
-    const blacklist = useSelector(store => store.blacklist);
 
     // ------- Brings user back to UserPage -------
 	const backToHome = () => {
@@ -38,6 +36,10 @@ function ResultPage() {
             <h2>{result.champion.name}</h2>
 
             <FavoriteButton 
+                result={result}
+            /> 
+
+            <BlacklistButton 
                 result={result}
             />
 
