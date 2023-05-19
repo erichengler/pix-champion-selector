@@ -21,7 +21,6 @@ function DetailsPage() {
 
     // ------- Storing this champion, favorites and blacklist -------
     const champion = useSelector(store => store.thisChampion);
-    const favorites = useSelector(store => store.favorites);
     const blacklist = useSelector(store => store.blacklist);
 
     // ------- Brings user back to Champion List -------
@@ -47,8 +46,6 @@ function DetailsPage() {
 
                     {/* ------- Favorite button ------- */}
                     <FavoriteButton 
-                        champion={champion}
-                        favorites={favorites}
                         id={id}
                     />
 

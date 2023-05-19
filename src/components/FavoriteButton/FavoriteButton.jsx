@@ -1,25 +1,39 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
-function FavoriteButton({ champion, favorites, id }) {
-
-    // ! Get champion_id from result reducer to get "id" on results page
-    // ! then do ternary operator
+function FavoriteButton({ id, result }) {
 
     const dispatch = useDispatch();
+    const favorites = useSelector(store => store.favorites);
 
     // ------- Checking if champion is on user's favorites -------
     const isFavorite = favorites.some(
-        favorite => favorite.champion_id === champion[0].id);
+        // ------- Matching by ID -------
+        favorite => (id === undefined ? 
+            favorite.champion_id === result.champion.id :
+            favorite.champion_id === Number(id) 
+        )      
+    );
 
     // ------- Adds champion to the user's favorites list -------
     const addFavorite = () => {
-        dispatch({ type: 'ADD_FAVORITE', payload: { id: id } });
+        dispatch({
+            type: 'ADD_FAVORITE', payload: {
+                id:
+                    id === undefined ? result.champion.id : id
+            }
+        });
     }
 
     // ------- Remove champion from user's favorites list -------
     const removeFavorite = () => {
         dispatch({
-            type: 'REMOVE_FAVORITE', payload: { params: { id: id } }
+            type: 'REMOVE_FAVORITE', payload: {
+                params: {
+                    id:
+                        id === undefined ? result.champion.id : id
+                }
+            }
         });
     }
 
