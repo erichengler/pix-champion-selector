@@ -71,7 +71,7 @@ function UserPage() {
 				const championNotes = notes.filter(note => 
 					note.champion_id === champion.id);
 				const filteredNotes = championNotes.filter(note => 
-					note.note.includes(filter.notes));
+					note.note.toLowerCase().includes(filter.notes.toLowerCase()));
 
 				if (filteredNotes.length === 0) {
 					return false;

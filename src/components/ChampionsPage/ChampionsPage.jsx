@@ -10,30 +10,39 @@ function ChampionsPage() {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
-	// ------- GET all champions from database -------
+	// ------- GET champions, filtered champions, blacklist from database -------
 	useEffect(() => {
+		dispatch({ type: 'FETCH_CHAMPIONS' });
 		dispatch({ type: 'FETCH_FILTERED_CHAMPIONS' });
 		dispatch({ type: 'FETCH_BLACKLIST' });
 	}, []);
 
-	// ------- Storing champions, filteredChampions and blacklist -------
-
+	// ------- Storing champions, filteredChampions, blacklist -------
+	const champions = useSelector(store => store.champions);
 	const filteredChampions = useSelector(store => store.filteredChampions);
 	const blacklist = useSelector(store => store.blacklist);
 
 
-	// ------- Search query, include blacklist states -------
+	// ------- States for search query, include blacklist, apply filter -------
 	const [searchQuery, setSearchQuery] = useState('');
+	const [disableFilter, setDisableFilter] = useState(false);
 	const [includeBlacklist, setIncludeBlacklist] = useState(false);
 
-	// ------- Include blacklist checkbox logic -------
-	const displayedChampions = includeBlacklist
-		? filteredChampions
-		: filteredChampions.filter(champion => {
-			return !blacklist.some(
-				blacklisted => blacklisted.champion_id === champion.id
-			);
-		});
+	// ------- Disable filter, include blacklist logic -------
+	const displayedChampions = disableFilter
+		? (includeBlacklist ? champions
+			: champions.filter(champion => {
+				return !blacklist.some(
+					blacklisted => blacklisted.champion_id === champion.id
+				);
+			}))
+
+		: (includeBlacklist ? filteredChampions
+			: filteredChampions.filter(champion => {
+				return !blacklist.some(
+					blacklisted => blacklisted.champion_id === champion.id
+				);
+			}));
 
 	// ------- Filter champions using search query -------
 	const filteredBySearch = displayedChampions.filter((champion) =>
@@ -56,6 +65,17 @@ function ChampionsPage() {
 				onChange={(e) => setSearchQuery(e.target.value)}
 				placeholder="Search champions..."
 			/>
+			<br />
+
+			{/* ------- Apply filter checkbox ------- */}
+			<label>
+				<input
+					type="checkbox"
+					checked={disableFilter}
+					onChange={event => setDisableFilter(event.target.checked)}
+				/>
+				Disable filter
+			</label>
 			<br />
 
 			{/* ------- Include blacklist checkbox ------- */}
