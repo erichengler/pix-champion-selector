@@ -68,26 +68,31 @@ function ChampionsPage() {
 			<br />
 
 			{/* ------- Apply filter checkbox ------- */}
-			<label>
-				<input
-					type="checkbox"
-					checked={disableFilter}
-					onChange={event => setDisableFilter(event.target.checked)}
-				/>
-				Disable filter
-			</label>
-			<br />
+			{filteredChampions.length === champions.length
+				? ''
+				: <label>
+					<input
+						type="checkbox"
+						checked={disableFilter}
+						onChange={event => setDisableFilter(event.target.checked)}
+					/>
+					Disable filter
+				</label>
+			} &nbsp;
 
 			{/* ------- Include blacklist checkbox ------- */}
-			<label>
-				<input
-					type="checkbox"
-					checked={includeBlacklist}
-					onChange={event => setIncludeBlacklist(event.target.checked)}
-				/>
-				Include blacklisted
-			</label>
-			<br /> <br />
+			{blacklist.length === 0
+				? ''
+				: <label>
+					<input
+						type="checkbox"
+						checked={includeBlacklist}
+						onChange={event => setIncludeBlacklist(event.target.checked)}
+					/>
+					Include blacklisted
+				</label>
+			}
+			<br />
 
 			{/* ------- Maps through all champions ------- */}
 			{
