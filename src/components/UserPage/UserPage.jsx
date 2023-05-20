@@ -17,11 +17,11 @@ function UserPage() {
 	const champions = useSelector((store) => store.champions);
 
 	// --------- Storing user filters ---------
-	let [newFilter, setFilter] = useState({
+	let [filter, setFilter] = useState({
 		class: '',
+		region: '',
 		minDifficulty: '1',
 		maxDifficulty: '10',
-		region: '',
 		notes: ''
 	});
 
@@ -31,41 +31,23 @@ function UserPage() {
 		document.getElementById("filterForm").reset();
 		setFilter({
 			class: '',
+			region: '',
 			minDifficulty: '1',
 			maxDifficulty: '10',
-			region: '',
 			notes: ''
 		});
 	}
 
-	// --------- START of handleChange ---------
-	const handleClassChange = (event) => {
-		setFilter({ ...newFilter, class: event.target.value });
-	}
-	const handleMinDifficultyChange = (event) => {
-		setFilter({ ...newFilter, minDifficulty: event.target.value });
-	}
-	const handleMaxDifficultyChange = (event) => {
-		setFilter({ ...newFilter, maxDifficulty: event.target.value });
-	}
-	const handleRegionChange = (event) => {
-		setFilter({ ...newFilter, region: event.target.value });
-	}
-	const handleNotesChange = (event) => {
-		setFilter({ ...newFilter, notes: event.target.value });
-	}
-	// --------- END of handleChange ---------
-
-	// ! Use newFilter to add champions to filteredChampions reducer
-	const filter = (event) => {
+	// ! Use filter to add champions to filteredChampions reducer
+	const useFilter = (event) => {
 		event.preventDefault();
-		console.log('Filter champions with this filter:', newFilter);
+		console.log('Filter champions with this filter:', filter);
 
 		const filteredChampions = [];
 		// ! FILTER WITH forEach GOES HERE
 
 		console.log('Filtered List:', filteredChampions);
-		// Dispatch to 'SET_FILTERED_CHAMPIONS' using newFilter
+		// Dispatch to 'SET_FILTERED_CHAMPIONS' using filter
 		dispatch({ type: 'SET_FILTERED_CHAMPIONS', payload: filteredChampions });
 		history.push('/champions');
 	}
@@ -84,7 +66,12 @@ function UserPage() {
 
 				{/* ------- Filter by class ------- */}
 				By Class: &nbsp;
-				<select id="classFilter" onChange={handleClassChange}>
+				<select 
+					id="classFilter" 
+					onChange={(event) => setFilter(
+						{ ...filter, class: event.target.value }
+					)}
+				>
 					<option value="">All Classes</option>
 					<option value="Enchanter">Enchanter</option>
 					<option value="Catcher">Catcher</option>
@@ -113,7 +100,12 @@ function UserPage() {
 
 				{/* ------- Filter by region ------- */}
 				By Region: &nbsp;
-				<select onChange={handleRegionChange}>
+				<select 
+					id="regionFilter"
+					onChange={(event) => setFilter(
+						{ ...filter, region: event.target.value }
+					)}
+				>
 					<option value="">All Regions</option>
 					<option value="Bandle City">Bandle City</option>
 					<option value="Bilgewater">Bilgewater</option>
@@ -147,7 +139,12 @@ function UserPage() {
 				From &nbsp;
 
 				{/* ------- Minimum difficulty ------- */}
-				<select onChange={handleMinDifficultyChange}>
+				<select 
+					id="minDifficultyFilter"
+					onChange={(event) => setFilter(
+						{ ...filter, minDifficulty: event.target.value }
+					)}
+				>
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
@@ -162,7 +159,13 @@ function UserPage() {
 				&nbsp; to &nbsp;
 
 				{/* ------- Maximum difficulty ------- */}
-				<select defaultValue={10} onChange={handleMaxDifficultyChange}>
+				<select 
+					id="maxDifficultyFilter"
+					defaultValue={10} 
+					onChange={(event) => setFilter(
+						{ ...filter, maxDifficulty: event.target.value }
+					)}
+				>
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
@@ -179,12 +182,18 @@ function UserPage() {
 				{/* ------- Filter by notes ------- */}
 				By Notes:
 				<br />
-				<input type="text" onChange={handleNotesChange} />
+				<input 
+					id="notesFilter"
+					type="text" 
+					onChange={(event) => setFilter(
+						{ ...filter, notes: event.target.value }
+					)}
+				/>
 				<br /><br />
 
 				{/* ------- Buttons ------- */}
 				<button onClick={resetFilters}>Reset</button> &nbsp;
-				<button onClick={filter}>Filter</button>
+				<button onClick={useFilter}>Filter</button>
 			</form>
 		</div>
 	);
