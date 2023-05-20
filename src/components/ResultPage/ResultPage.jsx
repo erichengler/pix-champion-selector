@@ -28,8 +28,6 @@ function ResultPage() {
 		history.push('/');
 	}
 
-    const id = result.champion.id;
-
 	return (
 		<div className="container">
             <p>Pix thinks you should play...</p>

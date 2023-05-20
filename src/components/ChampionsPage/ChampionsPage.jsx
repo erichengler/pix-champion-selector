@@ -111,7 +111,7 @@ function ChampionsPage() {
 			{/* ------- Roll button ------- */}
 			{/* ! CHANGE champions to filtered champions when filter works ! */}
 			<RollButton
-				champions={filteredChampions}
+				champions={displayedChampions}
 			/>
 		</div>
 	);
