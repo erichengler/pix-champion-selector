@@ -13,21 +13,32 @@ function ChampionsPage() {
 	// ------- GET all champions from database -------
 	useEffect(() => {
 		dispatch({ type: 'FETCH_CHAMPIONS' });
-		dispatch({ type: 'FETCH_BLACKLIST' });
 		dispatch({ type: 'FETCH_FILTERED_CHAMPIONS' });
+		dispatch({ type: 'FETCH_BLACKLIST' });
 	}, []);
 
 	// ------- Storing champions, filteredChampions and blacklist -------
 	const champions = useSelector(store => store.champions);
-	const blacklist = useSelector(store => store.blacklist);
 	const filteredChampions = useSelector(store => store.filteredChampions);
+	const blacklist = useSelector(store => store.blacklist);
+
 
 	// ------- Search query state -------
 	const [searchQuery, setSearchQuery] = useState('');
 
+	const [includeBlacklist, setIncludeBlacklist] = useState(false);
+
+	const displayedChampions = includeBlacklist
+		? champions
+		: champions.filter(champion => {
+			return !blacklist.some(
+				blacklisted => blacklisted.champion_id === champion.id
+			);
+		});
+
 	// ------- Filter champions using search query -------
 	// ! Change champions.filter to filteredChampions.filter when filter is working
-	const filteredBySearch = champions.filter((champion) => 
+	const filteredBySearch = displayedChampions.filter((champion) =>
 		champion.name.toLowerCase().includes(searchQuery.toLowerCase())
 	);
 
@@ -47,6 +58,17 @@ function ChampionsPage() {
 				onChange={(e) => setSearchQuery(e.target.value)}
 				placeholder="Search champions..."
 			/>
+			<br />
+
+			{/* ------- Include blacklist checkbox ------- */}
+			<label>
+				<input
+					type="checkbox"
+					checked={includeBlacklist}
+					onChange={event => setIncludeBlacklist(event.target.checked)}
+				/>
+				Include blacklisted
+			</label>
 			<br /> <br />
 
 			{/* ------- Maps through all champions ------- */}
@@ -65,7 +87,7 @@ function ChampionsPage() {
 
 			{/* ------- Roll button ------- */}
 			{/* ! CHANGE champions to filtered champions when filter works ! */}
-			<RollButton 
+			<RollButton
 				champions={champions}
 			/>
 		</div>
