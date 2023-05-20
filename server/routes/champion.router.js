@@ -97,6 +97,23 @@ router.delete('/favorites', rejectUnauthenticated, (req, res) => {
         })
 });
 
+// ------- GET user's notes -------
+router.get('/notes', rejectUnauthenticated, (req, res) => {
+    console.log('In GET all notes');
+    // ------- Query to get all notes -------
+    const queryText = `
+        SELECT * FROM notes
+        WHERE "user_id" = $1;`;
+    pool.query(queryText, [req.user.id])
+        .then(result => {
+            res.send(result.rows);
+        })
+        .catch(error => {
+            console.log('ERROR in GET all notes:', error);
+            res.sendStatus(500);
+        })
+});
+
 // ------- GET this note -------
 router.get('/thisnote', rejectUnauthenticated, (req, res) => {
     console.log('In GET this note');

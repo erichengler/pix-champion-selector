@@ -10,11 +10,13 @@ function UserPage() {
 	// --------- Fetch champions From database ---------
 	useEffect(() => {
 		dispatch({ type: 'FETCH_CHAMPIONS' });
+		dispatch({ type: 'FETCH_NOTES' });
 	}, []);
 
 	// --------- Storing user data, champions ---------
-	const user = useSelector((store) => store.user);
-	const champions = useSelector((store) => store.champions);
+	const user = useSelector(store => store.user);
+	const champions = useSelector(store => store.champions);
+	const notes = useSelector(store => store.notes);
 
 	// --------- Storing user filters ---------
 	let [filter, setFilter] = useState({
@@ -26,7 +28,7 @@ function UserPage() {
 	});
 
 	// --------- Reset user filters ---------
-	const resetFilters = (event) => {
+	const resetFilter = (event) => {
 		event.preventDefault();
 		document.getElementById("filterForm").reset();
 		setFilter({
@@ -39,12 +41,45 @@ function UserPage() {
 	}
 
 	// ! Use filter to add champions to filteredChampions reducer
-	const useFilter = (event) => {
+	const filterSubmit = (event) => {
 		event.preventDefault();
 		console.log('Filter champions with this filter:', filter);
 
-		const filteredChampions = [];
-		// ! FILTER WITH forEach GOES HERE
+		// ------- Filtering champions -------
+		const filteredChampions = champions.filter(champion => {
+			
+			// ------- Filter by class -------
+			if (filter.class && champion.class !== filter.class) {
+				return false;
+			}
+
+			// ------- Filter by region -------
+			if (filter.region && champion.region !== filter.region) {
+				return false;
+			}
+
+			// ------- Filter by difficulty -------
+			if (
+				parseInt(champion.difficulty) < parseInt(filter.minDifficulty) ||
+				parseInt(champion.difficulty) > parseInt(filter.maxDifficulty)
+			) {
+				return false;
+			}
+
+			// ------- Filter by notes -------
+			if (filter.notes) {
+				const championNotes = notes.filter(note => 
+					note.champion_id === champion.id);
+				const filteredNotes = championNotes.filter(note => 
+					note.note.includes(filter.notes));
+
+				if (filteredNotes.length === 0) {
+					return false;
+				}
+			}
+
+			return true;
+		});
 
 		console.log('Filtered List:', filteredChampions);
 		// Dispatch to 'SET_FILTERED_CHAMPIONS' using filter
@@ -192,8 +227,8 @@ function UserPage() {
 				<br /><br />
 
 				{/* ------- Buttons ------- */}
-				<button onClick={resetFilters}>Reset</button> &nbsp;
-				<button onClick={useFilter}>Filter</button>
+				<button onClick={resetFilter}>Reset</button> &nbsp;
+				<button onClick={filterSubmit}>Filter</button>
 			</form>
 		</div>
 	);

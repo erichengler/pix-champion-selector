@@ -12,13 +12,12 @@ function ChampionsPage() {
 
 	// ------- GET all champions from database -------
 	useEffect(() => {
-		dispatch({ type: 'FETCH_CHAMPIONS' });
 		dispatch({ type: 'FETCH_FILTERED_CHAMPIONS' });
 		dispatch({ type: 'FETCH_BLACKLIST' });
 	}, []);
 
 	// ------- Storing champions, filteredChampions and blacklist -------
-	const champions = useSelector(store => store.champions);
+
 	const filteredChampions = useSelector(store => store.filteredChampions);
 	const blacklist = useSelector(store => store.blacklist);
 
@@ -29,15 +28,14 @@ function ChampionsPage() {
 
 	// ------- Include blacklist checkbox logic -------
 	const displayedChampions = includeBlacklist
-		? champions
-		: champions.filter(champion => {
+		? filteredChampions
+		: filteredChampions.filter(champion => {
 			return !blacklist.some(
 				blacklisted => blacklisted.champion_id === champion.id
 			);
 		});
 
 	// ------- Filter champions using search query -------
-	// ! Change champions.filter to filteredChampions.filter when filter is working
 	const filteredBySearch = displayedChampions.filter((champion) =>
 		champion.name.toLowerCase().includes(searchQuery.toLowerCase())
 	);
@@ -88,7 +86,7 @@ function ChampionsPage() {
 			{/* ------- Roll button ------- */}
 			{/* ! CHANGE champions to filtered champions when filter works ! */}
 			<RollButton
-				champions={champions}
+				champions={filteredChampions}
 			/>
 		</div>
 	);

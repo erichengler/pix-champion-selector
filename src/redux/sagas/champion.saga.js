@@ -32,20 +32,6 @@ function* fetchThisChampion(action) {
     }
 }
 
-// ------- Get all filtered champions from champions DB -------
-function* fetchFilteredChampions() {
-    try {
-        const filteredChampions = yield axios.get('/api/champion');
-        // console.log('Get champions:', champions.data);
-        yield put({
-            type: 'SET_FILTERED_CHAMPIONS',
-            payload: filteredChampions.data
-        });
-    } catch {
-        console.log('Error in fetchFilteredChampions generator');
-    }
-}
-
 // ------- Get user's favorites DB -------
 function* fetchFavorites() {
     try {
@@ -83,6 +69,20 @@ function* removeFavorite(action) {
         yield put({ type: 'FETCH_FAVORITES' });
     } catch {
         console.log('Error in removeFavorite generator');
+    }
+}
+
+// ------- Get all notes from notes DB -------
+function* fetchNotes() {
+    try {
+        const notes = yield axios.get('/api/champion/notes');
+        // console.log('Get champions:', champions.data);
+        yield put({
+            type: 'SET_NOTES',
+            payload: notes.data
+        });
+    } catch {
+        console.log('Error in fetchNotes generator');
     }
 }
 
@@ -178,10 +178,10 @@ function* removeFromBlacklist(action) {
 function* championSaga() {
     yield takeEvery('FETCH_CHAMPIONS', fetchChampions);
     yield takeEvery('FETCH_THIS_CHAMPION', fetchThisChampion);
-    yield takeEvery('FETCH_FILTERED_CHAMPIONS', fetchFilteredChampions)
     yield takeEvery('FETCH_FAVORITES', fetchFavorites);
     yield takeEvery('ADD_FAVORITE', addFavorite);
     yield takeEvery('REMOVE_FAVORITE', removeFavorite);
+    yield takeEvery('FETCH_NOTES', fetchNotes);
     yield takeEvery('FETCH_THIS_NOTE', fetchThisNote);
     yield takeEvery('ADD_NOTE', addNote);
     yield takeEvery('REMOVE_NOTE', removeNote);
