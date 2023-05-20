@@ -4,17 +4,19 @@ import { useHistory } from "react-router-dom";
 
 function UserPage() {
 
-	// --------- Storing ---------
-	const user = useSelector((store) => store.user);
-	const champions = useSelector((store) => store.champions);
-
 	const history = useHistory();
 	const dispatch = useDispatch();
 
-	// --------- GET Champions From Database ---------
-	useEffect( () => { dispatch({ type: 'FETCH_CHAMPIONS' }); }, [] );
+	// --------- Fetch champions From database ---------
+	useEffect(() => {
+		dispatch({ type: 'FETCH_CHAMPIONS' });
+	}, []);
 
-	// --------- Storing User Filters ---------
+	// --------- Storing user data, champions ---------
+	const user = useSelector((store) => store.user);
+	const champions = useSelector((store) => store.champions);
+
+	// --------- Storing user filters ---------
 	let [newFilter, setFilter] = useState({
 		class: '',
 		minDifficulty: '1',
@@ -23,7 +25,7 @@ function UserPage() {
 		notes: ''
 	});
 
-	// --------- Reset User Filters ---------
+	// --------- Reset user filters ---------
 	const resetFilters = (event) => {
 		event.preventDefault();
 		document.getElementById("filterForm").reset();
@@ -65,29 +67,22 @@ function UserPage() {
 		console.log('Filtered List:', filteredChampions);
 		// Dispatch to 'SET_FILTERED_CHAMPIONS' using newFilter
 		dispatch({ type: 'SET_FILTERED_CHAMPIONS', payload: filteredChampions });
-		setFilter({
-			class: '',
-			minDifficulty: '1',
-			maxDifficulty: '10',
-			region: '',
-			notes: ''
-		});
 		history.push('/champions');
 	}
 
 	return (
 		<div className="container">
 
-			{/* ------- Welcome, User Information ------- */}
+			{/* ------- Welcome, user information ------- */}
 			<h2>Welcome, {user.username}!</h2>
 			<p>Your ID is: {user.id}</p>
 			<br /><br />
 
-			{/* ------- Champions Filter ------- */}
+			{/* ------- Champions filter ------- */}
 			<form id='filterForm'>
 				<h3>Filter Champions</h3>
 
-				{/* ------- Filter by Class ------- */}
+				{/* ------- Filter by class ------- */}
 				By Class: &nbsp;
 				<select id="classFilter" onChange={handleClassChange}>
 					<option value="">All Classes</option>
@@ -107,7 +102,7 @@ function UserPage() {
 				</select>
 				<br />
 
-				{/* ------- Link to Classes Info ------- */}
+				{/* ------- Link to classes info ------- */}
 				<a
 					href="https://leagueoflegends.fandom.com/wiki/Champion_classes"
 					target="_blank"
@@ -116,7 +111,7 @@ function UserPage() {
 				</a>
 				<br /><br />
 
-				{/* ------- Filter by Region ------- */}
+				{/* ------- Filter by region ------- */}
 				By Region: &nbsp;
 				<select onChange={handleRegionChange}>
 					<option value="">All Regions</option>
@@ -137,7 +132,7 @@ function UserPage() {
 				</select>
 				<br />
 
-				{/* ------- Link to Regions info ------- */}
+				{/* ------- Link to regions info ------- */}
 				<a
 					href="https://universe.leagueoflegends.com/en_US/regions"
 					target="_blank"
@@ -146,12 +141,12 @@ function UserPage() {
 				</a>
 				<br /><br />
 
-				{/* ------- Filter by Difficulty ------- */}
+				{/* ------- Filter by difficulty ------- */}
 				By Difficulty:
 				<br />
 				From &nbsp;
 
-				{/* ------- Minimum Difficulty ------- */}
+				{/* ------- Minimum difficulty ------- */}
 				<select onChange={handleMinDifficultyChange}>
 					<option value="1">1</option>
 					<option value="2">2</option>
@@ -166,7 +161,7 @@ function UserPage() {
 				</select>
 				&nbsp; to &nbsp;
 
-				{/* ------- Maximum Difficulty ------- */}
+				{/* ------- Maximum difficulty ------- */}
 				<select defaultValue={10} onChange={handleMaxDifficultyChange}>
 					<option value="1">1</option>
 					<option value="2">2</option>
@@ -181,7 +176,7 @@ function UserPage() {
 				</select>
 				<br /><br />
 
-				{/* ------- Filter by Notes ------- */}
+				{/* ------- Filter by notes ------- */}
 				By Notes:
 				<br />
 				<input type="text" onChange={handleNotesChange} />

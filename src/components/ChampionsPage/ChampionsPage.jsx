@@ -23,11 +23,11 @@ function ChampionsPage() {
 	const blacklist = useSelector(store => store.blacklist);
 
 
-	// ------- Search query state -------
+	// ------- Search query, include blacklist states -------
 	const [searchQuery, setSearchQuery] = useState('');
-
 	const [includeBlacklist, setIncludeBlacklist] = useState(false);
 
+	// ------- Include blacklist checkbox logic -------
 	const displayedChampions = includeBlacklist
 		? champions
 		: champions.filter(champion => {
