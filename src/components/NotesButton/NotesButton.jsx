@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // ------- MaterialUI Imports -------
@@ -22,8 +22,13 @@ function NotesButton({ champion, favorite, name, result }) {
 
     const dispatch = useDispatch();
 
-    // ------- Storing this note -------
-    const thisNote = useSelector(store => store.thisNote);
+    // ------- Fetch all notes -------
+    useEffect(() => {
+        dispatch({ type: 'FETCH_NOTES' });
+    }, []);
+
+    // const thisNote = useSelector(store => store.thisNote);
+    const notes = useSelector(store => store.notes);
 
     // ------- Storing modal status -------
     const [open, setOpen] = useState(false);
@@ -32,29 +37,33 @@ function NotesButton({ champion, favorite, name, result }) {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    // ------- Get ID required based on current page -------
+    const foundId = (result != undefined ? result.champion.id
+        :
+        (
+            favorite === undefined
+                ? champion[0].id
+                : favorite.champion_id
+        )
+    );
+
+    // ------- Finds specific champion's note -------
+    const thisNote = notes.find(note => note.champion_id === foundId);
+
     // ------- Checks which prop was sent -------
     // ------- then returns champion's name -------
     const notesHeader = () => {
-        return (result === undefined ?
-            (favorite === undefined ? champion[0].name : name) :
-            result.champion.name
+        return (result === undefined
+            ? (favorite === undefined ? champion[0].name : name)
+            : result.champion.name
         );
     }
-
-    // ------- Get ID required based on current page -------
-    const foundId = (result != undefined ? result.champion.id :
-        (
-            favorite === undefined ?
-                champion[0].id :
-                favorite.champion_id
-        )
-    );
 
     // ------- Check if a note exists, then -------
     // ------- set to defaultValue of textfield -------
     const defaultNote = () => {
-        return (favorite === undefined 
-            ? (thisNote.length === 0 ? '' : thisNote[0].note) 
+        return (favorite === undefined
+            ? (thisNote === undefined ? '' : thisNote.note)
             : (favorite.note === undefined ? '' : favorite.note)
         );
     }
@@ -104,10 +113,10 @@ function NotesButton({ champion, favorite, name, result }) {
         <>
             {/* ------- Add note or Edit note button ------- */}
             <button onClick={handleOpen}>
-                {favorite === undefined ? 
+                {favorite === undefined
                     // ------- Checking if a note exists -------
-                    (thisNote.length === 0 ? 'Add Note' : 'Edit Note') :
-                    (favorite.note == undefined ? 'Add Note' : 'Edit Note')
+                    ? (thisNote === undefined ? 'Add Note' : 'Edit Note')
+                    : (favorite.note == undefined ? 'Add Note' : 'Edit Note')
                 }
             </button>
 
@@ -143,16 +152,16 @@ function NotesButton({ champion, favorite, name, result }) {
                         <>
                             {/* ------- Cancel or Delete button ------- */}
                             <button
-                                onClick={thisNote.length === 0 ?
+                                onClick={thisNote === undefined ?
                                     handleClose : deleteNotes}>
-                                {thisNote.length === 0 ? 'Cancel' : 'Delete'}
+                                {thisNote === undefined ? 'Cancel' : 'Delete'}
                             </button>
 
                             {/* ------- Submit or Save button ------- */}
                             <button
-                                onClick={thisNote.length === 0 ?
+                                onClick={thisNote === undefined ?
                                     createNotes : updateNotes}>
-                                {thisNote.length === 0 ? 'Submit' : 'Save'}
+                                {thisNote === undefined ? 'Submit' : 'Save'}
                             </button>
                         </>
                     ) : (

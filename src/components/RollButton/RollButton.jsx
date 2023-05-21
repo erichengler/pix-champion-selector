@@ -1,24 +1,34 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-function RollButton({ favorites, champions, result }) {
+function RollButton({ favorites, filteredChampions, result }) {
 
     const dispatch = useDispatch();
     const history = useHistory();
 
+    const champions = useSelector(store => store.champions)
+
     // ------- Picks a random result from either -------
-    // ------- filtered champions or favorites -------
+    // ------- filtered filteredChampions or favorites -------
     const roll = () => {
-        console.log(favorites === undefined ? 
+        console.log(favorites === undefined ?
             'Rolling from filtered champions' : 'Rolling from favorites');
         const random = Math.floor(Math.random()
-            * (favorites === undefined ? champions.length : favorites.length));
+            * (favorites === undefined
+                ? filteredChampions.length
+                : favorites.length)
+        );
         dispatch({
             type: 'SET_RESULT',
             payload: {
-                champion: (favorites === undefined ? champions[random]
-                    : champions[favorites[random].champion_id - 1]),
-                rerollPool: (favorites === undefined ? champions : favorites)
+                champion: (favorites === undefined 
+                    ? filteredChampions[random]
+                    : champions[favorites[random].champion_id - 1]
+                ),
+                rerollPool: (favorites === undefined 
+                    ? filteredChampions 
+                    : favorites
+                )
             }
         });
         history.push('/result');
@@ -28,14 +38,15 @@ function RollButton({ favorites, champions, result }) {
     // ------- filtered champions or favorites -------
     const reroll = () => {
         const pool = result.rerollPool
-        console.log(pool[0].name == undefined ? 
+        console.log(pool[0].name == undefined ?
             'Rerolling from favorites' : 'Rerolling from filtered champions');
         const random = Math.floor(Math.random() * pool.length);
         dispatch({
             type: 'SET_RESULT',
             payload: {
-                champion: (pool[0].name == undefined ? 
-                    champions[pool[random].champion_id - 1] : pool[random]),
+                champion: (pool[0].name == undefined 
+                    ? champions[pool[random].champion_id - 1] 
+                    : pool[random]),
                 rerollPool: pool
             }
         });

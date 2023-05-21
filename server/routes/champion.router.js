@@ -114,24 +114,6 @@ router.get('/notes', rejectUnauthenticated, (req, res) => {
         })
 });
 
-// ------- GET this note -------
-router.get('/thisnote', rejectUnauthenticated, (req, res) => {
-    console.log('In GET this note');
-    // ------- Query to get note based on id -------
-    const queryText = `
-        SELECT * FROM notes 
-        WHERE "user_id" = $1 
-        AND "champion_id" = $2;`;
-    pool.query(queryText, [req.user.id, req.query.id])
-        .then(result => {
-            res.send(result.rows);
-        })
-        .catch(error => {
-            console.log('ERROR in GET this note', error);
-            res.sendStatus(500);
-        })
-});
-
 // ------- POST to user's notes -------
 router.post('/notes', rejectUnauthenticated, (req, res) => {
     console.log('In POST note');

@@ -8,7 +8,6 @@ import favorites from './favorites.reducer';
 import filteredChampions from './filteredChampions.reducer';
 import blacklist from './blacklist.reducer';
 import notes from './notes.reducer';
-import thisNote from './thisNote.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -24,7 +23,6 @@ const rootReducer = combineReducers({
   filteredChampions,
   favorites,
   notes,
-  thisNote,
   blacklist,
   result,
 });

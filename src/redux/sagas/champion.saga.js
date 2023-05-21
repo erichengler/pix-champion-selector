@@ -86,25 +86,12 @@ function* fetchNotes() {
     }
 }
 
-// ------- Get this note from notes DB -------
-function* fetchThisNote(action) {
-    try {
-        // ------- Based on ID -------
-        const note = yield axios.get(
-            `/api/champion/thisnote?id=${action.payload}`);
-        // console.log(`Get this note with champion ID: ${action.payload}`);
-        yield put({ type: 'SET_NOTE', payload: note.data });
-    } catch {
-        console.log('Error in fetchThisNote generator');
-    }
-}
-
 // ------- Post note to notes DB -------
 function* addNote(action) {
     try {
         console.log(action)
         yield axios.post('/api/champion/notes', action.payload );
-        yield put({ type: 'FETCH_THIS_NOTE', payload: action.payload.id });
+        yield put({ type: 'FETCH_NOTES' });
         yield put({ type: 'FETCH_FAVORITES' });
     } catch {
         console.log('Error in addNote generator');
@@ -115,7 +102,7 @@ function* addNote(action) {
 function* removeNote(action) {
     try {
         yield axios.delete(`/api/champion/notes/${action.payload}`);
-        yield put({ type: 'FETCH_THIS_NOTE', payload: action.payload });
+        yield put({ type: 'FETCH_NOTES' });
         yield put({ type: 'FETCH_FAVORITES' });
     } catch {
         console.log('Error in removeNote generator');
@@ -126,7 +113,7 @@ function* removeNote(action) {
 function* editNote(action) {
     try {
         yield axios.put('/api/champion/notes', action.payload);
-        yield put({ type: 'FETCH_THIS_NOTE', payload: action.payload.id });
+        yield put({ type: 'FETCH_NOTES' });
         yield put({ type: 'FETCH_FAVORITES' });
     } catch {
         console.log('Error in editNote generator');
@@ -182,7 +169,6 @@ function* championSaga() {
     yield takeEvery('ADD_FAVORITE', addFavorite);
     yield takeEvery('REMOVE_FAVORITE', removeFavorite);
     yield takeEvery('FETCH_NOTES', fetchNotes);
-    yield takeEvery('FETCH_THIS_NOTE', fetchThisNote);
     yield takeEvery('ADD_NOTE', addNote);
     yield takeEvery('REMOVE_NOTE', removeNote);
     yield takeEvery('EDIT_NOTE', editNote);
