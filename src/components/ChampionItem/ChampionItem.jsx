@@ -1,4 +1,5 @@
 import { useHistory } from 'react-router-dom';
+import './ChampionItem.css';
 
 function ChampionItem({ champion }) {
 
@@ -10,7 +11,7 @@ function ChampionItem({ champion }) {
     }
 
     return (
-        <>
+        <div className="champion-avatar">
             {/* ------- Champion portraits ------- */}
             <img
                 key={champion.id}
@@ -19,7 +20,8 @@ function ChampionItem({ champion }) {
                 style={{ padding: '5px', cursor: 'pointer' }}
                 onClick={toDetails}             
             />
-        </>
+            <span className="champion-name">{champion.name}</span>
+        </div>
     );
 }
 
