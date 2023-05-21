@@ -76,7 +76,7 @@ function* removeFavorite(action) {
 function* fetchNotes() {
     try {
         const notes = yield axios.get('/api/champion/notes');
-        // console.log('Get champions:', champions.data);
+        // console.log('Get notes:', notes.data);
         yield put({
             type: 'SET_NOTES',
             payload: notes.data

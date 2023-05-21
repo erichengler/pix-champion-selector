@@ -53,9 +53,9 @@ function NotesButton({ champion, favorite, name, result }) {
     // ------- Check if a note exists, then -------
     // ------- set to defaultValue of textfield -------
     const defaultNote = () => {
-        return (favorite === undefined ?
-            (thisNote.length === 0 ? '' : thisNote[0].note) :
-            (favorite.note === undefined ? '' : favorite.note)
+        return (favorite === undefined 
+            ? (thisNote.length === 0 ? '' : thisNote[0].note) 
+            : (favorite.note === undefined ? '' : favorite.note)
         );
     }
 
