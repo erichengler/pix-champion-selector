@@ -25,6 +25,11 @@ function FavoritesPage() {
         history.push('/');
     }
 
+    // ------- Brings user to champion details -------
+    const toDetails = (event) => {
+        history.push(`/details/${event.champion_id}`)
+    }
+
     // ------- Remove favorite from DB -------
     const removeFavorite = (event) => {
         dispatch({
@@ -61,18 +66,29 @@ function FavoritesPage() {
                                 return <div key={favorite.id}>
 
 
-                                    {/* ------- Matching champion name ------- */}
-                                    {favChampion.name}
+                                    {/* ------- Champion name, title ------- */}
+                                    <b>{favChampion.name}</b>, <i>{favChampion.title}</i>
+                                    <br />
 
-                                    {/* ------- Notes and remove buttons ------- */}
-                                    &nbsp; &nbsp; &nbsp; &nbsp;
+                                    {/* ------- Details button ------- */}
+                                    <button
+                                        onClick={() => toDetails(favorite)}
+                                    >
+                                        Details
+                                    </button>
+                                    &nbsp; &nbsp;
+
+                                    {/* ------- Notes button ------- */}
                                     <NotesButton
                                         favorite={favorite}
                                         name={favChampion.name}
                                     />
-                                    &nbsp; &nbsp; &nbsp; &nbsp;
+                                    &nbsp; &nbsp;
+
+                                    {/* ------- Remove button ------- */}
                                     <button
-                                        onClick={() => removeFavorite(favorite)}>
+                                        onClick={() => removeFavorite(favorite)}
+                                    >
                                         Remove
                                     </button>
                                     <br />
