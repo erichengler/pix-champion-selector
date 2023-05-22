@@ -17,6 +17,7 @@ function UserPage() {
 	const user = useSelector(store => store.user);
 	const champions = useSelector(store => store.champions);
 	const notes = useSelector(store => store.notes);
+	const checkboxToggle = useSelector(store => store.checkboxToggle);
 
 	// --------- Storing user filters ---------
 	let [filter, setFilter] = useState({
@@ -40,9 +41,12 @@ function UserPage() {
 		});
 	}
 
-	// ! Use filter to add champions to filteredChampions reducer
+	// ------- Logic for user filters -------
 	const filterSubmit = (event) => {
 		event.preventDefault();
+		if (checkboxToggle.disableFilter === true) {
+			dispatch({ type: 'TOGGLE_DISABLE_FILTER' });
+		}
 		console.log('Filter champions with this filter:', filter);
 
 		// ------- Filtering champions -------

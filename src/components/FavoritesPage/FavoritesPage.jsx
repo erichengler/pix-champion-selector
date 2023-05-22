@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import NotesButton from '../NotesButton/NotesButton';
+import FavoriteItem from '../FavoriteItem/FavoriteItem';
 import RollButton from '../RollButton/RollButton';
 
 function FavoritesPage() {
@@ -23,20 +23,6 @@ function FavoritesPage() {
     // ------- Brings user back to Home -------
     const backToHome = () => {
         history.push('/');
-    }
-
-    // ------- Brings user to champion details -------
-    const toDetails = (event) => {
-        history.push(`/details/${event.champion_id}`)
-    }
-
-    // ------- Remove favorite from DB -------
-    const removeFavorite = (event) => {
-        dispatch({
-            type: 'REMOVE_FAVORITE',
-            payload: { params: { id: event.champion_id } }
-        });
-
     }
 
     return (
@@ -61,46 +47,13 @@ function FavoritesPage() {
                         {/* ------- Mapping through favorites and ------- */}
                         {/* ------- matching by champion_id ------- */}
                         {
-                            favorites.map(favorite => {
-                                let favChampion = champions[favorite.champion_id - 1];
-                                return <div key={favorite.id}>
-
-
-                                    {/* ------- Champion name, title ------- */}
-                                    <b>{favChampion.name}</b>, <i>{favChampion.title}</i>
-                                    <br />
-
-                                    {/* ------- Details button ------- */}
-                                    <button
-                                        onClick={() => toDetails(favorite)}
-                                    >
-                                        Details
-                                    </button>
-                                    &nbsp; &nbsp;
-
-                                    {/* ------- Notes button ------- */}
-                                    <NotesButton
-                                        favorite={favorite}
-                                        name={favChampion.name}
-                                    />
-                                    &nbsp; &nbsp;
-
-                                    {/* ------- Remove button ------- */}
-                                    <button
-                                        onClick={() => removeFavorite(favorite)}
-                                    >
-                                        Remove
-                                    </button>
-                                    <br />
-
-                                    {/* ------- Matching champion image ------- */}
-                                    <img
-                                        src={favChampion.image}
-                                        style={{ width: '400px' }}
-                                    />
-                                    <br /><br /><br />
-                                </div>
-                            })
+                            favorites.map((favorite) => (
+                                <FavoriteItem 
+                                    key={favorite.id}
+                                    champions={champions}
+                                    favorite={favorite}
+                                />
+                            ))
                         }
                         {/* ------- Back to home button ------- */}
                         <button onClick={backToHome}>Back</button>

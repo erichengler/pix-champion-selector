@@ -79,7 +79,8 @@ function ChampionsPage() {
 				filteredBySearch.map((champion) => (
 					<ChampionItem
 						key={champion.id}
-						champion={champion} />
+						champion={champion} 
+					/>
 				))
 			}
 			<br /><br /><br />
