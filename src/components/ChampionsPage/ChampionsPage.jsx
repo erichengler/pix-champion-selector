@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import ChampionItem from '../ChampionItem/ChampionItem';
+import Checkboxes from '../Checkboxes/Checkboxes';
 import RollButton from '../RollButton/RollButton';
 
 function ChampionsPage() {
@@ -10,7 +11,7 @@ function ChampionsPage() {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
-	// ------- GET champions, filtered champions, blacklist from database -------
+	// ------- Fetch champions, filtered champions, blacklist -------
 	useEffect(() => {
 		dispatch({ type: 'FETCH_CHAMPIONS' });
 		dispatch({ type: 'FETCH_FILTERED_CHAMPIONS' });
@@ -21,33 +22,26 @@ function ChampionsPage() {
 	const champions = useSelector(store => store.champions);
 	const filteredChampions = useSelector(store => store.filteredChampions);
 	const blacklist = useSelector(store => store.blacklist);
-	const checkboxes = useSelector(store => store.checkboxes);
+	const checkboxToggle = useSelector(store => store.checkboxToggle);
 
 	// ------- State for search query -------
 	const [searchQuery, setSearchQuery] = useState('');
 
-	// ------- Toggle state change for checkboxes -------
-	const toggleDisableFilter = () => {
-		dispatch({ type: 'TOGGLE_DISABLE_FILTER' });
-	}
-	const toggleIncludeBlacklist = () => {
-		dispatch({ type: 'TOGGLE_INCLUDE_BLACKLIST' });
-	}
-
-	// ------- Logic for disable filter, include blacklist -------
-	const displayedChampions = checkboxes.disableFilter
-		? (checkboxes.includeBlacklist ? champions
+	// ------- Start disable filter, include blacklist -------
+	const displayedChampions = checkboxToggle.disableFilter
+		? (checkboxToggle.includeBlacklist ? champions
 			: champions.filter(champion => {
 				return !blacklist.some(
 					blacklisted => blacklisted.champion_id === champion.id
 				);
 			}))
-		: (checkboxes.includeBlacklist ? filteredChampions
+		: (checkboxToggle.includeBlacklist ? filteredChampions
 			: filteredChampions.filter(champion => {
 				return !blacklist.some(
 					blacklisted => blacklisted.champion_id === champion.id
 				);
 			}));
+	// ------- End disable filter, include blacklist -------
 
 	// ------- Filter champions using search query -------
 	const filteredBySearch = displayedChampions.filter((champion) =>
@@ -72,34 +66,15 @@ function ChampionsPage() {
 			/>
 			<br />
 
-			{/* ------- Disable filter checkbox ------- */}
-			{filteredChampions.length === champions.length
-				? ''
-				: <label>
-					<input
-						type="checkbox"
-						checked={checkboxes.disableFilter}
-						onChange={toggleDisableFilter}
-					/>
-					Disable filter
-				</label>
-			} &nbsp;
+			{/* ------- Disable filter, include blacklist ------- */}
+			<Checkboxes 
+				champions={champions}
+				filteredChampions={filteredChampions}
+				blacklist={blacklist}
+				checkboxToggle={checkboxToggle}
+			/>
 
-			{/* ------- Include blacklist checkbox ------- */}
-			{blacklist.length === 0
-				? ''
-				: <label>
-					<input
-						type="checkbox"
-						checked={checkboxes.includeBlacklist}
-						onChange={toggleIncludeBlacklist}
-					/>
-					Include blacklisted
-				</label>
-			}
-			<br />
-
-			{/* ------- Maps through all champions ------- */}
+			{/* ------- Maps through champions ------- */}
 			{
 				filteredBySearch.map((champion) => (
 					<ChampionItem
@@ -114,7 +89,6 @@ function ChampionsPage() {
 			&nbsp; &nbsp;
 
 			{/* ------- Roll button ------- */}
-			{/* ! CHANGE champions to filtered champions when filter works ! */}
 			<RollButton
 				filteredChampions={displayedChampions}
 			/>

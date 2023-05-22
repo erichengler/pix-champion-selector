@@ -8,7 +8,7 @@ import favorites from './favorites.reducer';
 import filteredChampions from './filteredChampions.reducer';
 import blacklist from './blacklist.reducer';
 import notes from './notes.reducer';
-import checkboxes from './checkboxes.reducer';
+import checkboxToggle from './checkboxToggle.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -26,7 +26,7 @@ const rootReducer = combineReducers({
   notes,
   blacklist,
   result,
-  checkboxes,
+  checkboxToggle,
 });
 
 export default rootReducer;

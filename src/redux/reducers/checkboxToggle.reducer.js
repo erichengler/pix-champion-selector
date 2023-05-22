@@ -5,7 +5,7 @@ const initialState = {
 };
 
 // ------- Stores state of checkboxes -------
-const checkboxes = (state = initialState, action) => {
+const checkboxToggle = (state = initialState, action) => {
     switch (action.type) {
         case 'TOGGLE_INCLUDE_BLACKLIST':
             return {
@@ -22,4 +22,4 @@ const checkboxes = (state = initialState, action) => {
     }
 }
 
-export default checkboxes;
+export default checkboxToggle;
