@@ -17,27 +17,32 @@ function ChampionsPage() {
 		dispatch({ type: 'FETCH_BLACKLIST' });
 	}, []);
 
-	// ------- Storing champions, filteredChampions, blacklist -------
+	// ------- Storing champions, filteredChampions, blacklist, checkboxes -------
 	const champions = useSelector(store => store.champions);
 	const filteredChampions = useSelector(store => store.filteredChampions);
 	const blacklist = useSelector(store => store.blacklist);
+	const checkboxes = useSelector(store => store.checkboxes);
 
-
-	// ------- States for search query, include blacklist, apply filter -------
+	// ------- State for search query -------
 	const [searchQuery, setSearchQuery] = useState('');
-	const [disableFilter, setDisableFilter] = useState(false);
-	const [includeBlacklist, setIncludeBlacklist] = useState(false);
 
-	// ------- Disable filter, include blacklist logic -------
-	const displayedChampions = disableFilter
-		? (includeBlacklist ? champions
+	// ------- Toggle state change for checkboxes -------
+	const toggleDisableFilter = () => {
+		dispatch({ type: 'TOGGLE_DISABLE_FILTER' });
+	}
+	const toggleIncludeBlacklist = () => {
+		dispatch({ type: 'TOGGLE_INCLUDE_BLACKLIST' });
+	}
+
+	// ------- Logic for disable filter, include blacklist -------
+	const displayedChampions = checkboxes.disableFilter
+		? (checkboxes.includeBlacklist ? champions
 			: champions.filter(champion => {
 				return !blacklist.some(
 					blacklisted => blacklisted.champion_id === champion.id
 				);
 			}))
-
-		: (includeBlacklist ? filteredChampions
+		: (checkboxes.includeBlacklist ? filteredChampions
 			: filteredChampions.filter(champion => {
 				return !blacklist.some(
 					blacklisted => blacklisted.champion_id === champion.id
@@ -63,18 +68,18 @@ function ChampionsPage() {
 				type="text"
 				value={searchQuery}
 				onChange={(e) => setSearchQuery(e.target.value)}
-				placeholder="Search champions..."
+				placeholder="Search..."
 			/>
 			<br />
 
-			{/* ------- Apply filter checkbox ------- */}
+			{/* ------- Disable filter checkbox ------- */}
 			{filteredChampions.length === champions.length
 				? ''
 				: <label>
 					<input
 						type="checkbox"
-						checked={disableFilter}
-						onChange={event => setDisableFilter(event.target.checked)}
+						checked={checkboxes.disableFilter}
+						onChange={toggleDisableFilter}
 					/>
 					Disable filter
 				</label>
@@ -86,8 +91,8 @@ function ChampionsPage() {
 				: <label>
 					<input
 						type="checkbox"
-						checked={includeBlacklist}
-						onChange={event => setIncludeBlacklist(event.target.checked)}
+						checked={checkboxes.includeBlacklist}
+						onChange={toggleIncludeBlacklist}
 					/>
 					Include blacklisted
 				</label>
