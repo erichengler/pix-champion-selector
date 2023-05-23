@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 
-function Checkboxes({ champions, filteredChampions, blacklist, checkboxToggle }) {
+function Checkboxes({ filteredChampions, blacklist, checkboxToggle }) {
 
     const dispatch = useDispatch();
 
@@ -15,7 +15,7 @@ function Checkboxes({ champions, filteredChampions, blacklist, checkboxToggle })
     return (
         <>
             {/* ------- Disable filter checkbox ------- */}
-            {filteredChampions.length === champions.length
+            {filteredChampions.length === 0
                 ? ''
                 : <label>
                     <input

@@ -11,39 +11,54 @@ function ChampionFilter() {
         dispatch({ type: 'FETCH_NOTES' });
     }, []);
 
-    const champions = useSelector(store => store.champions);
-    const notes = useSelector(store => store.notes);
-    const filter = useSelector(store => store.filter);
+    const { champions, notes, filter } = useSelector(state => state);
+
+    // ------- Calculate filtered champions -------
+    useEffect(() => {
+        const filteredChampions = champions.filter(champion => {
+
+            // ------- Filter by class -------
+            if (filter.class && champion.class !== filter.class) {
+                return false;
+            }
+    
+            // ------- Filter by region -------
+            if (filter.region && champion.region !== filter.region) {
+                return false;
+            }
+    
+            // ------- Filter by difficulty -------
+            if (
+                parseInt(champion.difficulty) < parseInt(filter.minDifficulty) ||
+                parseInt(champion.difficulty) > parseInt(filter.maxDifficulty)
+            ) {
+                return false;
+            }
+    
+            // ------- Filter by notes -------
+            if (filter.notes) {
+                const championNotes = notes.filter(note =>
+                    note.champion_id === champion.id);
+                const filteredNotes = championNotes.filter(note =>
+                    note.note.toLowerCase().includes(filter.notes.toLowerCase()));
+    
+                if (filteredNotes.length === 0) {
+                    return false;
+                }
+            }
+            return true;
+        });
+        dispatch({ type: 'SET_FILTERED_CHAMPIONS', payload: filteredChampions });
+    }, [filter]);
 
 
     // ------- Start of handleChange for filter form -------
-    const handleClassChange = (event) => {
-        const newFilter = { ...filter, class: event.target.value };
-        dispatch({ type: 'UPDATE_FILTER', payload: newFilter });
-        dispatch({ type: 'SET_FILTERED_CHAMPIONS', payload: filteredChampions });
+    const handleFilterChange = (property) => {
+        return (event) => {
+            const newFilter = { ...filter, [property]: event.target.value };
+            dispatch({ type: 'UPDATE_FILTER', payload: newFilter });
+        }
     }
-    const handleRegionChange = (event) => {
-        const newFilter = { ...filter, region: event.target.value };
-        dispatch({ type: 'UPDATE_FILTER', payload: newFilter });
-        dispatch({ type: 'SET_FILTERED_CHAMPIONS', payload: filteredChampions });
-    }
-    const handleMinDiffChange = (event) => {
-        const newFilter = { ...filter, minDifficulty: event.target.value };
-        dispatch({ type: 'UPDATE_FILTER', payload: newFilter });
-        dispatch({ type: 'SET_FILTERED_CHAMPIONS', payload: filteredChampions });
-    }
-    const handleMaxDiffChange = (event) => {
-        const newFilter = { ...filter, maxDifficulty: event.target.value };
-        dispatch({ type: 'UPDATE_FILTER', payload: newFilter });
-        dispatch({ type: 'SET_FILTERED_CHAMPIONS', payload: filteredChampions });
-    }
-    const handleNotesChange = (event) => {
-        const newFilter = { ...filter, notes: event.target.value };
-        dispatch({ type: 'UPDATE_FILTER', payload: newFilter });
-        dispatch({ type: 'SET_FILTERED_CHAMPIONS', payload: filteredChampions });
-    }
-    // ------- End of handleChange for filter form -------
-
 
     // --------- Reset user filters ---------
     const resetFilter = (event) => {
@@ -51,40 +66,6 @@ function ChampionFilter() {
         document.getElementById("filterForm").reset();
         dispatch({ type: 'RESET_FILTER' });
     }
-
-    const filteredChampions = champions.filter(champion => {
-
-        // ------- Filter by class -------
-        if (filter.class && champion.class !== filter.class) {
-            return false;
-        }
-
-        // ------- Filter by region -------
-        if (filter.region && champion.region !== filter.region) {
-            return false;
-        }
-
-        // ------- Filter by difficulty -------
-        if (
-            parseInt(champion.difficulty) < parseInt(filter.minDifficulty) ||
-            parseInt(champion.difficulty) > parseInt(filter.maxDifficulty)
-        ) {
-            return false;
-        }
-
-        // ------- Filter by notes -------
-        if (filter.notes) {
-            const championNotes = notes.filter(note =>
-                note.champion_id === champion.id);
-            const filteredNotes = championNotes.filter(note =>
-                note.note.toLowerCase().includes(filter.notes.toLowerCase()));
-
-            if (filteredNotes.length === 0) {
-                return false;
-            }
-        }
-        return true;
-    });
 
     return (
         <div className="container">
@@ -96,7 +77,7 @@ function ChampionFilter() {
                 <select
                     id="classFilter"
                     value={filter.class}
-                    onChange={handleClassChange}
+                    onChange={handleFilterChange('class')}
                 >
                     {/* ------- Class options ------- */}
                     <option value="">All Classes</option>
@@ -130,7 +111,7 @@ function ChampionFilter() {
                 <select
                     id="regionFilter"
                     value={filter.region}
-                    onChange={handleRegionChange}
+                    onChange={handleFilterChange('region')}
                 >
                     {/* ------- Region options ------- */}
                     <option value="">All Regions</option>
@@ -169,7 +150,7 @@ function ChampionFilter() {
                 <select
                     id="minDifficultyFilter"
                     value={filter.minDifficulty}
-                    onChange={handleMinDiffChange}
+                    onChange={handleFilterChange('minDifficulty')}
                 >
                     {/* ------- Difficulty options ------- */}
                     <option value="1">1</option>
@@ -189,7 +170,7 @@ function ChampionFilter() {
                 <select
                     id="maxDifficultyFilter"
                     value={filter.maxDifficulty}
-                    onChange={handleMaxDiffChange}
+                    onChange={handleFilterChange('maxDifficulty')}
                 >
                     {/* ------- Difficulty options ------- */}
                     <option value="1">1</option>
@@ -212,7 +193,7 @@ function ChampionFilter() {
                     id="notesFilter"
                     type="text"
                     value={filter.notes}
-                    onChange={handleNotesChange}
+                    onChange={handleFilterChange('notes')}
                 />
                 <br /><br />
 
@@ -221,7 +202,6 @@ function ChampionFilter() {
             </form>
         </div>
     )
-}
-;
+};
 
 export default ChampionFilter;
