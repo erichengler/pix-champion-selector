@@ -23,8 +23,6 @@ function FavoriteItem({ favorite, champions }) {
 
     let favChampion = champions[favorite.champion_id - 1];
 
-    console.log('hello')
-
     return (
         <div>
             {/* ------- Champion name, title ------- */}

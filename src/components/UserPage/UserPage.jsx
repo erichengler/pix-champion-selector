@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from "react-router-dom";
 
@@ -17,28 +17,47 @@ function UserPage() {
 	const user = useSelector(store => store.user);
 	const champions = useSelector(store => store.champions);
 	const notes = useSelector(store => store.notes);
+	const filter = useSelector(store => store.filter);
 	const checkboxToggle = useSelector(store => store.checkboxToggle);
 
-	// --------- Storing user filters ---------
-	let [filter, setFilter] = useState({
-		class: '',
-		region: '',
-		minDifficulty: '1',
-		maxDifficulty: '10',
-		notes: ''
-	});
+
+	// ------- Start of handleChange for filter form -------
+	const handleClassChange = (event) => {
+		const newFilter = {...filter, class: event.target.value};
+		dispatch(updateFilter(newFilter));
+	}
+	const handleRegionChange = (event) => {
+		const newFilter = {...filter, region: event.target.value};
+		dispatch(updateFilter(newFilter));
+	}
+	const handleMinDiffChange = (event) => {
+		const newFilter = {...filter, minDifficulty: event.target.value};
+		dispatch(updateFilter(newFilter));
+	}
+	const handleMaxDiffChange = (event) => {
+		const newFilter = {...filter, maxDifficulty: event.target.value};
+		dispatch(updateFilter(newFilter));
+	}
+	const handleNotesChange = (event) => {
+		const newFilter = {...filter, notes: event.target.value};
+		dispatch(updateFilter(newFilter));
+	}
+	// ------- End of handleChange for filter form -------
+
+
+	// ------- Update user filter -------
+	const updateFilter = (filter) => {
+		return {
+			type: 'UPDATE_FILTER',
+			payload: filter
+		}
+	}
 
 	// --------- Reset user filters ---------
 	const resetFilter = (event) => {
 		event.preventDefault();
 		document.getElementById("filterForm").reset();
-		setFilter({
-			class: '',
-			region: '',
-			minDifficulty: '1',
-			maxDifficulty: '10',
-			notes: ''
-		});
+		dispatch({ type: 'RESET_FILTER' });
 	}
 
 	// ------- Logic for user filters -------
@@ -51,7 +70,7 @@ function UserPage() {
 
 		// ------- Filtering champions -------
 		const filteredChampions = champions.filter(champion => {
-			
+
 			// ------- Filter by class -------
 			if (filter.class && champion.class !== filter.class) {
 				return false;
@@ -72,9 +91,9 @@ function UserPage() {
 
 			// ------- Filter by notes -------
 			if (filter.notes) {
-				const championNotes = notes.filter(note => 
+				const championNotes = notes.filter(note =>
 					note.champion_id === champion.id);
-				const filteredNotes = championNotes.filter(note => 
+				const filteredNotes = championNotes.filter(note =>
 					note.note.toLowerCase().includes(filter.notes.toLowerCase()));
 
 				if (filteredNotes.length === 0) {
@@ -86,8 +105,12 @@ function UserPage() {
 		});
 
 		console.log('Filtered List:', filteredChampions);
-		// Dispatch to 'SET_FILTERED_CHAMPIONS' using filter
+
+		// ------- Dispatch to set filtered champions -------
 		dispatch({ type: 'SET_FILTERED_CHAMPIONS', payload: filteredChampions });
+
+		// ------- Dispatch to update filter -------
+		dispatch({ type: 'UPDATE_FILTER', payload: filter })
 		history.push('/champions');
 	}
 
@@ -105,11 +128,10 @@ function UserPage() {
 
 				{/* ------- Filter by class ------- */}
 				By Class: &nbsp;
-				<select 
-					id="classFilter" 
-					onChange={(event) => setFilter(
-						{ ...filter, class: event.target.value }
-					)}
+				<select
+					id="classFilter"
+					value={filter.class}
+					onChange={handleClassChange}
 				>
 					{/* ------- Class options ------- */}
 					<option value="">All Classes</option>
@@ -140,11 +162,10 @@ function UserPage() {
 
 				{/* ------- Filter by region ------- */}
 				By Region: &nbsp;
-				<select 
+				<select
 					id="regionFilter"
-					onChange={(event) => setFilter(
-						{ ...filter, region: event.target.value }
-					)}
+					value={filter.region}
+					onChange={handleRegionChange}
 				>
 					{/* ------- Region options ------- */}
 					<option value="">All Regions</option>
@@ -180,11 +201,10 @@ function UserPage() {
 				From &nbsp;
 
 				{/* ------- Minimum difficulty ------- */}
-				<select 
+				<select
 					id="minDifficultyFilter"
-					onChange={(event) => setFilter(
-						{ ...filter, minDifficulty: event.target.value }
-					)}
+					value={filter.minDifficulty}
+					onChange={handleMinDiffChange}
 				>
 					{/* ------- Difficulty options ------- */}
 					<option value="1">1</option>
@@ -201,12 +221,10 @@ function UserPage() {
 				&nbsp; to &nbsp;
 
 				{/* ------- Maximum difficulty ------- */}
-				<select 
+				<select
 					id="maxDifficultyFilter"
-					defaultValue={10} 
-					onChange={(event) => setFilter(
-						{ ...filter, maxDifficulty: event.target.value }
-					)}
+					value={filter.maxDifficulty}
+					onChange={handleMaxDiffChange}
 				>
 					{/* ------- Difficulty options ------- */}
 					<option value="1">1</option>
@@ -225,12 +243,11 @@ function UserPage() {
 				{/* ------- Filter by notes ------- */}
 				By Notes:
 				<br />
-				<input 
+				<input
 					id="notesFilter"
-					type="text" 
-					onChange={(event) => setFilter(
-						{ ...filter, notes: event.target.value }
-					)}
+					type="text"
+					value={filter.notes}
+					onChange={handleNotesChange}
 				/>
 				<br /><br />
 

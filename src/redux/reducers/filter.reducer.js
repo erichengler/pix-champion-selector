@@ -7,14 +7,19 @@ const initialState = {
     notes: ''
 };
 
-// ------- Stores state of checkboxes -------
+// ------- Updates or resets state of user filter -------
 const filter = (state = initialState, action) => {
     switch (action.type) {
-        case 'SET_FILTER':
-            return action.payload;
+        case 'UPDATE_FILTER':
+            return {
+                ...state,
+                ...action.payload
+            };
+        case 'RESET_FILTER':
+            return initialState;
         default:
             return state;
     }
-}
+};
 
 export default filter;
