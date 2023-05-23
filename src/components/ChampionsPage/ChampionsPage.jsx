@@ -20,32 +20,42 @@ function ChampionsPage() {
 
 	// ------- Storing all champions, user notes, user filter,  -------
 	// ------- filteredChampions, user blacklist, and checkboxToggle -------
-	const { champions, notes, filter, filteredChampions, 
+	let { champions, notes, filter, filteredChampions,
 		blacklist, checkboxToggle } = useSelector(state => state);
 
 	// ------- State for search query -------
 	const [searchQuery, setSearchQuery] = useState('');
 
-	// ------- Start disable filter, include blacklist -------
-	const displayedChampions = checkboxToggle.disableFilter
-		? (checkboxToggle.includeBlacklist 
+	// ------- Checking if filter is empty -------
+	let emptyFilter;
+	if (filter.class === '' & filter.region === '' & filter.notes === ''
+		& filter.minDifficulty === '1' & filter.maxDifficulty === '10') {
+		emptyFilter = true;
+	} else {
+		emptyFilter = false;
+	}
+
+	// ------- If filter is empty, display all champions -------
+	if (emptyFilter === true) {
+		filteredChampions = champions
+	}
+
+	// ------- Start disable filter, include blacklist logic -------
+	const modifiedChampions = checkboxToggle.disableFilter
+		? checkboxToggle.includeBlacklist
 			? champions
-			: champions.filter(champion => {
-				return !blacklist.some(
-					blacklisted => blacklisted.champion_id === champion.id
-				);
-			}))
-		: (checkboxToggle.includeBlacklist 
+			: champions.filter(champion => !blacklist.some(
+				blacklisted => blacklisted.champion_id === champion.id
+			))
+		: checkboxToggle.includeBlacklist
 			? filteredChampions
-			: filteredChampions.filter(champion => {
-				return !blacklist.some(
-					blacklisted => blacklisted.champion_id === champion.id
-				);
-			}));
-	// ------- End disable filter, include blacklist -------
+			: filteredChampions.filter(champion => !blacklist.some(
+				blacklisted => blacklisted.champion_id === champion.id
+			));
+	// ------- End disable filter, include blacklist logic -------
 
 	// ------- Filter champions using search query -------
-	const filteredBySearch = displayedChampions.filter((champion) =>
+	const displayedChampions = modifiedChampions.filter((champion) =>
 		champion.name.toLowerCase().includes(searchQuery.toLowerCase())
 	);
 
@@ -56,14 +66,17 @@ function ChampionsPage() {
 
 	return (
 		<div className="container">
+
+			{/* ------- User filter ------- */}
 			<h2>Filter</h2>
-			<ChampionFilter 
+			<ChampionFilter
 				champions={champions}
 				notes={notes}
 				filter={filter}
 			/>
 			<br /><br />
 
+			{/* ------- List of champions ------- */}
 			<h2>Champions</h2>
 
 			{/* ------- Search by name ------- */}
@@ -76,18 +89,18 @@ function ChampionsPage() {
 			<br />
 
 			{/* ------- Disable filter, include blacklist ------- */}
-			<Checkboxes 
-				filter={filter}
+			<Checkboxes
+				emptyFilter={emptyFilter}
 				blacklist={blacklist}
 				checkboxToggle={checkboxToggle}
 			/>
 
 			{/* ------- Maps through champions ------- */}
 			{
-				filteredBySearch.map((champion) => (
+				displayedChampions.map((champion) => (
 					<ChampionItem
 						key={champion.id}
-						champion={champion} 
+						champion={champion}
 					/>
 				))
 			}

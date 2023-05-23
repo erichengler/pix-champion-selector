@@ -17,6 +17,11 @@ const checkboxToggle = (state = initialState, action) => {
                 ...state,
                 disableFilter: !state.disableFilter
             };
+        case 'RESET_FILTER':
+            return {
+                ...state,
+                disableFilter: false
+            }
         default:
             return state;
     }
