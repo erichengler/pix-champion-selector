@@ -1,4 +1,4 @@
-// ------- Stores blacklist from server -------
+// ------- Stores user's blacklist from server -------
 const blacklist = (state = [], action) => {
     switch (action.type) {
         case 'SET_BLACKLIST':

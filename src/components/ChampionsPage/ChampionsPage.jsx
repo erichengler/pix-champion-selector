@@ -28,13 +28,15 @@ function ChampionsPage() {
 
 	// ------- Start disable filter, include blacklist -------
 	const displayedChampions = checkboxToggle.disableFilter
-		? (checkboxToggle.includeBlacklist ? champions
+		? (checkboxToggle.includeBlacklist 
+			? champions
 			: champions.filter(champion => {
 				return !blacklist.some(
 					blacklisted => blacklisted.champion_id === champion.id
 				);
 			}))
-		: (checkboxToggle.includeBlacklist ? filteredChampions
+		: (checkboxToggle.includeBlacklist 
+			? filteredChampions
 			: filteredChampions.filter(champion => {
 				return !blacklist.some(
 					blacklisted => blacklisted.champion_id === champion.id
