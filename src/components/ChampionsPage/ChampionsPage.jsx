@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
+import ChampionFilter from '../ChampionFilter/ChampionFilter';
 import ChampionItem from '../ChampionItem/ChampionItem';
 import Checkboxes from '../Checkboxes/Checkboxes';
 import RollButton from '../RollButton/RollButton';
@@ -56,6 +57,10 @@ function ChampionsPage() {
 
 	return (
 		<div className="container">
+			<h2>Filter</h2>
+			<ChampionFilter />
+			<br /><br />
+
 			<h2>Champions</h2>
 
 			{/* ------- Search by name ------- */}
