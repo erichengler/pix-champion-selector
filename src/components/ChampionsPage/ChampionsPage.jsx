@@ -68,7 +68,6 @@ function ChampionsPage() {
 		<div className="container">
 
 			{/* ------- User filter ------- */}
-			<h2>Filter</h2>
 			<ChampionFilter
 				champions={champions}
 				notes={notes}
@@ -77,7 +76,6 @@ function ChampionsPage() {
 			<br /><br />
 
 			{/* ------- List of champions ------- */}
-			<h2>Champions</h2>
 
 			{/* ------- Search by name ------- */}
 			<input
@@ -104,7 +102,7 @@ function ChampionsPage() {
 					/>
 				))
 			}
-			<br /><br /><br />
+			<br /><br />
 
 			{/* ------- Back to home button ------- */}
 			<button onClick={backToHome}>Back</button>

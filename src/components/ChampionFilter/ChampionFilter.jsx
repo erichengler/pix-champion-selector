@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import './ChampionFilter.css'
 
 function ChampionFilter({ champions, notes, filter }) {
 
@@ -19,12 +20,12 @@ function ChampionFilter({ champions, notes, filter }) {
             if (filter.class && champion.class !== filter.class) {
                 return false;
             }
-    
+
             // ------- Filter by region -------
             if (filter.region && champion.region !== filter.region) {
                 return false;
             }
-    
+
             // ------- Filter by difficulty -------
             if (
                 parseInt(champion.difficulty) < parseInt(filter.minDifficulty) ||
@@ -32,14 +33,14 @@ function ChampionFilter({ champions, notes, filter }) {
             ) {
                 return false;
             }
-    
+
             // ------- Filter by notes -------
             if (filter.notes) {
                 const championNotes = notes.filter(note =>
                     note.champion_id === champion.id);
                 const filteredNotes = championNotes.filter(note =>
                     note.note.toLowerCase().includes(filter.notes.toLowerCase()));
-    
+
                 if (filteredNotes.length === 0) {
                     return false;
                 }
@@ -68,10 +69,17 @@ function ChampionFilter({ champions, notes, filter }) {
     return (
         <div className="container">
             {/* ------- Champions filter ------- */}
-            <form id='filterForm'>
 
                 {/* ------- Filter by class ------- */}
-                By Class: &nbsp;
+                <span className="info-text">
+                    <a
+                        href="https://leagueoflegends.fandom.com/wiki/Champion_classes"
+                        target="_blank"
+                    >
+                        Class
+                    </a>
+                </span>
+                : &nbsp;
                 <select
                     id="classFilter"
                     value={filter.class}
@@ -93,19 +101,18 @@ function ChampionFilter({ champions, notes, filter }) {
                     <option value="Warden">Warden</option>
                     <option value="Specialist">Specialist</option>
                 </select>
-                <br />
-
-                {/* ------- Link to classes info ------- */}
-                <a
-                    href="https://leagueoflegends.fandom.com/wiki/Champion_classes"
-                    target="_blank"
-                >
-                    Read about classes
-                </a>
                 <br /><br />
 
                 {/* ------- Filter by region ------- */}
-                By Region: &nbsp;
+                <span className="info-text">
+                    <a
+                        href="https://universe.leagueoflegends.com/en_US/regions"
+                        target="_blank"
+                    >
+                        Region
+                    </a>
+                </span>
+                : &nbsp;
                 <select
                     id="regionFilter"
                     value={filter.region}
@@ -128,21 +135,10 @@ function ChampionFilter({ champions, notes, filter }) {
                     <option value="Zaun">Zaun</option>
                     <option value="Runeterra">Runeterra</option>
                 </select>
-                <br />
-
-                {/* ------- Link to regions info ------- */}
-                <a
-                    href="https://universe.leagueoflegends.com/en_US/regions"
-                    target="_blank"
-                >
-                    Read about regions
-                </a>
                 <br /><br />
 
                 {/* ------- Filter by difficulty ------- */}
-                By Difficulty:
-                <br />
-                From &nbsp;
+                Difficulty: &nbsp;
 
                 {/* ------- Minimum difficulty ------- */}
                 <select
@@ -185,8 +181,7 @@ function ChampionFilter({ champions, notes, filter }) {
                 <br /><br />
 
                 {/* ------- Filter by notes ------- */}
-                By Notes:
-                <br />
+                Notes:&nbsp;
                 <input
                     id="notesFilter"
                     type="text"
@@ -197,7 +192,6 @@ function ChampionFilter({ champions, notes, filter }) {
 
                 {/* ------- Buttons ------- */}
                 <button onClick={resetFilter}>Reset</button> &nbsp;
-            </form>
         </div>
     )
 };
