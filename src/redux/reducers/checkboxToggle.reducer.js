@@ -1,4 +1,4 @@
-// ------- Initial state of checkboxes -------
+// ------- Initial state -------
 const initialState = {
     includeBlacklist: false,
     disableFilter: false,

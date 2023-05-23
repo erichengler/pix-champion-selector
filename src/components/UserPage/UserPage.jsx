@@ -111,6 +111,7 @@ function UserPage() {
 						{ ...filter, class: event.target.value }
 					)}
 				>
+					{/* ------- Class options ------- */}
 					<option value="">All Classes</option>
 					<option value="Enchanter">Enchanter</option>
 					<option value="Catcher">Catcher</option>
@@ -145,6 +146,7 @@ function UserPage() {
 						{ ...filter, region: event.target.value }
 					)}
 				>
+					{/* ------- Region options ------- */}
 					<option value="">All Regions</option>
 					<option value="Bandle City">Bandle City</option>
 					<option value="Bilgewater">Bilgewater</option>
@@ -184,6 +186,7 @@ function UserPage() {
 						{ ...filter, minDifficulty: event.target.value }
 					)}
 				>
+					{/* ------- Difficulty options ------- */}
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
@@ -205,6 +208,7 @@ function UserPage() {
 						{ ...filter, maxDifficulty: event.target.value }
 					)}
 				>
+					{/* ------- Difficulty options ------- */}
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
