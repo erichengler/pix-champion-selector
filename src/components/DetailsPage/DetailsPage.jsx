@@ -15,6 +15,7 @@ function DetailsPage() {
     // ------- Fetch this champion, favorites and blacklist -------
     useEffect(() => {
         dispatch({ type: 'FETCH_THIS_CHAMPION', payload: id });
+        dispatch({ type: 'FETCH_FAVORITES' });
     }, []);
 
     // ------- Storing this champion, favorites and blacklist -------

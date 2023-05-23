@@ -14,7 +14,6 @@ function ChampionsPage() {
 	// ------- Fetch champions, filtered champions, blacklist -------
 	useEffect(() => {
 		dispatch({ type: 'FETCH_CHAMPIONS' });
-		dispatch({ type: 'FETCH_FILTERED_CHAMPIONS' });
 		dispatch({ type: 'FETCH_BLACKLIST' });
 	}, []);
 
