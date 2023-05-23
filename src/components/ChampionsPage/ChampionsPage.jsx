@@ -18,11 +18,10 @@ function ChampionsPage() {
 		dispatch({ type: 'FETCH_BLACKLIST' });
 	}, []);
 
-	// ------- Storing champions, filteredChampions, blacklist, checkboxes -------
-	const champions = useSelector(store => store.champions);
-	const filteredChampions = useSelector(store => store.filteredChampions);
-	const blacklist = useSelector(store => store.blacklist);
-	const checkboxToggle = useSelector(store => store.checkboxToggle);
+	// ------- Storing all champions, user notes, user filter,  -------
+	// ------- filteredChampions, user blacklist, and checkboxToggle -------
+	const { champions, notes, filter, filteredChampions, 
+		blacklist, checkboxToggle } = useSelector(state => state);
 
 	// ------- State for search query -------
 	const [searchQuery, setSearchQuery] = useState('');
@@ -58,7 +57,11 @@ function ChampionsPage() {
 	return (
 		<div className="container">
 			<h2>Filter</h2>
-			<ChampionFilter />
+			<ChampionFilter 
+				champions={champions}
+				notes={notes}
+				filter={filter}
+			/>
 			<br /><br />
 
 			<h2>Champions</h2>
@@ -74,8 +77,7 @@ function ChampionsPage() {
 
 			{/* ------- Disable filter, include blacklist ------- */}
 			<Checkboxes 
-				champions={champions}
-				filteredChampions={filteredChampions}
+				filter={filter}
 				blacklist={blacklist}
 				checkboxToggle={checkboxToggle}
 			/>

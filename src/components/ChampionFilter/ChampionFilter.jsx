@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-function ChampionFilter() {
+function ChampionFilter({ champions, notes, filter }) {
 
     const dispatch = useDispatch();
 
@@ -10,8 +10,6 @@ function ChampionFilter() {
         dispatch({ type: 'FETCH_CHAMPIONS' });
         dispatch({ type: 'FETCH_NOTES' });
     }, []);
-
-    const { champions, notes, filter } = useSelector(state => state);
 
     // ------- Calculate filtered champions -------
     useEffect(() => {
