@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import ChampionFilter from '../ChampionFilter/ChampionFilter';
-import ChampionItem from '../ChampionItem/ChampionItem';
-import Checkboxes from '../Checkboxes/Checkboxes';
-import RollButton from '../RollButton/RollButton';
+import ChampionFilter from './ChampionFilter/ChampionFilter';
+import ChampionItem from './ChampionItem/ChampionItem';
+import DisableFilter from '../../Checkboxes/DisableFilter';
+import IncludeBlacklist from '../../Checkboxes/IncludeBlacklist';
+import RollButton from '../../Buttons/RollButton';
 
 function ChampionsPage() {
 
@@ -87,11 +88,16 @@ function ChampionsPage() {
 			<br />
 
 			{/* ------- Disable filter, include blacklist ------- */}
-			<Checkboxes
+			<DisableFilter 
 				emptyFilter={emptyFilter}
+				checkboxToggle={checkboxToggle}
+			/>
+
+			<IncludeBlacklist 
 				blacklist={blacklist}
 				checkboxToggle={checkboxToggle}
 			/>
+			<br />
 
 			{/* ------- Maps through champions ------- */}
 			{

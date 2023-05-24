@@ -2,9 +2,9 @@ import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from 'react';
 
-import FavoriteButton from "../FavoriteButton/FavoriteButton";
-import NotesButton from "../NotesButton/NotesButton";
-import BlacklistButton from "../BlacklistButton/BlacklistButton";
+import FavoriteButton from "../Buttons/FavoriteButton";
+import NotesButton from "../Buttons/NotesButton";
+import BlacklistButton from "../Buttons/BlacklistButton";
 
 function DetailsPage() {
 

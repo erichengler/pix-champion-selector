@@ -13,14 +13,14 @@ import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
-import AboutPage from '../AboutPage/AboutPage';
-import UserPage from '../UserPage/UserPage';
-import LoginPage from '../Login/LoginPage/LoginPage';
-import RegisterPage from '../Register/RegisterPage/RegisterPage';
-import ChampionsPage from '../ChampionsPage/ChampionsPage';
-import FavoritesPage from '../FavoritesPage/FavoritesPage';
-import DetailsPage from '../DetailsPage/DetailsPage';
-import ResultPage from '../ResultPage/ResultPage';
+import AboutPage from '../Pages/AboutPage';
+import UserPage from '../Pages/UserPage';
+import LoginPage from '../Pages/LoginPage/LoginPage';
+import RegisterPage from '../Pages/RegisterPage/RegisterPage';
+import ChampionsPage from '../Pages/ChampionsPage/ChampionsPage';
+import FavoritesPage from '../Pages/FavoritesPage/FavoritesPage';
+import DetailsPage from '../Pages/DetailsPage';
+import ResultPage from '../Pages/ResultPage';
 
 import './App.css';
 

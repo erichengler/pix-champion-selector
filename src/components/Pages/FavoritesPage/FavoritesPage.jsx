@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import FavoriteItem from '../FavoriteItem/FavoriteItem';
-import RollButton from '../RollButton/RollButton';
+import FavoriteItem from './FavoriteItem';
+import RollButton from '../../Buttons/RollButton';
 
 function FavoritesPage() {
 
@@ -24,6 +24,8 @@ function FavoritesPage() {
     const backToHome = () => {
         history.push('/');
     }
+
+    console.log(favorites);
 
     return (
         <div>

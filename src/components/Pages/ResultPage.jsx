@@ -2,10 +2,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
 
-import FavoriteButton from '../FavoriteButton/FavoriteButton';
-import NotesButton from '../NotesButton/NotesButton'
-import BlacklistButton from '../BlacklistButton/BlacklistButton';
-import RollButton from '../RollButton/RollButton';
+import FavoriteButton from '../Buttons/FavoriteButton';
+import NotesButton from '../Buttons/NotesButton'
+import BlacklistButton from '../Buttons/BlacklistButton';
+import RollButton from '../Buttons/RollButton';
 
 function ResultPage() {
 
@@ -20,8 +20,7 @@ function ResultPage() {
 
     // ------- Storing result, champions, this -------
     // ------- champion, blacklist, and favorites -------
-    const result = useSelector(store => store.result);
-    const champions = useSelector(store => store.champions);
+    const { result, champions } = useSelector(state => state);
 
     // ------- Brings user back to UserPage -------
     const backToHome = () => {

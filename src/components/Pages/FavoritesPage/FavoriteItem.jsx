@@ -1,7 +1,7 @@
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import NotesButton from '../NotesButton/NotesButton';
+import NotesButton from '../../Buttons/NotesButton';
 
 function FavoriteItem({ favorite, champions }) {
 

@@ -11,9 +11,11 @@ function RollButton({ favorites, championPool, result }) {
     // ------- Picks a random result from either -------
     // ------- filtered filteredChampions or favorites -------
     const roll = () => {
-        if (championPool.length === 0) {
-            alert('Cannot roll from an empty pool of champions!');
-            return;
+        if (championPool != undefined) {
+            if (championPool.length === 0) {
+                alert('Cannot roll from an empty pool of champions!');
+                return;
+            }
         }
 
         console.log(favorites === undefined ?
