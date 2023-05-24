@@ -5,6 +5,22 @@ const {
     rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
 
+// ------- Post champion info from jsons to database -------
+router.post('/', rejectUnauthenticated, (req, res) => {
+    const queryText = `
+        INSERT INTO champions ("name", "title", "difficulty", "lore")
+        VALUES ($1, $2, $3, $4)`
+    pool.query(queryText, [req.body.name, req.body.title,
+    req.body.info.difficulty, req.body.lore])
+        .then(result => {
+            res.sendStatus(201);
+        })
+        .catch(error => {
+            console.log('ERROR in GET all champions:', error);
+            res.sendStatus(500);
+        })
+});
+
 // ------- GET all champions -------
 router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('In GET all champions');

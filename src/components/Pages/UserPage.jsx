@@ -1,9 +1,15 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { useEffect } from 'react';
 
 function UserPage() {
 
 	const history = useHistory();
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch({ type: 'FETCH_CHAMPION_INFO' });
+	}, []);
 
 	// --------- Storing user data ---------
 	const user = useSelector(store => store.user);

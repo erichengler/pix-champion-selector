@@ -15,7 +15,6 @@ function Nav() {
 	// ------- Logs out user -------
 	const handleLogout = () => {
 		dispatch({ type: 'LOGOUT' });
-		history.push('/');
 	}
 
 	return (

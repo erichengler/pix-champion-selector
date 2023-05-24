@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import ChampionFilter from './ChampionFilter/ChampionFilter';
@@ -11,7 +10,6 @@ import RollButton from '../../Buttons/RollButton';
 function ChampionsPage() {
 
 	const dispatch = useDispatch();
-	const history = useHistory();
 
 	// ------- Fetch champions, filtered champions, blacklist -------
 	useEffect(() => {

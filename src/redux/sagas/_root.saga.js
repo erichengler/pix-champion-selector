@@ -6,6 +6,7 @@ import championSaga from './champion.saga';
 import favoriteSaga from './favorite.saga';
 import noteSaga from './note.saga';
 import blacklistSaga from './blacklist.saga';
+import championInfoSaga from './championInfo.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -23,5 +24,6 @@ export default function* rootSaga() {
     favoriteSaga(),
     noteSaga(),
     blacklistSaga(),
+    championInfoSaga(),
   ]);
 }
