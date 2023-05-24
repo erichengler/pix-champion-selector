@@ -82,7 +82,7 @@ function ChampionsPage() {
 				type="text"
 				value={searchQuery}
 				onChange={(e) => setSearchQuery(e.target.value)}
-				placeholder="Search..."
+				placeholder="Search by name..."
 			/>
 			<br />
 
@@ -110,7 +110,7 @@ function ChampionsPage() {
 
 			{/* ------- Roll button ------- */}
 			<RollButton
-				filteredChampions={displayedChampions}
+				championPool={modifiedChampions}
 			/>
 		</div>
 	);

@@ -13,6 +13,7 @@ function ChampionFilter({ champions, notes, filter }) {
     }, []);
 
     // ------- Calculate filtered champions -------
+    // ------- Triggers any time filter changes -------
     useEffect(() => {
         const filteredChampions = champions.filter(champion => {
 
@@ -67,9 +68,11 @@ function ChampionFilter({ champions, notes, filter }) {
     }
 
     return (
-        <div className="container">
+        <div>
             {/* ------- Champions filter ------- */}
+            <h2>Filter</h2>
 
+            <form id='filterForm'>
                 {/* ------- Filter by class ------- */}
                 <span className="info-text">
                     <a
@@ -192,6 +195,7 @@ function ChampionFilter({ champions, notes, filter }) {
 
                 {/* ------- Buttons ------- */}
                 <button onClick={resetFilter}>Reset</button> &nbsp;
+            </form>
         </div>
     )
 };

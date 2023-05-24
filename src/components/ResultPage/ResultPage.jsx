@@ -14,41 +14,45 @@ function ResultPage() {
 
     // ------- Fetch champions, this champion, -------
     // ------- blacklist and favorites -------
-	useEffect(() => {
-		dispatch({ type: 'FETCH_CHAMPIONS' });
-	}, []);
+    useEffect(() => {
+        dispatch({ type: 'FETCH_CHAMPIONS' });
+    }, []);
 
     // ------- Storing result, champions, this -------
     // ------- champion, blacklist, and favorites -------
     const result = useSelector(store => store.result);
-	const champions = useSelector(store => store.champions);
+    const champions = useSelector(store => store.champions);
 
     // ------- Brings user back to UserPage -------
-	const backToHome = () => {
-		history.push('/');
-	}
+    const backToHome = () => {
+        history.push('/');
+    }
 
-	return (
-		<div className="container">
-            <p>Pix thinks you should play...</p>
+    return (
+        <div className="container">
+            <p>This game, Pix thinks you should play...</p>
+            <img
+                src="images/pix-small.png"
+                style={{ width: '300px' }}
+            />
 
             {/* Random result name */}
             <h2>{result.champion.name}</h2>
 
-            <FavoriteButton 
+            <FavoriteButton
                 result={result}
             />  &nbsp;
 
-            <NotesButton 
+            <NotesButton
                 result={result}
             />  &nbsp;
 
-            <BlacklistButton 
+            <BlacklistButton
                 result={result}
             />
 
             {/* Random result image */}
-            <img src={result.champion.image} style={{width: '700px'}} />
+            <img src={result.champion.image} style={{ width: '700px' }} />
             <br /><br />
 
             {/* Back to Home Button */}
@@ -56,12 +60,12 @@ function ResultPage() {
             &nbsp; &nbsp;
 
             {/* Reroll Button */}
-            <RollButton 
+            <RollButton
                 result={result}
                 champions={champions}
             />
-		</div>
-	);
+        </div>
+    );
 }
 
 export default ResultPage;

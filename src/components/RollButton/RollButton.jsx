@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-function RollButton({ favorites, filteredChampions, result }) {
+function RollButton({ favorites, championPool, result }) {
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -11,22 +11,27 @@ function RollButton({ favorites, filteredChampions, result }) {
     // ------- Picks a random result from either -------
     // ------- filtered filteredChampions or favorites -------
     const roll = () => {
+        if (championPool.length === 0) {
+            alert('Cannot roll from an empty pool of champions!');
+            return;
+        }
+
         console.log(favorites === undefined ?
             'Rolling from filtered champions' : 'Rolling from favorites');
         const random = Math.floor(Math.random()
             * (favorites === undefined
-                ? filteredChampions.length
+                ? championPool.length
                 : favorites.length)
         );
         dispatch({
             type: 'SET_RESULT',
             payload: {
                 champion: (favorites === undefined 
-                    ? filteredChampions[random]
+                    ? championPool[random]
                     : champions[favorites[random].champion_id - 1]
                 ),
                 rerollPool: (favorites === undefined 
-                    ? filteredChampions 
+                    ? championPool 
                     : favorites
                 )
             }

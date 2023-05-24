@@ -2,10 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Nav.css';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 function Nav() {
 
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	// ------- Storing user information -------
 	const user = useSelector((store) => store.user);
@@ -13,6 +15,7 @@ function Nav() {
 	// ------- Logs out user -------
 	const handleLogout = () => {
 		dispatch({ type: 'LOGOUT' });
+		history.push('/');
 	}
 
 	return (
