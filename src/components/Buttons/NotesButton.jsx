@@ -184,6 +184,6 @@ function NotesButton({ champion, favorite, name, result }) {
                 </Box>
             </Modal>
         </>
-    )
+    );
 }
 export default NotesButton;

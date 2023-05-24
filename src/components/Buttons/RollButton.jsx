@@ -66,7 +66,7 @@ function RollButton({ favorites, championPool, result }) {
                 {result == undefined ? 'Roll' : 'Reroll'}
             </button>
         </>
-    )
+    );
 }
 
 export default RollButton;

@@ -20,12 +20,14 @@ function UserPage() {
 			<center>
 				<h2>Welcome, {user.username}!</h2>		
 				<img 
-					src="images/pix-full.png" 
-					style={{ width: '900px', border: '1px solid black', cursor: 'pointer' }}
+					src="images/pix-small.png" 
+					style={{ width: '500px', cursor: 'pointer' }}
 					onClick={toChampionsPage}
 				/>
 				<br /><br />
-				<span>Click the image of Pix to get help deciding what champion to play.</span>
+				<span>Pix has arrived, and is here to assist you with champion select!</span>
+				<br /><br />
+				<span>Click on Pix to begin.</span>
 			</center>			
 		</div>
 	);

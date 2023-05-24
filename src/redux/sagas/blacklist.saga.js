@@ -6,7 +6,6 @@ function* fetchBlacklist() {
     try {
         const blacklist = yield axios.get(
             '/api/champion/blacklist');
-        console.log('Get blacklist:', blacklist.data);
         yield put({
             type: 'SET_BLACKLIST',
             payload: blacklist.data

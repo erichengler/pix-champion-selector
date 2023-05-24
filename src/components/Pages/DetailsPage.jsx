@@ -1,15 +1,15 @@
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from 'react';
 
 import FavoriteButton from "../Buttons/FavoriteButton";
 import NotesButton from "../Buttons/NotesButton";
 import BlacklistButton from "../Buttons/BlacklistButton";
+import BackButton from "../Buttons/BackButton";
 
 function DetailsPage() {
 
     let { id } = useParams();
-    const history = useHistory();
     const dispatch = useDispatch();
 
     // ------- Fetch this champion, favorites and blacklist -------
@@ -20,11 +20,6 @@ function DetailsPage() {
 
     // ------- Storing this champion, favorites and blacklist -------
     const champion = useSelector(store => store.thisChampion);
-
-    // ------- Brings user back to Champion List -------
-    const backToList = () => {
-        history.push('/champions');
-    }
 
     return (
         <div>
@@ -82,7 +77,7 @@ function DetailsPage() {
                     <br /><br />
 
                     {/* ------- Back button ------- */}
-                    <button onClick={backToList}>Back</button>
+                    <BackButton />
                 </div>
             )}
         </div>

@@ -8,7 +8,6 @@ import RollButton from '../../Buttons/RollButton';
 function FavoritesPage() {
 
     const dispatch = useDispatch();
-    const history = useHistory();
 
     // ------- Fetch champions and favorites -------
     useEffect(() => {
@@ -19,13 +18,6 @@ function FavoritesPage() {
     // Storing champions, favorites
     const champions = useSelector(store => store.champions);
     const favorites = useSelector(store => store.favorites);
-
-    // ------- Brings user back to Home -------
-    const backToHome = () => {
-        history.push('/');
-    }
-
-    console.log(favorites);
 
     return (
         <div>
@@ -57,9 +49,6 @@ function FavoritesPage() {
                                 />
                             ))
                         }
-                        {/* ------- Back to home button ------- */}
-                        <button onClick={backToHome}>Back</button>
-                        &nbsp; &nbsp;
 
                         {/* ------- Roll button ------- */}
                         <RollButton

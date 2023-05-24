@@ -45,7 +45,7 @@ function BlacklistButton({ id, result }) {
             </button> &nbsp; &nbsp;
             <br />
         </>
-    )
+    );
 }
 
 export default BlacklistButton;

@@ -44,7 +44,7 @@ function FavoriteButton({ id, result }) {
                 {isFavorite ? 'Unfavorite' : 'Favorite'}
             </button>
         </>
-    )
+    );
 }
 
 export default FavoriteButton;

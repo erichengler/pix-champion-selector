@@ -6,6 +6,7 @@ import FavoriteButton from '../Buttons/FavoriteButton';
 import NotesButton from '../Buttons/NotesButton'
 import BlacklistButton from '../Buttons/BlacklistButton';
 import RollButton from '../Buttons/RollButton';
+import BackButton from '../Buttons/BackButton';
 
 function ResultPage() {
 
@@ -54,11 +55,10 @@ function ResultPage() {
             <img src={result.champion.image} style={{ width: '700px' }} />
             <br /><br />
 
-            {/* Back to Home Button */}
-            <button onClick={backToHome}>Back</button>
-            &nbsp; &nbsp;
+            {/* Back button */}
+            <BackButton />
 
-            {/* Reroll Button */}
+            {/* Reroll button */}
             <RollButton
                 result={result}
                 champions={champions}

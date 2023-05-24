@@ -34,7 +34,7 @@ function AboutPage() {
 				<ul>
 					<li>
 						Instead of providing external links to information about Classes
-						and Regions, include an `information` page that displays this info.
+						and Regions, include an information page that displays this info.
 					</li>
 					<br />
 					<li>

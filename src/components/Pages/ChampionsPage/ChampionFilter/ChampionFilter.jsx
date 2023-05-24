@@ -197,7 +197,7 @@ function ChampionFilter({ champions, notes, filter }) {
                 <button onClick={resetFilter}>Reset</button> &nbsp;
             </form>
         </div>
-    )
-};
+    );
+}
 
 export default ChampionFilter;

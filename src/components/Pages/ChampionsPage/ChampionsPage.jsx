@@ -60,11 +60,6 @@ function ChampionsPage() {
 		champion.name.toLowerCase().includes(searchQuery.toLowerCase())
 	);
 
-	// ------- Brings user back to Home -------
-	const backToHome = () => {
-		history.push('/');
-	}
-
 	return (
 		<div className="container">
 
@@ -109,10 +104,6 @@ function ChampionsPage() {
 				))
 			}
 			<br /><br />
-
-			{/* ------- Back to home button ------- */}
-			<button onClick={backToHome}>Back</button>
-			&nbsp; &nbsp;
 
 			{/* ------- Roll button ------- */}
 			<RollButton
