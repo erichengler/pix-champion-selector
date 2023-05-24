@@ -7,12 +7,17 @@ const {
 
 // ------- Post champion info from jsons to database -------
 router.post('/', rejectUnauthenticated, (req, res) => {
+    const info = req.body.info
+    const images = req.body.images
+
     const queryText = `
-        INSERT INTO champions ("name", "title", "difficulty", "lore")
-        VALUES ($1, $2, $3, $4)`
-    pool.query(queryText, [req.body.name, req.body.title,
-    req.body.info.difficulty, req.body.lore])
+        INSERT INTO champions ("name", "title", "difficulty", "lore",
+            "imageSplash", "imageTile", "imageSmall")
+        VALUES ($1, $2, $3, $4, $5, $6, $7)`
+    pool.query(queryText, [info.name, info.title, info.info.difficulty, 
+        info.lore, images.splash, images.tile, images.small])
         .then(result => {
+            // Put querytext and pool to add region and class here (looong)
             res.sendStatus(201);
         })
         .catch(error => {
@@ -27,7 +32,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     // ------- Query to get all champions -------
     const queryText = `
         SELECT * FROM champions 
-        ORDER BY name ASC;`;
+        ORDER BY id ASC;`;
     pool.query(queryText)
         .then(result => {
             res.send(result.rows);

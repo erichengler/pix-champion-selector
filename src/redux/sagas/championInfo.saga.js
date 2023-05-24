@@ -26,14 +26,18 @@ function* fetchChampionInfo() {
 const version = '12.6.1';
 const processedChampions = [];
 
-function* fetchInfoByName(fetchedname) {
+function* fetchInfoByName(fetchedName) {
     try {
-        const response = yield call(
+        const info = yield call(
             axios.get,
-            `https://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/champion/${fetchedname}.json`
+            `https://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/champion/${fetchedName}.json`
         );
-        const championName = Object.keys(response.data.data)[0];
-        const champion = response.data.data[championName]
+        const championName = Object.keys(info.data.data)[0];
+        const championInfo = info.data.data[championName]
+
+        const imageSplash = `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${fetchedName}_0.jpg`
+        const imageTile = `https://ddragon.leagueoflegends.com/cdn/img/champion/tiles/${fetchedName}_0.jpg`
+        const imageSmall = `https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${fetchedName}.png`
 
         if (processedChampions.includes(championName)) {
             return;
@@ -41,15 +45,22 @@ function* fetchInfoByName(fetchedname) {
 
         processedChampions.push(championName);
 
-        yield call(postChampionInfo, champion);
+        yield call(postChampionInfo, {
+            info: championInfo, 
+            images: {
+                splash: imageSplash,
+                tile: imageTile,
+                small: imageSmall,
+            }
+        });
     } catch (error) {
         console.log('Error in fetchInfoByName generator:', error);
     }
 }
 
-function* postChampionInfo(info) {
+function* postChampionInfo(data) {
     try {
-        yield call(axios.post, '/api/champion', info);
+        yield call(axios.post, '/api/champion', data);
     } catch (error) {
         console.error('Failed to post champion details:', error);
     }

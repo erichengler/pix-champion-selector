@@ -54,8 +54,8 @@ function FavoriteItem({ favorite, champions }) {
 
             {/* ------- Matching champion image ------- */}
             <img
-                src={favChampion.image}
-                style={{ width: '400px' }}
+                src={favChampion.imageTile}
+                style={{ width: '250px' }}
             />
             <br /><br /><br />
         </div>

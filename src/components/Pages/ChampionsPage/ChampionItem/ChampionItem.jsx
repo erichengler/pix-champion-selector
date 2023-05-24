@@ -15,7 +15,7 @@ function ChampionItem({ champion }) {
             {/* ------- Champion portraits ------- */}
             <img
                 key={champion.id}
-                src={champion.portrait}
+                src={champion.imageSmall}
                 alt={champion.name}
                 style={{ padding: '5px', cursor: 'pointer' }}
                 onClick={toDetails}             

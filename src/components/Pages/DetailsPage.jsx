@@ -55,8 +55,8 @@ function DetailsPage() {
 
                     {/* ------- Champion image ------- */}
                     <img
-                        src={champion[0].image}
-                        style={{ width: '500px', border: '1px solid black' }}
+                        src={champion[0].imageSplash}
+                        style={{ width: '800px', border: '1px solid black' }}
                     />
                     <br />
 
