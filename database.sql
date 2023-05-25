@@ -44,7 +44,22 @@ CREATE TABLE "blacklist" (
 );
 
 -- ! UPON LOGIN, CHAMPIONS DATABASE WILL BE POPULATED
--- ! TO ADD CLASS AND REGION INFO, RUN THE FOLLOWING:
+-- ! AFTER LOGIN, RUN THE FOLLOWING:
+
+------- Riot forgot to give these champions a difficulty -------
+UPDATE champions
+SET "difficulty" = 
+	CASE
+		WHEN name IN ('Akshan')
+			THEN 9
+		WHEN name IN ('Rell')
+			THEN 7
+		WHEN name IN ('Seraphine')
+			THEN 3
+		WHEN name IN ('Vex')
+			THEN 6
+		ELSE "difficulty"
+	END;
 
 ------- UPDATE CLASSES -------
 UPDATE champions
