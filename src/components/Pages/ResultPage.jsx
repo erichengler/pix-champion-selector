@@ -52,7 +52,7 @@ function ResultPage() {
             />
 
             {/* Random result image */}
-            <img src={result.champion.image} style={{ width: '700px' }} />
+            <img src={result.champion.imageSplash} style={{ width: '700px' }} />
             <br /><br />
 
             {/* Back button */}

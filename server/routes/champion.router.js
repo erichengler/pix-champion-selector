@@ -14,10 +14,16 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         INSERT INTO champions ("name", "title", "difficulty", "lore",
             "imageSplash", "imageTile", "imageSmall")
         VALUES ($1, $2, $3, $4, $5, $6, $7)`
-    pool.query(queryText, [info.name, info.title, info.info.difficulty, 
-        info.lore, images.splash, images.tile, images.small])
+    pool.query(queryText, [
+        info.name, 
+        info.title, 
+        info.info.difficulty, 
+        info.lore, 
+        images.splash, 
+        images.tile, 
+        images.small
+    ])
         .then(result => {
-            // Put querytext and pool to add region and class here (looong)
             res.sendStatus(201);
         })
         .catch(error => {

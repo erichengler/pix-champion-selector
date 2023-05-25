@@ -18,7 +18,7 @@ function ChampionFilter({ champions, notes, filter }) {
         const filteredChampions = champions.filter(champion => {
 
             // ------- Filter by class -------
-            if (filter.class && champion.class !== filter.class) {
+            if (filter.class && !champion.class.includes(filter.class)) {
                 return false;
             }
 

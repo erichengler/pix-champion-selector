@@ -62,7 +62,9 @@ function DetailsPage() {
 
                     {/* ------- Class, difficulty and region ------- */}
                     <span>
-                        Class: {champion[0].class} &nbsp; • &nbsp;
+                        Class: {champion[0].class.slice(1, -1)
+                            .split(',').map(classItem => classItem
+                            .trim()).join(', ')} &nbsp; • &nbsp;
                         Difficulty: {champion[0].difficulty} &nbsp; • &nbsp;
                         Region: {champion[0].region}
                     </span>
