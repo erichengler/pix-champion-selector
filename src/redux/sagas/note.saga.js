@@ -4,7 +4,7 @@ import axios from 'axios';
 // ------- Get user's notes from DB -------
 function* fetchNotes() {
     try {
-        const notes = yield axios.get('/api/champion/notes');
+        const notes = yield axios.get('/api/note');
         yield put({
             type: 'SET_NOTES',
             payload: notes.data
@@ -18,7 +18,7 @@ function* fetchNotes() {
 function* addNote(action) {
     try {
         console.log(action)
-        yield axios.post('/api/champion/notes', action.payload);
+        yield axios.post('/api/note', action.payload);
         yield put({ type: 'FETCH_NOTES' });
         yield put({ type: 'FETCH_FAVORITES' });
     } catch {
@@ -29,7 +29,7 @@ function* addNote(action) {
 // ------- Remove note from notes DB -------
 function* removeNote(action) {
     try {
-        yield axios.delete(`/api/champion/notes/${action.payload}`);
+        yield axios.delete(`/api/note/${action.payload}`);
         yield put({ type: 'FETCH_NOTES' });
         yield put({ type: 'FETCH_FAVORITES' });
     } catch {
@@ -40,7 +40,7 @@ function* removeNote(action) {
 // ------- Edit note in notes DB -------
 function* editNote(action) {
     try {
-        yield axios.put('/api/champion/notes', action.payload);
+        yield axios.put('/api/note', action.payload);
         yield put({ type: 'FETCH_NOTES' });
         yield put({ type: 'FETCH_FAVORITES' });
     } catch {
