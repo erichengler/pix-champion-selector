@@ -1,7 +1,7 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
-// ------- Get user's blacklist DB -------
+// ------- Get user's blacklist from DB -------
 function* fetchBlacklist() {
     try {
         const blacklist = yield axios.get(
@@ -15,7 +15,7 @@ function* fetchBlacklist() {
     }
 }
 
-// ------- Post champion to blacklist DB -------
+// ------- Post champion to user's blacklist -------
 function* addToBlacklist(action) {
     try {
         yield axios.post(
@@ -28,7 +28,7 @@ function* addToBlacklist(action) {
     }
 }
 
-// ------- Remove champion from blacklist DB -------
+// ------- Remove champion from user's blacklist -------
 function* removeFromBlacklist(action) {
     try {
         yield axios.delete(

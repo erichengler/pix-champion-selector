@@ -5,7 +5,7 @@ function Footer() {
 
 	return (
 		<footer>
-			&copy; Prime Digital Academy
+			&copy; Erich Engler
 		</footer>
 	);
 }

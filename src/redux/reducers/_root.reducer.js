@@ -18,17 +18,17 @@ import filter from './filter.reducer';
 // Lets make a bigger object for our store, with the objects from our reducers.
 // This is what we get when we use 'state' inside of 'mapStateToProps'
 const rootReducer = combineReducers({
-  errors, // contains registrationMessage and loginMessage
-  user, // will have an id and username if someone is logged in
-  champions,
-  thisChampion,
-  filteredChampions,
-  favorites,
-  notes,
-  blacklist,
-  result,
-  checkboxToggle,
-  filter,
+	errors, // contains registrationMessage and loginMessage
+	user, // will have an id and username if someone is logged in
+	champions,
+	thisChampion,
+	filteredChampions,
+	favorites,
+	notes,
+	blacklist,
+	result,
+	checkboxToggle,
+	filter,
 });
 
 export default rootReducer;

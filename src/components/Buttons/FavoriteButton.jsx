@@ -19,6 +19,7 @@ function FavoriteButton({ id, result }) {
         dispatch({
             type: 'ADD_FAVORITE', payload: {
                 id:
+                    // ------- Using prop to check page -------
                     id === undefined ? result.champion.id : id
             }
         });
@@ -30,6 +31,7 @@ function FavoriteButton({ id, result }) {
             type: 'REMOVE_FAVORITE', payload: {
                 params: {
                     id:
+                        // ------- Using prop to check page -------
                         id === undefined ? result.champion.id : id
                 }
             }
@@ -38,10 +40,16 @@ function FavoriteButton({ id, result }) {
 
     return (
         <>
-            <button onClick={
-                isFavorite ? removeFavorite : addFavorite
-            }>
-                {isFavorite ? 'Unfavorite' : 'Favorite'}
+            <button 
+                onClick={isFavorite 
+                    ? removeFavorite 
+                    : addFavorite
+                }
+            >
+                {isFavorite 
+                    ? 'Unfavorite' 
+                    : 'Favorite'
+                }
             </button>
         </>
     );

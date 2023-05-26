@@ -1,11 +1,10 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
-// ------- Get all notes from notes DB -------
+// ------- Get user's notes from DB -------
 function* fetchNotes() {
     try {
         const notes = yield axios.get('/api/champion/notes');
-        // console.log('Get notes:', notes.data);
         yield put({
             type: 'SET_NOTES',
             payload: notes.data

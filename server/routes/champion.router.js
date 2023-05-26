@@ -9,7 +9,7 @@ const {
 router.post('/', rejectUnauthenticated, (req, res) => {
     const info = req.body.info
     const images = req.body.images
-
+    // ------- Query to insert values into champions DB -------
     const queryText = `
         INSERT INTO champions ("name", "title", "difficulty", "lore",
             "imageSplash", "imageTile", "imageSmall")
@@ -27,7 +27,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
             res.sendStatus(201);
         })
         .catch(error => {
-            console.log('ERROR in GET all champions:', error);
+            console.log('ERROR in GET champions:', error);
             res.sendStatus(500);
         })
 });
@@ -69,7 +69,7 @@ router.get('/details', rejectUnauthenticated, (req, res) => {
 // ------- GET user's favorites -------
 router.get('/favorites', rejectUnauthenticated, (req, res) => {
     console.log('In GET favorites');
-    // ------- Query to get all favorites -------
+    // ------- Query to get favorites -------
     const queryText = `
         SELECT favorites.id, favorites.user_id, favorites.champion_id, note
         FROM favorites
@@ -127,7 +127,7 @@ router.delete('/favorites', rejectUnauthenticated, (req, res) => {
 // ------- GET user's notes -------
 router.get('/notes', rejectUnauthenticated, (req, res) => {
     console.log('In GET all notes');
-    // ------- Query to get all notes -------
+    // ------- Query to get notes -------
     const queryText = `
         SELECT * FROM notes
         WHERE "user_id" = $1;`;
@@ -136,7 +136,7 @@ router.get('/notes', rejectUnauthenticated, (req, res) => {
             res.send(result.rows);
         })
         .catch(error => {
-            console.log('ERROR in GET all notes:', error);
+            console.log('ERROR in GET notes:', error);
             res.sendStatus(500);
         })
 });

@@ -12,13 +12,13 @@ function DetailsPage() {
     let { id } = useParams();
     const dispatch = useDispatch();
 
-    // ------- Fetch this champion, favorites and blacklist -------
+    // ------- Fetch this champion and favorites -------
     useEffect(() => {
         dispatch({ type: 'FETCH_THIS_CHAMPION', payload: id });
         dispatch({ type: 'FETCH_FAVORITES' });
     }, []);
 
-    // ------- Storing this champion, favorites and blacklist -------
+    // ------- Storing this champion -------
     const champion = useSelector(store => store.thisChampion);
 
     return (
@@ -52,7 +52,6 @@ function DetailsPage() {
                         id={id}
                     />
 
-
                     {/* ------- Champion image ------- */}
                     <img
                         src={champion[0].imageSplash}
@@ -62,6 +61,7 @@ function DetailsPage() {
 
                     {/* ------- Class, difficulty and region ------- */}
                     <span>
+                        {/* This turns "{Enchanter,Warden}" into "Enchanter, Warden" */}
                         Class: {champion[0].class.slice(1, -1)
                             .split(',').map(classItem => classItem
                             .trim()).join(', ')} &nbsp; • &nbsp;

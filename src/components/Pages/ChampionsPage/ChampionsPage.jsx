@@ -11,7 +11,7 @@ function ChampionsPage() {
 
 	const dispatch = useDispatch();
 
-	// ------- Fetch champions, filtered champions, blacklist -------
+	// ------- Fetch champions, user's blacklist -------
 	useEffect(() => {
 		dispatch({ type: 'FETCH_CHAMPIONS' });
 		dispatch({ type: 'FETCH_BLACKLIST' });
@@ -69,8 +69,6 @@ function ChampionsPage() {
 			/>
 			<br /><br />
 
-			{/* ------- List of champions ------- */}
-
 			{/* ------- Search by name ------- */}
 			<input
 				type="text"
@@ -80,12 +78,13 @@ function ChampionsPage() {
 			/>
 			<br />
 
-			{/* ------- Disable filter, include blacklist ------- */}
+			{/* ------- Disable filter checkbox ------- */}
 			<DisableFilter 
 				emptyFilter={emptyFilter}
 				checkboxToggle={checkboxToggle}
 			/>
 
+			{/* ------- Include blacklist checkbox ------- */}
 			<IncludeBlacklist 
 				blacklist={blacklist}
 				checkboxToggle={checkboxToggle}

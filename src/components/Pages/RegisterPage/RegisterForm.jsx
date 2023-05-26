@@ -2,11 +2,17 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 function RegisterForm() {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const errors = useSelector((store) => store.errors);
+
     const dispatch = useDispatch();
 
+    // ------- Storing username and password -------
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    // ------- Storing errors -------
+    const errors = useSelector((store) => store.errors);
+
+    // ------- Register user -------
     const registerUser = (event) => {
         event.preventDefault();
 
@@ -17,9 +23,10 @@ function RegisterForm() {
                 password: password,
             },
         });
-    }; // end registerUser
+    };
 
     return (
+        // ------- Register user form -------
         <form className="formPanel" onSubmit={registerUser}>
             <h2>New User Registration</h2>
             <hr /><br />

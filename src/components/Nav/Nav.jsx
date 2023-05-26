@@ -7,7 +7,6 @@ import { useHistory } from 'react-router-dom';
 function Nav() {
 
 	const dispatch = useDispatch();
-	const history = useHistory();
 
 	// ------- Storing user information -------
 	const user = useSelector((store) => store.user);
@@ -20,11 +19,12 @@ function Nav() {
 	return (
 		<div>
 			<div className="nav">
+				{/* ------- Title header ------- */}
 				<Link to="/home">
 					<h2 className="nav-title">Pix</h2>
 				</Link>
 				<div>
-					{/* -------If no user is logged in, show these ------- */}
+					{/* ------- If no user is logged in, show these ------- */}
 					{!user.id && (
 						<>
 							{/* ------- Login link ------- */}
@@ -61,13 +61,17 @@ function Nav() {
 				</div>
 			</div>
 
-			{/* ------- If a user is logged in,  show these ------- */}
+			{/* ------- If a user is logged in, show these ------- */}
 			{user.id && (
 				<div className="signed-in-section">
+
+					{/* ------- Logged in as ------- */}
 					<span className="signed-in-text">
 						Logged in as {user.username}
 					</span>
 					|
+
+					{/* ------- Logout ------- */}
 					<span className="logout-text" onClick={handleLogout}>
 						Logout
 					</span>

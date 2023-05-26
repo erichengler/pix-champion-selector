@@ -1,13 +1,12 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
-// ------- Get user's favorites DB -------
+// ------- Get user's favorites from DB -------
 function* fetchFavorites() {
     try {
         const favorites = yield axios.get(
             '/api/champion/favorites'
         );
-        // console.log('Get favorites:', favorites.data);
         yield put({
             type: 'SET_FAVORITES',
             payload: favorites.data

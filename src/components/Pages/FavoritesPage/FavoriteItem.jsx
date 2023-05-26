@@ -21,6 +21,7 @@ function FavoriteItem({ favorite, champions }) {
         });
     }
 
+    // ------- Getting favorite from champion DB using id -------
     let favChampion = champions[favorite.champion_id - 1];
 
     return (

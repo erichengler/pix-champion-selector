@@ -5,12 +5,16 @@ import { useHistory } from 'react-router-dom';
 function LoginForm() {
 
 	const history = useHistory();
-
-	const [username, setUsername] = useState('');
-	const [password, setPassword] = useState('');
-	const errors = useSelector(store => store.errors);
 	const dispatch = useDispatch();
 
+	// ------- Storing username and password -------
+	const [username, setUsername] = useState('');
+	const [password, setPassword] = useState('');
+
+	// ------- Storing errors -------
+	const errors = useSelector(store => store.errors);
+
+	// ------- Login -------
 	const login = (event) => {
 		event.preventDefault();
 
@@ -26,9 +30,10 @@ function LoginForm() {
 		} else {
 			dispatch({ type: 'LOGIN_INPUT_ERROR' });
 		}
-	}; // end login
+	};
 
 	return (
+		// ------- Login form -------
 		<form className="formPanel" onSubmit={login}>
 			<h2>Login</h2>
 			<hr /><br />

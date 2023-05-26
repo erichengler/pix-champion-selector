@@ -7,6 +7,7 @@ function UserPage() {
 	const history = useHistory();
 	const dispatch = useDispatch();
 
+	// ------- Fetching champion info from DB -------
 	useEffect(() => {
 		dispatch({ type: 'FETCH_CHAMPION_INFO' });
 	}, []);

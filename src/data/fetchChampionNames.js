@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+// ------- Fetching champion names from championFull.json -------
 async function fetchChampionNames() {
 
     // ! ------- Change this to your version ------- !

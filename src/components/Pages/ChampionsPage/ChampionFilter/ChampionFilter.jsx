@@ -12,7 +12,7 @@ function ChampionFilter({ champions, notes, filter }) {
         dispatch({ type: 'FETCH_NOTES' });
     }, []);
 
-    // ------- Calculate filtered champions -------
+    // ------- Calculating filtered champions -------
     // ------- Triggers any time filter changes -------
     useEffect(() => {
         const filteredChampions = champions.filter(champion => {
@@ -48,11 +48,12 @@ function ChampionFilter({ champions, notes, filter }) {
             }
             return true;
         });
+        // ------- Sending to filteredChampions reducer -------
         dispatch({ type: 'SET_FILTERED_CHAMPIONS', payload: filteredChampions });
     }, [filter]);
 
 
-    // ------- Start of handleChange for filter form -------
+    // ------- handleChange for filter form -------
     const handleFilterChange = (property) => {
         return (event) => {
             const newFilter = { ...filter, [property]: event.target.value };
@@ -69,12 +70,13 @@ function ChampionFilter({ champions, notes, filter }) {
 
     return (
         <div>
-            {/* ------- Champions filter ------- */}
             <h2>Filter</h2>
 
+            {/* ------- Champions filter form ------- */}
             <form id='filterForm'>
-                {/* ------- Filter by class ------- */}
+                {/* ------- Filter by class text ------- */}
                 <span className="info-text">
+                    {/* ------- Link to class information ------- */}
                     <a
                         href="https://leagueoflegends.fandom.com/wiki/Champion_classes"
                         target="_blank"
@@ -83,6 +85,7 @@ function ChampionFilter({ champions, notes, filter }) {
                     </a>
                 </span>
                 : &nbsp;
+                {/* ------- Class select ------- */}
                 <select
                     id="classFilter"
                     value={filter.class}
@@ -106,8 +109,9 @@ function ChampionFilter({ champions, notes, filter }) {
                 </select>
                 <br /><br />
 
-                {/* ------- Filter by region ------- */}
+                {/* ------- Filter by region text ------- */}
                 <span className="info-text">
+                    {/* ------- Link to region information ------- */}
                     <a
                         href="https://universe.leagueoflegends.com/en_US/regions"
                         target="_blank"
@@ -116,6 +120,7 @@ function ChampionFilter({ champions, notes, filter }) {
                     </a>
                 </span>
                 : &nbsp;
+                {/* ------- Region select ------- */}
                 <select
                     id="regionFilter"
                     value={filter.region}
@@ -140,16 +145,16 @@ function ChampionFilter({ champions, notes, filter }) {
                 </select>
                 <br /><br />
 
-                {/* ------- Filter by difficulty ------- */}
+                {/* ------- Filter by difficulty text ------- */}
                 Difficulty: &nbsp;
 
-                {/* ------- Minimum difficulty ------- */}
+                {/* ------- Min difficulty select ------- */}
                 <select
                     id="minDifficultyFilter"
                     value={filter.minDifficulty}
                     onChange={handleFilterChange('minDifficulty')}
                 >
-                    {/* ------- Difficulty options ------- */}
+                    {/* ------- Min difficulty options ------- */}
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -163,13 +168,13 @@ function ChampionFilter({ champions, notes, filter }) {
                 </select>
                 &nbsp; to &nbsp;
 
-                {/* ------- Maximum difficulty ------- */}
+                {/* ------- Max difficulty select ------- */}
                 <select
                     id="maxDifficultyFilter"
                     value={filter.maxDifficulty}
                     onChange={handleFilterChange('maxDifficulty')}
                 >
-                    {/* ------- Difficulty options ------- */}
+                    {/* ------- Max difficulty options ------- */}
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -183,8 +188,10 @@ function ChampionFilter({ champions, notes, filter }) {
                 </select>
                 <br /><br />
 
-                {/* ------- Filter by notes ------- */}
+                {/* ------- Filter by notes text ------- */}
                 Notes:&nbsp;
+
+                {/* ------- Notes input ------- */}
                 <input
                     id="notesFilter"
                     type="text"
@@ -193,7 +200,7 @@ function ChampionFilter({ champions, notes, filter }) {
                 />
                 <br /><br />
 
-                {/* ------- Buttons ------- */}
+                {/* ------- Reset button ------- */}
                 <button onClick={resetFilter}>Reset</button> &nbsp;
             </form>
         </div>

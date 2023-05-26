@@ -12,7 +12,7 @@ function ChampionItem({ champion }) {
 
     return (
         <div className="champion-avatar">
-            {/* ------- Champion portraits ------- */}
+            {/* ------- Champion portrait ------- */}
             <img
                 key={champion.id}
                 src={champion.imageSmall}

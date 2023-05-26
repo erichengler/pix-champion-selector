@@ -1,5 +1,4 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
 
 import FavoriteButton from '../Buttons/FavoriteButton';
@@ -10,55 +9,52 @@ import BackButton from '../Buttons/BackButton';
 
 function ResultPage() {
 
-    const history = useHistory();
     const dispatch = useDispatch();
 
-    // ------- Fetch champions, this champion, -------
-    // ------- blacklist and favorites -------
+    // ------- Fetch champions -------
     useEffect(() => {
         dispatch({ type: 'FETCH_CHAMPIONS' });
     }, []);
 
-    // ------- Storing result, champions, this -------
-    // ------- champion, blacklist, and favorites -------
+    // ------- Storing result and champions -------
     const { result, champions } = useSelector(state => state);
-
-    // ------- Brings user back to UserPage -------
-    const backToHome = () => {
-        history.push('/');
-    }
 
     return (
         <div className="container">
             <p>This game, Pix thinks you should play...</p>
+
+            {/* ------- Pix image ------- */}
             <img
-                src="images/pix-small.png"
-                style={{ width: '300px' }}
+                src="images/pix-full.jpg"
+                style={{ width: '800px' }}
             />
 
-            {/* Random result name */}
+            {/* ------- Result name ------- */}
             <h2>{result.champion.name}</h2>
 
+            {/* ------- Favorite button ------- */}
             <FavoriteButton
                 result={result}
             />  &nbsp;
 
+            {/* ------- Notes button ------- */}
             <NotesButton
                 result={result}
             />  &nbsp;
 
+            {/* ------- Blacklist button ------- */}
             <BlacklistButton
                 result={result}
             />
 
-            {/* Random result image */}
+            {/* ------- Result image ------- */}
             <img src={result.champion.imageSplash} style={{ width: '700px' }} />
             <br /><br />
 
-            {/* Back button */}
+            {/* ------- Back button ------- */}
             <BackButton />
 
-            {/* Reroll button */}
+            {/* ------- Reroll button ------- */}
             <RollButton
                 result={result}
                 champions={champions}

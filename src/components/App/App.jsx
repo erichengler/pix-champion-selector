@@ -62,22 +62,22 @@ function App() {
 						<UserPage />
 					</ProtectedRoute>
 
-					{/* Champion List Page */}
+					{/* ------- Champions Page ------- */}
 					<ProtectedRoute exact path="/champions">
 						<ChampionsPage />
 					</ProtectedRoute>
 
-					{/* Favorites Page */}
+					{/* ------- Favorites Page ------- */}
 					<ProtectedRoute exact path="/favorites">
 						<FavoritesPage />
 					</ProtectedRoute>
 
-					{/* Details Page */}
+					{/* ------- Details Page ------- */}
 					<ProtectedRoute exact path="/details/:id">
 						<DetailsPage />
 					</ProtectedRoute>
 
-					{/* Result Page */}
+					{/* ------- Result Page ------- */}
 					<ProtectedRoute exact path="/result">
 						<ResultPage />
 					</ProtectedRoute>

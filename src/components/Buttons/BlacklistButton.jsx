@@ -19,6 +19,7 @@ function BlacklistButton({ id, result }) {
         dispatch({
             type: 'ADD_TO_BLACKLIST', payload: {
                 id:
+                    // ------- Using prop to check page -------
                     id === undefined ? result.champion.id : id
             }
         });
@@ -30,6 +31,7 @@ function BlacklistButton({ id, result }) {
             type: 'REMOVE_FROM_BLACKLIST', payload: {
                 params: {
                     id:
+                        // ------- Using prop to check page -------
                         id === undefined ? result.champion.id : id
                 }
             }
@@ -38,10 +40,17 @@ function BlacklistButton({ id, result }) {
 
     return (
         <>
-            <button onClick={
-                isBlacklist ? removeFromBlacklist : addToBlacklist
-            }>
-                {isBlacklist ? 'Unblacklist' : 'Blacklist'}
+           {/* ------- Add to / remove from blacklist button ------- */}
+            <button 
+                onClick={isBlacklist 
+                    ? removeFromBlacklist 
+                    : addToBlacklist
+                }
+            >
+                {isBlacklist 
+                    ? 'Unblacklist' 
+                    : 'Blacklist'
+                }
             </button> &nbsp; &nbsp;
             <br />
         </>

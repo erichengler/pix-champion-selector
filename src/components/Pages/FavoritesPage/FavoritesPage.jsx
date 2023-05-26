@@ -15,20 +15,20 @@ function FavoritesPage() {
         dispatch({ type: 'FETCH_FAVORITES' });
     }, []);
 
-    // Storing champions, favorites
+    // ------- Storing champions, favorites -------
     const champions = useSelector(store => store.champions);
     const favorites = useSelector(store => store.favorites);
 
     return (
         <div>
-            {/* ------- Checking champions reducer ------- */}
+            {/* ------- Checking for champions ------- */}
             {champions.length === 0 ? (
                 <div className="container">
                     <h2>Loading...</h2>
                 </div>
             ) : (
 
-                // ------- Checking favorites reducer -------
+                // ------- Checking for favorites -------
                 favorites.length === 0 ? (
                     <div className="container">
                         <h2>No Favorites</h2>
@@ -38,8 +38,8 @@ function FavoritesPage() {
                     <div className="container">
                         <h2>Favorites</h2>
 
-                        {/* ------- Mapping through favorites and ------- */}
-                        {/* ------- matching by champion_id ------- */}
+                        {/* ------- Mapping through favorites ------- */}
+                        {/* ------- and matching by champion_id ------- */}
                         {
                             favorites.map((favorite) => (
                                 <FavoriteItem 

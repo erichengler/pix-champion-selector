@@ -27,7 +27,7 @@ function NotesButton({ champion, favorite, name, result }) {
         dispatch({ type: 'FETCH_NOTES' });
     }, []);
 
-    // const thisNote = useSelector(store => store.thisNote);
+    // ------- Storing all notes -------
     const notes = useSelector(store => store.notes);
 
     // ------- Storing modal status -------
@@ -38,13 +38,11 @@ function NotesButton({ champion, favorite, name, result }) {
     const handleClose = () => setOpen(false);
 
     // ------- Get ID required based on current page -------
-    const foundId = (result != undefined ? result.champion.id
-        :
-        (
-            favorite === undefined
-                ? champion[0].id
-                : favorite.champion_id
-        )
+    const foundId = (result != undefined
+        ? result.champion.id
+        : favorite === undefined
+            ? champion[0].id
+            : favorite.champion_id
     );
 
     // ------- Finds specific champion's note -------
@@ -54,7 +52,9 @@ function NotesButton({ champion, favorite, name, result }) {
     // ------- then returns champion's name -------
     const notesHeader = () => {
         return (result === undefined
-            ? (favorite === undefined ? champion[0].name : name)
+            ? favorite === undefined
+                ? champion[0].name
+                : name
             : result.champion.name
         );
     }
@@ -63,8 +63,12 @@ function NotesButton({ champion, favorite, name, result }) {
     // ------- set to defaultValue of textfield -------
     const defaultNote = () => {
         return (favorite === undefined
-            ? (thisNote === undefined ? '' : thisNote.note)
-            : (favorite.note === undefined ? '' : favorite.note)
+            ? thisNote === undefined
+                ? ''
+                : thisNote.note
+            : favorite.note === undefined
+                ? ''
+                : favorite.note
         );
     }
 
@@ -152,32 +156,55 @@ function NotesButton({ champion, favorite, name, result }) {
                         <>
                             {/* ------- Cancel or Delete button ------- */}
                             <button
-                                onClick={thisNote === undefined ?
-                                    handleClose : deleteNotes}>
-                                {thisNote === undefined ? 'Cancel' : 'Delete'}
+                                onClick={thisNote === undefined
+                                    ? handleClose
+                                    : deleteNotes
+                                }
+                            >
+                                {thisNote === undefined
+                                    ? 'Cancel'
+                                    : 'Delete'
+                                }
                             </button>
 
                             {/* ------- Submit or Save button ------- */}
                             <button
-                                onClick={thisNote === undefined ?
-                                    createNotes : updateNotes}>
-                                {thisNote === undefined ? 'Submit' : 'Save'}
+                                onClick={thisNote === undefined
+                                    ? createNotes
+                                    : updateNotes
+                                }
+                            >
+                                {thisNote === undefined
+                                    ? 'Submit'
+                                    : 'Save'
+                                }
                             </button>
                         </>
                     ) : (
                         <>
                             {/* ------- Cancel or Delete button ------- */}
                             <button
-                                onClick={favorite.note == undefined ?
-                                    handleClose : deleteNotes}>
-                                {favorite.note == undefined ? 'Cancel' : 'Delete'}
+                                onClick={favorite.note == undefined
+                                    ? handleClose
+                                    : deleteNotes
+                                }
+                            >
+                                {favorite.note == undefined
+                                    ? 'Cancel'
+                                    : 'Delete'}
                             </button>
 
                             {/* ------- Submit or Save button ------- */}
                             <button
-                                onClick={favorite.note == undefined ?
-                                    createNotes : updateNotes}>
-                                {favorite.note == undefined ? 'Submit' : 'Save'}
+                                onClick={favorite.note == undefined
+                                    ? createNotes
+                                    : updateNotes
+                                }
+                            >
+                                {favorite.note == undefined
+                                    ? 'Submit'
+                                    : 'Save'
+                                }
                             </button>
                         </>
                     )}
