@@ -5,7 +5,7 @@ import axios from 'axios';
 function* fetchBlacklist() {
     try {
         const blacklist = yield axios.get(
-            '/api/champion/blacklist');
+            '/api/blacklist');
         yield put({
             type: 'SET_BLACKLIST',
             payload: blacklist.data
@@ -19,7 +19,7 @@ function* fetchBlacklist() {
 function* addToBlacklist(action) {
     try {
         yield axios.post(
-            '/api/champion/blacklist',
+            '/api/blacklist',
             action.payload
         );
         yield put({ type: 'FETCH_BLACKLIST' });
@@ -32,7 +32,7 @@ function* addToBlacklist(action) {
 function* removeFromBlacklist(action) {
     try {
         yield axios.delete(
-            '/api/champion/blacklist',
+            '/api/blacklist',
             action.payload
         );
         yield put({ type: 'FETCH_BLACKLIST' });
