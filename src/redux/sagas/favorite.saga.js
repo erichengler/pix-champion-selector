@@ -5,7 +5,7 @@ import axios from 'axios';
 function* fetchFavorites() {
     try {
         const favorites = yield axios.get(
-            '/api/champion/favorites'
+            '/api/favorite'
         );
         yield put({
             type: 'SET_FAVORITES',
@@ -20,7 +20,7 @@ function* fetchFavorites() {
 function* addFavorite(action) {
     try {
         yield axios.post(
-            '/api/champion/favorites',
+            '/api/favorite',
             action.payload);
         yield put({ type: 'FETCH_FAVORITES' });
     } catch {
@@ -32,7 +32,7 @@ function* addFavorite(action) {
 function* removeFavorite(action) {
     try {
         yield axios.delete(
-            '/api/champion/favorites',
+            '/api/favorite',
             action.payload);
         yield put({ type: 'FETCH_FAVORITES' });
     } catch {
