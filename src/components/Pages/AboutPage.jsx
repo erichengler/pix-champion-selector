@@ -33,6 +33,10 @@ function AboutPage() {
 				<h2>Future Plans</h2>
 				<ul>
 					<li>
+						Store the result of the roll in localStorage to allow the user to refresh the result page.
+					</li>
+					<br />
+					<li>
 						Instead of providing external links to information about Classes
 						and Regions, include an information page that displays this info.
 					</li>

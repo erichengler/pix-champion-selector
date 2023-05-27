@@ -20,6 +20,11 @@ function ResultPage() {
     const { result, champions } = useSelector(state => state);
 
     return (
+        // ------- Prevent error when result is undefined -------
+        result.champion === undefined 
+            ? <h2 className='container'>Please go back and roll again.</h2>
+            :
+
         <div className="container">
             <p>This game, Pix thinks you should play...</p>
 
