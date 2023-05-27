@@ -1,0 +1,13 @@
+.welcome-container {
+    opacity: 0;
+    animation: fade-in-animation 2s ease forwards;
+  }
+  
+  @keyframes fade-in-animation {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }

@@ -2,6 +2,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
 
+import './UserPage.css'
+
 function UserPage() {
 
 	const history = useHistory();
@@ -21,7 +23,7 @@ function UserPage() {
 	}
 
 	return (
-		<div className="container">
+		<div className="welcome-container">
 
 			{/* ------- Welcome, user information ------- */}
 			<center>
