@@ -10,7 +10,7 @@ function FavoriteItem({ favorite, champions }) {
 
     // ------- Brings user to champion details -------
     const toDetails = (event) => {
-        history.push(`/details/${event.champion_id}`)
+        history.push(`/champions/${event.champion_id}`)
     }
 
     // ------- Remove favorite from DB -------

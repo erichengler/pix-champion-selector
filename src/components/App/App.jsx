@@ -73,7 +73,7 @@ function App() {
 					</ProtectedRoute>
 
 					{/* ------- Details Page ------- */}
-					<ProtectedRoute exact path="/details/:id">
+					<ProtectedRoute exact path="/champions/:id">
 						<DetailsPage />
 					</ProtectedRoute>
 

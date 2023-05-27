@@ -76,16 +76,22 @@ function ChampionsPage() {
 				onChange={(e) => setSearchQuery(e.target.value)}
 				placeholder="Search by name..."
 			/>
+
+			{/* ------- Roll button ------- */}
+			<RollButton
+				championPool={modifiedChampions}
+				style={{ }}
+			/>
 			<br />
 
 			{/* ------- Disable filter checkbox ------- */}
-			<DisableFilter 
+			<DisableFilter
 				emptyFilter={emptyFilter}
 				checkboxToggle={checkboxToggle}
 			/>
 
 			{/* ------- Include blacklist checkbox ------- */}
-			<IncludeBlacklist 
+			<IncludeBlacklist
 				blacklist={blacklist}
 				checkboxToggle={checkboxToggle}
 			/>
@@ -100,12 +106,6 @@ function ChampionsPage() {
 					/>
 				))
 			}
-			<br /><br />
-
-			{/* ------- Roll button ------- */}
-			<RollButton
-				championPool={modifiedChampions}
-			/>
 		</div>
 	);
 }

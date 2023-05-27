@@ -7,7 +7,7 @@ function ChampionItem({ champion }) {
 
     // ------- Brings user to champion details -------
     const toDetails = () => {
-        history.push(`/details/${champion.id}`)
+        history.push(`/champions/${champion.id}`)
     }
 
     return (
