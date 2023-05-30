@@ -8,6 +8,10 @@ function AboutPage() {
 				<p>
 					This application was designed and developed by <b>Erich Engler</b> for
 					Prime Digital Academy.
+					<br />
+					<br />
+					Some of the technologies I used to build this app include React, 
+					Redux, Node, Express, Material UI, and SQL.
 				</p>
 				<p>
 					For more information on the purpose of this application, how it
@@ -24,7 +28,7 @@ function AboutPage() {
 				</center>
 				<br />
 				<p>
-					If you have any issues with or suggestions for the application, please
+					If you have issues with or suggestions for the application, please
 					don't hesitate to connect with me. Or if you just want to have a chat
 					about League or play some games together, that works too!
 				</p>
