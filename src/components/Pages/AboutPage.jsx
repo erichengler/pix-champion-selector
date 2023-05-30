@@ -5,33 +5,37 @@ function AboutPage() {
 		<div className="container">
 			<div>
 				<h2>About</h2>
-				<p>
-					This application was designed and developed by <b>Erich Engler</b> for
-					Prime Digital Academy.
+				<ul>
+					<li>
+						This application was designed and developed by <b>Erich Engler</b> for
+						Prime Digital Academy.
+					</li>
 					<br />
+					<li>
+						Some of the technologies I used to build this app include React,
+						Redux, Node, Express, Material UI, and SQL.
+					</li>
 					<br />
-					Some of the technologies I used to build this app include React, 
-					Redux, Node, Express, Material UI, and SQL.
-				</p>
-				<p>
-					For more information on the purpose of this application, how it
-					works, or the challenges I encountered while creating it, see the 
-					readme file located on the app's <a
-						href="https://github.com/erichengler/pix-champion-selector">
-						Github repository page
-					</a>
-					.
-				</p>
-				<br />
-				<center>
-					<img src="/images/QRcodes.png"/>
-				</center>
-				<br />
-				<p>
-					If you have issues with or suggestions for the application, please
-					don't hesitate to connect with me. Or if you just want to have a chat
-					about League or play some games together, that works too!
-				</p>
+					<li>
+						For more information on the purpose of this application, how it
+						works, or the challenges I encountered while creating it, see the
+						readme file located on the app's <a
+							href="https://github.com/erichengler/pix-champion-selector">
+							Github repository page
+						</a>
+						.
+					</li>
+					<br /><br />
+					<center>
+						<img src="/images/QRcodes.png" />
+					</center>
+					<br /><br />
+					<li>
+						If you have issues with or suggestions for the application, please
+						don't hesitate to connect with me. Or if you just want to have a chat
+						about League or play some games together, that works too!
+					</li>
+				</ul>
 				<br />
 
 				<h2>Future Plans</h2>

@@ -21,50 +21,52 @@ function ResultPage() {
 
     return (
         // ------- Prevent error when result is undefined -------
-        result.champion === undefined 
+        result.champion === undefined
             ? <h2 className='container'>Please go back and roll again.</h2>
             :
 
-        <div className="container">
-            <p>This game, Pix thinks you should play...</p>
+            <div className="container">
+                <center>
+                    <h3>This game, Pix thinks you should play...</h3>
 
-            {/* ------- Pix image ------- */}
-            <img
-                src="images/pix-full.jpg"
-                style={{ width: '800px' }}
-            />
+                    {/* ------- Pix image ------- */}
+                    <img
+                        src="images/pix-full.jpg"
+                        style={{ width: '1300px' }}
+                    />
 
-            {/* ------- Result name ------- */}
-            <h2>{result.champion.name}</h2>
+                    {/* ------- Result name ------- */}
+                    <h2>{result.champion.name}</h2>
 
-            {/* ------- Favorite button ------- */}
-            <FavoriteButton
-                result={result}
-            />  &nbsp;
+                    {/* ------- Favorite button ------- */}
+                    <FavoriteButton
+                        result={result}
+                    />  &nbsp;
 
-            {/* ------- Notes button ------- */}
-            <NotesButton
-                result={result}
-            />  &nbsp;
+                    {/* ------- Notes button ------- */}
+                    <NotesButton
+                        result={result}
+                    />  &nbsp;
 
-            {/* ------- Blacklist button ------- */}
-            <BlacklistButton
-                result={result}
-            />
+                    {/* ------- Blacklist button ------- */}
+                    <BlacklistButton
+                        result={result}
+                    />
 
-            {/* ------- Result image ------- */}
-            <img src={result.champion.imageSplash} style={{ width: '700px' }} />
-            <br /><br />
+                    {/* ------- Result image ------- */}
+                    <img src={result.champion.imageSplash} style={{ width: '1000px' }} />
+                    <br /><br />
 
-            {/* ------- Back button ------- */}
-            <BackButton />
+                    {/* ------- Back button ------- */}
+                    <BackButton /> &nbsp;
 
-            {/* ------- Reroll button ------- */}
-            <RollButton
-                result={result}
-                champions={champions}
-            />
-        </div>
+                    {/* ------- Reroll button ------- */}
+                    <RollButton
+                        result={result}
+                        champions={champions}
+                    />
+                </center>
+            </div>
     );
 }
 

@@ -62,6 +62,7 @@ function ChampionsPage() {
 		<div className="container">
 
 			{/* ------- User filter ------- */}
+			<center>
 			<ChampionFilter
 				champions={champions}
 				notes={notes}
@@ -76,13 +77,6 @@ function ChampionsPage() {
 				onChange={(e) => setSearchQuery(e.target.value)}
 				placeholder="Search by name..."
 			/>
-
-			{/* ------- Roll button ------- */}
-			<RollButton
-				championPool={modifiedChampions}
-				style={{ }}
-			/>
-			<br />
 
 			{/* ------- Disable filter checkbox ------- */}
 			<DisableFilter
@@ -106,6 +100,15 @@ function ChampionsPage() {
 					/>
 				))
 			}
+			<br /><br /><br />
+
+			{/* ------- Roll button ------- */}
+			<RollButton
+				championPool={modifiedChampions}
+				style={{}}
+			/>
+			</center>
+
 		</div>
 	);
 }
