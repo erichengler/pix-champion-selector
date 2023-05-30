@@ -3,6 +3,13 @@ import { useDispatch } from 'react-redux';
 
 import NotesButton from '../../Buttons/NotesButton';
 
+// ------- MUI Imports -------
+import Grid from '@mui/material/Grid';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+
 function FavoriteItem({ favorite, champions }) {
 
     const history = useHistory();
@@ -25,10 +32,21 @@ function FavoriteItem({ favorite, champions }) {
     let favChampion = champions[favorite.champion_id - 1];
 
     return (
-        <div>
+        <Grid item sx={{ mx: '25px', my: '30px' }}>
+
+            <Card variant="outlined" sx={{
+                width: 250,
+                height: 300,
+                padding: '20px',
+                paddingBottom: '52px',
+                boxShadow: 6,
+                textAlign: 'center'
+            }}>
             {/* ------- Champion name, title ------- */}
-            <b>{favChampion.name}</b>, <i>{favChampion.title}</i>
+            <b>{favChampion.name}</b>
             <br />
+            <i>{favChampion.title}</i>
+            <br /><br />
 
             {/* ------- Details button ------- */}
             <button
@@ -58,8 +76,8 @@ function FavoriteItem({ favorite, champions }) {
                 src={favChampion.imageTile}
                 style={{ width: '250px' }}
             />
-            <br /><br /><br />
-        </div>
+            </Card>
+        </Grid>
     );
 }
 

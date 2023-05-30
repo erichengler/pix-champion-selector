@@ -1,9 +1,12 @@
 import { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import FavoriteItem from './FavoriteItem';
 import RollButton from '../../Buttons/RollButton';
+
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+import Container from '@mui/material/Container';
 
 function FavoritesPage() {
 
@@ -35,27 +38,35 @@ function FavoritesPage() {
                     </div>
                 ) : (
 
-                    <div className="container">
-                        <h2>Favorites</h2>
+                    <Container className="container" maxWidth='xl'>
+                        <Typography variant="h3" textAlign='center'>
+                            Favorites
+                        </Typography>
+                        <br />
 
-                        {/* ------- Mapping through favorites ------- */}
-                        {/* ------- and matching by champion_id ------- */}
-                        {
-                            favorites.map((favorite) => (
-                                <FavoriteItem 
-                                    key={favorite.id}
-                                    champions={champions}
-                                    favorite={favorite}
-                                />
-                            ))
-                        }
-
+                        <Grid container spacing={0} justifyContent='center'>
+                            {/* ------- Mapping through favorites ------- */}
+                            {/* ------- and matching by champion_id ------- */}
+                            {
+                                favorites.map((favorite) => (
+                                    <FavoriteItem
+                                        key={favorite.id}
+                                        champions={champions}
+                                        favorite={favorite}
+                                    />
+                                ))
+                            }
+                        </Grid>
+                        <br />
+                        
                         {/* ------- Roll button ------- */}
-                        <RollButton
-                            champions={champions}
-                            favorites={favorites}
-                        />
-                    </div>
+                        <center>
+                            <RollButton
+                                champions={champions}
+                                favorites={favorites}
+                            />
+                        </center>
+                    </Container>
                 ))
             }
         </div>
