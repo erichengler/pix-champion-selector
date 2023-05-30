@@ -2,6 +2,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
 
+import Typography from '@mui/material/Typography';
+
 import './UserPage.css'
 
 function UserPage() {
@@ -27,16 +29,21 @@ function UserPage() {
 
 			{/* ------- Welcome, user information ------- */}
 			<center>
-				<h2>Welcome, {user.username}!</h2>		
+				<Typography variant="h4">
+					Welcome, {user.username}!
+				</Typography>	
+				<br />	
 				<img 
 					src="images/pix-small.png" 
 					style={{ width: '500px', cursor: 'pointer' }}
 					onClick={toChampionsPage}
 				/>
 				<br /><br />
-				<span>Pix has arrived, and is here to assist you with champion select!</span>
-				<br /><br />
-				<span>Click on Pix to begin.</span>
+				<Typography>
+					Pix has arrived, and is here to assist you with champion select.
+					<br /><br />
+					Click on Pix to begin!
+				</Typography>
 			</center>			
 		</div>
 	);

@@ -1,9 +1,9 @@
-import React from 'react';
+import Typography from '@mui/material/Typography';
 
 function AboutPage() {
 	return (
 		<div className="container">
-			<div>
+			<Typography>
 				<h2>About</h2>
 				<ul>
 					<li>
@@ -84,7 +84,7 @@ function AboutPage() {
 					</li>
 				</ul>
 
-			</div>
+			</Typography>
 		</div>
 	);
 }

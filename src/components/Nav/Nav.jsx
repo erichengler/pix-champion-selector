@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Nav.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+
+import { Typography } from '@mui/material';
 
 function Nav() {
 
@@ -18,7 +19,7 @@ function Nav() {
 
 	return (
 		<div>
-			<div className="nav">
+			<Typography className="nav">
 				{/* ------- Title header ------- */}
 				<Link to="/home">
 					<h2 className="nav-title">Pix</h2>
@@ -59,7 +60,7 @@ function Nav() {
 						About
 					</Link>
 				</div>
-			</div>
+			</Typography>
 
 			{/* ------- If a user is logged in, show these ------- */}
 			{user.id && (

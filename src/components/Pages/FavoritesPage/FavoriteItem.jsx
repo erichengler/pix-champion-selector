@@ -32,7 +32,7 @@ function FavoriteItem({ favorite, champions }) {
     let favChampion = champions[favorite.champion_id - 1];
 
     return (
-        <Grid item sx={{ mx: '25px', my: '30px' }}>
+        <Grid item sx={{ mx: '25px', my: '25px' }}>
 
             <Card variant="outlined" sx={{
                 width: 250,
