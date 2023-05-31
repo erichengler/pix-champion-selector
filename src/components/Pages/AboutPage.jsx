@@ -17,6 +17,12 @@ function AboutPage() {
 					</li>
 					<br />
 					<li>
+						Thank you to <b>Riot Games</b> for providing me with all of the 
+						images that were used, as well as the information about champion
+						names, titles, difficulties, regions and lore via Data Dragon.
+					</li>
+					<br />
+					<li>
 						For more information on the purpose of this application, how it
 						works, or the challenges I encountered while creating it, see the
 						readme file located on the app's <a

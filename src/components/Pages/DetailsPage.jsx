@@ -27,7 +27,7 @@ function DetailsPage() {
             {champion.length === 0 ? (
                 <h2>Loading...</h2>
             ) : (
-
+                <center>
                 <div className="container">
 
                     {/* ------- Champion name ------- */}
@@ -72,7 +72,7 @@ function DetailsPage() {
 
                     {/* ------- Champion lore ------- */}
                     <div
-                        style={{ width: '500px' }}
+                        style={{ width: '700px' }}
                     >
                         {champion[0].lore}
                     </div>
@@ -81,6 +81,7 @@ function DetailsPage() {
                     {/* ------- Back button ------- */}
                     <BackButton />
                 </div>
+                </center>
             )}
         </div>
     );
