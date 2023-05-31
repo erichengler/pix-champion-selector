@@ -1,5 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 
+// ------- Material UI imports -------
+import PersonRemoveOutlinedIcon from '@mui/icons-material/PersonRemoveOutlined';
+import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
+
 function BlacklistButton({ id, result }) {
 
     const dispatch = useDispatch();
@@ -40,19 +44,23 @@ function BlacklistButton({ id, result }) {
 
     return (
         <>
-           {/* ------- Add to / remove from blacklist button ------- */}
-            <button 
-                onClick={isBlacklist 
-                    ? removeFromBlacklist 
-                    : addToBlacklist
+            {/* ------- Add to / remove from blacklist button ------- */}
+                {isBlacklist
+                    ? <PersonRemoveIcon
+                            className="blacklist-icon"
+                            onClick={isBlacklist
+                                ? removeFromBlacklist
+                                : addToBlacklist
+                            }
+                    />
+                    : <PersonRemoveOutlinedIcon
+                            className="blacklist-icon"
+                            onClick={isBlacklist
+                                ? removeFromBlacklist
+                                : addToBlacklist
+                            }
+                    />
                 }
-            >
-                {isBlacklist 
-                    ? 'Unblacklist' 
-                    : 'Blacklist'
-                }
-            </button> &nbsp; &nbsp;
-            <br />
         </>
     );
 }

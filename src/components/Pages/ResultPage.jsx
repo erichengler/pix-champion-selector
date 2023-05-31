@@ -41,20 +41,25 @@ function ResultPage() {
                     {/* ------- Favorite button ------- */}
                     <FavoriteButton
                         result={result}
-                    />  &nbsp;
+                    /> 
 
                     {/* ------- Notes button ------- */}
                     <NotesButton
                         result={result}
-                    />  &nbsp;
+                    /> 
 
                     {/* ------- Blacklist button ------- */}
                     <BlacklistButton
                         result={result}
                     />
+                    <br />
 
                     {/* ------- Result image ------- */}
-                    <img src={result.champion.imageSplash} style={{ width: '1000px' }} />
+                    <img src={result.champion.imageSplash} style={{ 
+                        width: '1000px',
+                        paddingBottom: '7px',
+                        paddingTop: '7px'
+                    }} />
                     <br /><br />
 
                     {/* ------- Back button ------- */}

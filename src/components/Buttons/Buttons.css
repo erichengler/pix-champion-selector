@@ -1,7 +1,15 @@
 .favorite-icon {
-    transform: scale(1.7)
+    transform: scale(1.7);
+    margin-right: 15px;
 }
 
 .note-icon {
-    transform: scale(1.6)
+    transform: scale(1.6);
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.blacklist-icon {
+    transform: scale(1.8);
+    margin-left: 15px;
 }

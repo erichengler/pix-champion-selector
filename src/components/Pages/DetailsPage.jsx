@@ -40,17 +40,18 @@ function DetailsPage() {
                     {/* ------- Favorite button ------- */}
                     <FavoriteButton 
                         id={id}
-                    /> &nbsp; &nbsp;
+                    />
 
                     {/* ------- Notes button ------- */}
                     <NotesButton
                         champion={champion}
-                    /> &nbsp; &nbsp;
+                    />
 
                     {/* ------- Blacklist button ------- */}
                     <BlacklistButton 
                         id={id}
                     />
+                    <br />
 
                     {/* ------- Champion image ------- */}
                     <img
