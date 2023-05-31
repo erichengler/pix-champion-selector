@@ -1,5 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 
+// ------- Material UI Imports -------
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+
+import './Buttons.css'
+
 function FavoriteButton({ id, result }) {
 
     const dispatch = useDispatch();
@@ -8,10 +14,10 @@ function FavoriteButton({ id, result }) {
     // ------- Checking if champion is on user's favorites -------
     const isFavorite = favorites.some(
         // ------- Matching by ID -------
-        favorite => (id === undefined ? 
+        favorite => (id === undefined ?
             favorite.champion_id === result.champion.id :
-            favorite.champion_id === Number(id) 
-        )      
+            favorite.champion_id === Number(id)
+        )
     );
 
     // ------- Adds champion to the user's favorites list -------
@@ -40,17 +46,22 @@ function FavoriteButton({ id, result }) {
 
     return (
         <>
-            <button 
-                onClick={isFavorite 
-                    ? removeFavorite 
-                    : addFavorite
+                {isFavorite
+                    ? <FavoriteIcon
+                            className="icon"
+                            sx={{ cursor: 'pointer' }}
+                            onClick={isFavorite
+                                ? removeFavorite
+                                : addFavorite}
+                    />
+                    : <FavoriteBorderIcon
+                            className="icon"
+                            sx={{ cursor: 'pointer' }}
+                            onClick={isFavorite
+                                ? removeFavorite
+                                : addFavorite}
+                    />
                 }
-            >
-                {isFavorite 
-                    ? 'Unfavorite' 
-                    : 'Favorite'
-                }
-            </button>
         </>
     );
 }
