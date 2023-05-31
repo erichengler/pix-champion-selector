@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import NoteAddOutlinedIcon from '@mui/icons-material/NoteAddOutlined';
+import DescriptionIcon from '@mui/icons-material/Description';
 
 // ------- Modal styling -------
 const style = {
@@ -116,13 +118,15 @@ function NotesButton({ champion, favorite, name, result }) {
     return (
         <>
             {/* ------- Add note or Edit note button ------- */}
-            <button onClick={handleOpen}>
-                {favorite === undefined
-                    // ------- Checking if a note exists -------
-                    ? (thisNote === undefined ? 'Add Note' : 'Edit Note')
-                    : (favorite.note == undefined ? 'Add Note' : 'Edit Note')
-                }
-            </button>
+            {favorite === undefined
+                // ------- Checking if a note exists -------
+                ? (thisNote === undefined 
+                    ? <NoteAddOutlinedIcon className="note-icon" onClick={handleOpen} />
+                    : <DescriptionIcon className="note-icon" onClick={handleOpen} />)
+                : (favorite.note == undefined 
+                    ? <NoteAddOutlinedIcon className="note-icon" onClick={handleOpen} /> 
+                    : <DescriptionIcon className="note-icon" onClick={handleOpen} />)
+            }
 
             {/* ------- Modal ------- */}
             <Modal

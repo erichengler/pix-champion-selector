@@ -1,3 +1,7 @@
-.icon {
-    transform: scale(2)
+.favorite-icon {
+    transform: scale(1.7)
+}
+
+.note-icon {
+    transform: scale(1.6)
 }
