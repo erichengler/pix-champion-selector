@@ -49,14 +49,12 @@ function FavoriteButton({ id, result }) {
                 {isFavorite
                     ? <FavoriteIcon
                             className="favorite-icon"
-                            sx={{ cursor: 'pointer' }}
                             onClick={isFavorite
                                 ? removeFavorite
                                 : addFavorite}
                     />
                     : <FavoriteBorderIcon
                             className="favorite-icon"
-                            sx={{ cursor: 'pointer' }}
                             onClick={isFavorite
                                 ? removeFavorite
                                 : addFavorite}

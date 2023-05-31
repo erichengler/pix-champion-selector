@@ -9,6 +9,8 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import ClearIcon from '@mui/icons-material/Clear';
+import PortraitIcon from '@mui/icons-material/Portrait';
 
 function FavoriteItem({ favorite, champions }) {
 
@@ -36,46 +38,53 @@ function FavoriteItem({ favorite, champions }) {
 
             <Card variant="outlined" sx={{
                 width: 250,
-                height: 300,
-                padding: '20px',
-                paddingBottom: '52px',
+                height: 360,
+                paddingLeft: '12px',
+                paddingRight: '12px',
                 boxShadow: 6,
                 textAlign: 'center'
             }}>
-            {/* ------- Champion name, title ------- */}
-            <b>{favChampion.name}</b>
-            <br />
-            <i>{favChampion.title}</i>
-            <br /><br />
+                <CardContent>
 
-            {/* ------- Details button ------- */}
-            <button
-                onClick={() => toDetails(favorite)}
-            >
-                Details
-            </button>
-            &nbsp; &nbsp;
+                    {/* ------- Champion name, title ------- */}
+                    <Typography variant="h6">
+                        <b>{favChampion.name}</b>
+                    </Typography>
+                    <Typography>
+                        <i>{favChampion.title}</i>
+                    </Typography>
 
-            {/* ------- Notes button ------- */}
-            <NotesButton
-                favorite={favorite}
-                name={favChampion.name}
-            />
-            &nbsp; &nbsp;
+                    {/* ------- Details button ------- */}
+                    <PortraitIcon 
+                        onClick={() => toDetails(favorite)}
+                        sx={{transform: 'scale(1.75)', cursor: 'pointer' }}
+                    />
 
-            {/* ------- Remove button ------- */}
-            <button
-                onClick={() => removeFavorite(favorite)}
-            >
-                Remove
-            </button>
-            <br />
+                    {/* ------- Notes icon ------- */}
+                    <NotesButton
+                        favorite={favorite}
+                        name={favChampion.name}
+                    />
 
-            {/* ------- Matching champion image ------- */}
-            <img
-                src={favChampion.imageTile}
-                style={{ width: '250px' }}
-            />
+
+                    {/* ------- Remove icon ------- */}
+                    <ClearIcon 
+                        onClick={() => removeFavorite(favorite)}
+                        sx={{transform: 'scale(1.8)', cursor: 'pointer' }}
+                    />
+ 
+
+                    {/* ------- Matching champion image ------- */}
+                    <CardMedia>
+                        <img
+                            src={favChampion.imageTile}
+                            style={{
+                                border: '1px solid black',
+                                marginTop: '8px'
+                            }}
+                        />
+                    </CardMedia>
+                </CardContent>
             </Card>
         </Grid>
     );

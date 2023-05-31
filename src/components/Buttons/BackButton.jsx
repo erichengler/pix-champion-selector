@@ -1,5 +1,8 @@
 import { useHistory } from "react-router-dom";
 
+// ------- MUI Imports -------
+import { Button } from "@mui/material";
+
 function BackButton() {
 
     const history = useHistory();
@@ -12,7 +15,12 @@ function BackButton() {
 
     return (
         // ------- Back button -------
-        <button onClick={back}>Back</button>
+        <Button 
+            onClick={back}
+            variant="outlined"
+        >
+            Back
+        </Button>
     );
 }
 

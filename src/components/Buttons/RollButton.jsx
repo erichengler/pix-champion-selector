@@ -1,6 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
+// ------- MUI Imports -------
+import { Button } from "@mui/material";
+
 function RollButton({ favorites, championPool, result }) {
 
     const dispatch = useDispatch();
@@ -72,7 +75,8 @@ function RollButton({ favorites, championPool, result }) {
 
     return (
         <>
-            <button
+            <Button
+                variant="outlined"
                 onClick={result == undefined
                     ? roll
                     : reroll
@@ -82,7 +86,7 @@ function RollButton({ favorites, championPool, result }) {
                     ? 'Roll'
                     : 'Reroll'
                 }
-            </button>
+            </Button>
         </>
     );
 }
