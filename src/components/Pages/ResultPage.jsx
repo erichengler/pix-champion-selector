@@ -7,6 +7,9 @@ import BlacklistButton from '../Buttons/BlacklistButton';
 import RollButton from '../Buttons/RollButton';
 import BackButton from '../Buttons/BackButton';
 
+// ------- MUI Imports -------
+import { Container, Typography, Grid } from '@mui/material';
+
 function ResultPage() {
 
     const dispatch = useDispatch();
@@ -25,42 +28,70 @@ function ResultPage() {
             ? <h2 className='container'>Please go back and roll again.</h2>
             :
 
-            <div className="container">
-                <center>
-                    <h3>This game, Pix thinks you should play...</h3>
+            <Container className='container' sx={{ marginTop: '10px' }}>
 
-                    {/* ------- Pix image ------- */}
+                {/* ------- Pix message ------- */}
+                <Typography variant='h5' textAlign='center'>
+                    Pix thinks you should play...
+                </Typography>
+
+                {/* ------- Pix image ------- */}
+                <div style={{ textAlign: 'center' }}>
                     <img
                         src="images/pix-full.jpg"
-                        style={{ width: '1300px' }}
+                        style={{
+                            border: '1px solid black',
+                            marginTop: '25px', marginBottom: '25px',
+                            width: '900px'
+                        }}
                     />
+                </div>
+                <br />
 
-                    {/* ------- Result name ------- */}
-                    <h2>{result.champion.name}</h2>
+                <div style={{ marginLeft: '175px' }}>
+                    <Grid container spacing={-10} sx={{ textAlign: 'left' }}>
+                        <Grid item xs={9}>
 
-                    {/* ------- Favorite button ------- */}
-                    <FavoriteButton
-                        result={result}
-                    /> 
+                            {/* ------- Result name ------- */}
+                            <Typography variant='h4'>
+                                <b>{result.champion.name}</b>
+                            </Typography>
 
-                    {/* ------- Notes button ------- */}
-                    <NotesButton
-                        result={result}
-                    /> 
+                            {/* ------- Result title ------- */}
+                            <Typography>
+                                <i>{result.champion.title}</i>
+                            </Typography>
 
-                    {/* ------- Blacklist button ------- */}
-                    <BlacklistButton
-                        result={result}
-                    />
-                    <br />
+                        </Grid>
+
+                        <Grid item xs={3} sx={{ marginTop: '25px' }}>
+
+                            {/* ------- Favorite button ------- */}
+                            <FavoriteButton result={result} />
+
+                            {/* ------- Notes button ------- */}
+                            <NotesButton result={result} />
+
+                            {/* ------- Blacklist button ------- */}
+                            <BlacklistButton result={result} />
+
+                        </Grid>
+                    </Grid>
+                </div>
+
+                <div style={{ textAlign: 'center' }}>
 
                     {/* ------- Result image ------- */}
-                    <img src={result.champion.imageSplash} style={{ 
-                        width: '1000px',
-                        paddingBottom: '7px',
-                        paddingTop: '7px'
+                    <img src={result.champion.imageSplash} style={{
+                        width: '800px',
+                        marginBottom: '7px',
+                        marginTop: '7px',
+                        border: '1px solid black'
                     }} />
-                    <br /><br />
+                </div>
+                <br />
+
+                <div style={{ textAlign: 'center' }}>
 
                     {/* ------- Back button ------- */}
                     <BackButton /> &nbsp;
@@ -69,9 +100,9 @@ function ResultPage() {
                     <RollButton
                         result={result}
                         champions={champions}
-                    />
-                </center>
-            </div>
+                    />   
+                </div>
+            </Container>
     );
 }
 

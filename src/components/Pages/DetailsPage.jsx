@@ -31,7 +31,7 @@ function DetailsPage() {
         }}>
             <Card sx={{
                 width: '800px',
-                padding: '30px',
+                padding: '32px',
                 paddingTop: '22px',
                 marginTop: '35px',
                 boxShadow: 6,

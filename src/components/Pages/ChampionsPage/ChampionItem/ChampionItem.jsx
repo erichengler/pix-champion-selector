@@ -17,7 +17,7 @@ function ChampionItem({ champion }) {
                 key={champion.id}
                 src={champion.imageSmall}
                 alt={champion.name}
-                style={{ padding: '5px', cursor: 'pointer' }}
+                style={{ padding: '9px', cursor: 'pointer' }}
                 onClick={toDetails}             
             />
             <span className="champion-name">{champion.name}</span>
