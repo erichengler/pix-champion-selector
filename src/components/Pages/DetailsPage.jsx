@@ -37,7 +37,8 @@ function DetailsPage() {
                 boxShadow: 6,
             }}>
                 <Grid container spacing={2}>
-                    <Grid item xs={9.85}>
+                    <Grid item xs={10}>
+
                         {/* ------- Champion name ------- */}
                         <Typography variant="h4">
                             <b>{champion[0].name}</b>
@@ -49,7 +50,8 @@ function DetailsPage() {
                         </Typography>
                     </Grid>
 
-                    <Grid item xs={2.15} style={{ marginTop: '25px' }}>
+                    <Grid item xs={2} style={{ marginTop: '25px' }}>
+
                         {/* ------- Favorite button ------- */}
                         <FavoriteButton
                             id={id}

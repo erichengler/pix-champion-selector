@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 
 // ------- Material UI imports -------
-import PersonRemoveOutlinedIcon from '@mui/icons-material/PersonRemoveOutlined';
-import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
+import NoAccountsOutlinedIcon from '@mui/icons-material/NoAccountsOutlined';
+import NoAccountsIcon from '@mui/icons-material/NoAccounts';
 
 function BlacklistButton({ id, result }) {
 
@@ -46,14 +46,14 @@ function BlacklistButton({ id, result }) {
         <>
             {/* ------- Add to / remove from blacklist button ------- */}
                 {isBlacklist
-                    ? <PersonRemoveIcon
+                    ? <NoAccountsIcon
                             className="blacklist-icon"
                             onClick={isBlacklist
                                 ? removeFromBlacklist
                                 : addToBlacklist
                             }
                     />
-                    : <PersonRemoveOutlinedIcon
+                    : <NoAccountsOutlinedIcon
                             className="blacklist-icon"
                             onClick={isBlacklist
                                 ? removeFromBlacklist

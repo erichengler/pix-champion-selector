@@ -125,10 +125,10 @@ function NotesButton({ champion, favorite, name, result, stylez }) {
                         className="note-icon" 
                         onClick={handleOpen} 
                         sx={{
-                            transform: 'scale(1.6)',
+                            transform: 'scale(1.65)',
                             marginLeft: '15px',
                             marginRight: '15px',
-                            marginTop: '10px',
+                            marginTop: '12px',
                             cursor: 'pointer',
                         }}
                     />
@@ -136,10 +136,10 @@ function NotesButton({ champion, favorite, name, result, stylez }) {
                         className="note-icon" 
                         onClick={handleOpen} 
                         sx={{
-                            transform: 'scale(1.6)',
+                            transform: 'scale(1.65)',
                             marginLeft: '15px',
                             marginRight: '15px',
-                            marginTop: '10px',
+                            marginTop: '12px',
                             cursor: 'pointer',
                         }}
                     />)

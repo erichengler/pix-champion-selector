@@ -48,12 +48,13 @@ function ResultPage() {
                 </div>
                 <br />
 
+                {/* ------- Result ------- */}
                 <div style={{ textAlign: 'center' }}>
                         <Grid container spacing={2} sx={{ 
                             maxWidth: '830px',
                             margin: '0 auto'
                         }}>
-                            <Grid item xs={9.3} sx={{ 
+                            <Grid item xs={9.5} sx={{ 
                                 textAlign: 'left', 
                                 display: 'inline-block' 
                             }}>
@@ -70,7 +71,7 @@ function ResultPage() {
 
                             </Grid>
 
-                            <Grid item xs={2.7} sx={{ marginTop: '25px' }}>
+                            <Grid item xs={2.5} sx={{ marginTop: '25px' }}>
 
                                 {/* ------- Favorite button ------- */}
                                 <FavoriteButton result={result} />
