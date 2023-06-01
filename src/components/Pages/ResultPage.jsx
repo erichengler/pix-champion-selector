@@ -48,35 +48,41 @@ function ResultPage() {
                 </div>
                 <br />
 
-                <div style={{ marginLeft: '175px' }}>
-                    <Grid container spacing={-10} sx={{ textAlign: 'left' }}>
-                        <Grid item xs={9}>
+                <div style={{ textAlign: 'center' }}>
+                        <Grid container spacing={2} sx={{ 
+                            maxWidth: '830px',
+                            margin: '0 auto'
+                        }}>
+                            <Grid item xs={9.3} sx={{ 
+                                textAlign: 'left', 
+                                display: 'inline-block' 
+                            }}>
 
-                            {/* ------- Result name ------- */}
-                            <Typography variant='h4'>
-                                <b>{result.champion.name}</b>
-                            </Typography>
+                                {/* ------- Result name ------- */}
+                                <Typography variant='h4'>
+                                    <b>{result.champion.name}</b>
+                                </Typography>
 
-                            {/* ------- Result title ------- */}
-                            <Typography>
-                                <i>{result.champion.title}</i>
-                            </Typography>
+                                {/* ------- Result title ------- */}
+                                <Typography>
+                                    <i>{result.champion.title}</i>
+                                </Typography>
 
+                            </Grid>
+
+                            <Grid item xs={2.7} sx={{ marginTop: '25px' }}>
+
+                                {/* ------- Favorite button ------- */}
+                                <FavoriteButton result={result} />
+
+                                {/* ------- Notes button ------- */}
+                                <NotesButton result={result} />
+
+                                {/* ------- Blacklist button ------- */}
+                                <BlacklistButton result={result} />
+
+                            </Grid>
                         </Grid>
-
-                        <Grid item xs={3} sx={{ marginTop: '25px' }}>
-
-                            {/* ------- Favorite button ------- */}
-                            <FavoriteButton result={result} />
-
-                            {/* ------- Notes button ------- */}
-                            <NotesButton result={result} />
-
-                            {/* ------- Blacklist button ------- */}
-                            <BlacklistButton result={result} />
-
-                        </Grid>
-                    </Grid>
                 </div>
 
                 <div style={{ textAlign: 'center' }}>
@@ -100,7 +106,7 @@ function ResultPage() {
                     <RollButton
                         result={result}
                         champions={champions}
-                    />   
+                    />
                 </div>
             </Container>
     );

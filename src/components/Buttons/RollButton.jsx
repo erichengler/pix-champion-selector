@@ -82,10 +82,7 @@ function RollButton({ favorites, championPool, result }) {
                     : reroll
                 }
             >
-                {result == undefined
-                    ? 'Roll'
-                    : 'Reroll'
-                }
+                Roll
             </Button>
         </>
     );
