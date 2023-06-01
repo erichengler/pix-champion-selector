@@ -4,9 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import FavoriteItem from './FavoriteItem';
 import RollButton from '../../Buttons/RollButton';
 
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
-import Container from '@mui/material/Container';
+// ------- MUI Imports -------
+import { Container, Typography, Grid } from '@mui/material';
 
 function FavoritesPage() {
 
@@ -58,7 +57,7 @@ function FavoritesPage() {
                             }
                         </Grid>
                         <br />
-                        
+
                         {/* ------- Roll button ------- */}
                         <center>
                             <RollButton
