@@ -73,8 +73,6 @@ function ChampionFilter({ champions, notes, filter }) {
 
     return (
         <div>
-            <h2>Filter</h2>
-
             {/* ------- Champions filter form ------- */}
             <form id='filterForm'>
                 {/* ------- Filter by class text ------- */}

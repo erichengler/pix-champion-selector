@@ -3,8 +3,11 @@ import Typography from '@mui/material/Typography';
 function AboutPage() {
 	return (
 		<div className="container">
+			<Typography variant="h3" sx={{ textAlign: 'center' }}>
+				About
+			</Typography>
+			<br />
 			<Typography>
-				<h2>About</h2>
 				<ul>
 					<li>
 						This application was designed and developed by <b>Erich Engler</b> for
@@ -89,7 +92,6 @@ function AboutPage() {
 						to see where this path takes me into the future.
 					</li>
 				</ul>
-
 			</Typography>
 		</div>
 	);

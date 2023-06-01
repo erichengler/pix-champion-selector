@@ -7,6 +7,8 @@ import DisableFilter from '../../Checkboxes/DisableFilter';
 import IncludeBlacklist from '../../Checkboxes/IncludeBlacklist';
 import RollButton from '../../Buttons/RollButton';
 
+import { Typography } from '@mui/material';
+
 function ChampionsPage() {
 
 	const dispatch = useDispatch();
@@ -60,14 +62,19 @@ function ChampionsPage() {
 
 	return (
 		<div className="container">
+			<Typography variant="h3" sx={{ textAlign: 'center' }}>
+				Champions
+			</Typography>
+			<br /><br />
 
 			{/* ------- User filter ------- */}
-			<center>
-			<ChampionFilter
-				champions={champions}
-				notes={notes}
-				filter={filter}
-			/>
+			<div style={{ textAlign: 'center' }}>
+				<ChampionFilter
+					champions={champions}
+					notes={notes}
+					filter={filter}
+				/>
+			</div>
 			<br /><br />
 
 			{/* ------- Search by name ------- */}
@@ -107,9 +114,8 @@ function ChampionsPage() {
 				championPool={modifiedChampions}
 				style={{}}
 			/>
-			</center>
-
 		</div>
+
 	);
 }
 
