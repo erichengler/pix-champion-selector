@@ -4,14 +4,6 @@
     cursor: pointer;
 }
 
-.note-icon {
-    transform: scale(1.6);
-    margin-left: 15px;
-    margin-right: 15px;
-    margin-top: 10px;
-    cursor: pointer;
-}
-
 .blacklist-icon {
     transform: scale(1.8);
     margin-left: 8px;

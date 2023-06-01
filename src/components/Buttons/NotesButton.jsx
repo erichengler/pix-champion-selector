@@ -20,7 +20,7 @@ const style = {
     p: 4,
 };
 
-function NotesButton({ champion, favorite, name, result }) {
+function NotesButton({ champion, favorite, name, result, stylez }) {
 
     const dispatch = useDispatch();
 
@@ -121,11 +121,51 @@ function NotesButton({ champion, favorite, name, result }) {
             {favorite === undefined
                 // ------- Checking if a note exists -------
                 ? (thisNote === undefined 
-                    ? <NoteAddOutlinedIcon className="note-icon" onClick={handleOpen} />
-                    : <DescriptionIcon className="note-icon" onClick={handleOpen} />)
+                    ? <NoteAddOutlinedIcon 
+                        className="note-icon" 
+                        onClick={handleOpen} 
+                        sx={{
+                            transform: 'scale(1.6)',
+                            marginLeft: '15px',
+                            marginRight: '15px',
+                            marginTop: '10px',
+                            cursor: 'pointer',
+                        }}
+                    />
+                    : <DescriptionIcon 
+                        className="note-icon" 
+                        onClick={handleOpen} 
+                        sx={{
+                            transform: 'scale(1.6)',
+                            marginLeft: '15px',
+                            marginRight: '15px',
+                            marginTop: '10px',
+                            cursor: 'pointer',
+                        }}
+                    />)
                 : (favorite.note == undefined 
-                    ? <NoteAddOutlinedIcon className="note-icon" onClick={handleOpen} /> 
-                    : <DescriptionIcon className="note-icon" onClick={handleOpen} />)
+                    ? <NoteAddOutlinedIcon 
+                        className="note-icon" 
+                        onClick={handleOpen} 
+                        sx={{
+                            transform: 'scale(1.18)',
+                            cursor: 'pointer',
+                            position: 'absolute',
+                            top: 7,
+                            left: 37,
+                        }}
+                    /> 
+                    : <DescriptionIcon 
+                        className="note-icon" 
+                        onClick={handleOpen}
+                        sx={{
+                            transform: 'scale(1.18)',
+                            cursor: 'pointer',
+                            position: 'absolute',
+                            top: 7,
+                            left: 37,
+                        }} 
+                    />)
             }
 
             {/* ------- Modal ------- */}

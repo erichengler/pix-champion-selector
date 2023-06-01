@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import './ChampionFilter.css'
 
+// ------- MUI Imports -------
+import { Button } from '@mui/material';
+
 function ChampionFilter({ champions, notes, filter }) {
 
     const dispatch = useDispatch();
@@ -201,7 +204,12 @@ function ChampionFilter({ champions, notes, filter }) {
                 <br /><br />
 
                 {/* ------- Reset button ------- */}
-                <button onClick={resetFilter}>Reset</button> &nbsp;
+                <Button 
+                    variant='outlined'
+                    onClick={resetFilter}
+                >
+                    Reset
+                </Button> &nbsp;
             </form>
         </div>
     );

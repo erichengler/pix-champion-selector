@@ -37,8 +37,9 @@ function FavoriteItem({ favorite, champions }) {
         <Grid item sx={{ mx: '25px', my: '25px' }}>
 
             <Card variant="outlined" sx={{
+                position: 'relative',
                 width: 250,
-                height: 360,
+                height: 344,
                 paddingLeft: '12px',
                 paddingRight: '12px',
                 boxShadow: 6,
@@ -46,18 +47,16 @@ function FavoriteItem({ favorite, champions }) {
             }}>
                 <CardContent>
 
-                    {/* ------- Champion name, title ------- */}
-                    <Typography variant="h6">
-                        <b>{favChampion.name}</b>
-                    </Typography>
-                    <Typography>
-                        <i>{favChampion.title}</i>
-                    </Typography>
-
                     {/* ------- Details button ------- */}
-                    <PortraitIcon 
+                    <PortraitIcon
                         onClick={() => toDetails(favorite)}
-                        sx={{transform: 'scale(1.75)', cursor: 'pointer' }}
+                        sx={{
+                            transform: 'scale(1.3)',
+                            cursor: 'pointer',
+                            position: 'absolute',
+                            top: 7,
+                            left: 7,
+                        }}
                     />
 
                     {/* ------- Notes icon ------- */}
@@ -68,11 +67,25 @@ function FavoriteItem({ favorite, champions }) {
 
 
                     {/* ------- Remove icon ------- */}
-                    <ClearIcon 
+                    <ClearIcon
                         onClick={() => removeFavorite(favorite)}
-                        sx={{transform: 'scale(1.8)', cursor: 'pointer' }}
+                        sx={{
+                            transform: 'scale(1.2)',
+                            cursor: 'pointer',
+                            position: 'absolute',
+                            top: 5,
+                            right: 5,
+                        }}
                     />
- 
+                    <br />
+
+                    {/* ------- Champion name, title ------- */}
+                    <Typography variant="h6">
+                        <b>{favChampion.name}</b>
+                    </Typography>
+                    <Typography>
+                        <i>{favChampion.title}</i>
+                    </Typography>
 
                     {/* ------- Matching champion image ------- */}
                     <CardMedia>
