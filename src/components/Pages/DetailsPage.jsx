@@ -81,7 +81,7 @@ function DetailsPage() {
                 </CardMedia>
 
                 {/* ------- Class, difficulty and region ------- */}
-                <center>
+                <div style={{ textAlign: 'center' }}>
                     <Typography>
                         {/* This turns "{Enchanter,Warden}" into "Enchanter, Warden" */}
                         Class: {champion[0].class.slice(1, -1)
@@ -93,16 +93,14 @@ function DetailsPage() {
                     <br />
 
                     {/* ------- Champion lore ------- */}
-                    <Typography
-                        sx={{ width: '750px' }}
-                    >
+                    <Typography>
                         {champion[0].lore}
                     </Typography>
                     <br />
 
                     {/* ------- Back button ------- */}
                     <BackButton />
-                </center>
+                </div>
             </Card>
         </Container>
     );

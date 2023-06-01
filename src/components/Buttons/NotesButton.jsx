@@ -151,7 +151,7 @@ function NotesButton({ champion, favorite, name, result, stylez }) {
                             transform: 'scale(1.18)',
                             cursor: 'pointer',
                             position: 'absolute',
-                            top: 7,
+                            top: 8,
                             left: 37,
                         }}
                     /> 
@@ -162,7 +162,7 @@ function NotesButton({ champion, favorite, name, result, stylez }) {
                             transform: 'scale(1.18)',
                             cursor: 'pointer',
                             position: 'absolute',
-                            top: 7,
+                            top: 8,
                             left: 37,
                         }} 
                     />)

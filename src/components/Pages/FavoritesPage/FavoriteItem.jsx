@@ -54,8 +54,8 @@ function FavoriteItem({ favorite, champions }) {
                             transform: 'scale(1.3)',
                             cursor: 'pointer',
                             position: 'absolute',
-                            top: 7,
-                            left: 7,
+                            top: 8,
+                            left: 8,
                         }}
                     />
 
