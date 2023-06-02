@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import ChampionFilter from './ChampionFilter/ChampionFilter';
+import ChampionFilter from './ChampionFilter';
 import ChampionItem from './ChampionItem/ChampionItem';
 import DisableFilter from '../../Checkboxes/DisableFilter';
 import IncludeBlacklist from '../../Checkboxes/IncludeBlacklist';
@@ -75,41 +75,42 @@ function ChampionsPage() {
 					filter={filter}
 				/>
 			</div>
-			<br /><br />
+			<br /><hr /><br />
 
 			{/* ------- Search by name ------- */}
-			<input
-				type="text"
-				value={searchQuery}
-				onChange={(e) => setSearchQuery(e.target.value)}
-				placeholder="Search by name..."
-			/>
+			<Typography>
+				<input
+					type="text"
+					value={searchQuery}
+					onChange={(e) => setSearchQuery(e.target.value)}
+					placeholder="Search by name..."
+				/>
 
-			{/* ------- Disable filter checkbox ------- */}
-			<DisableFilter
-				emptyFilter={emptyFilter}
-				checkboxToggle={checkboxToggle}
-			/>
+				{/* ------- Disable filter checkbox ------- */}
+				<DisableFilter
+					emptyFilter={emptyFilter}
+					checkboxToggle={checkboxToggle}
+				/>
 
-			{/* ------- Include blacklist checkbox ------- */}
-			<IncludeBlacklist
-				blacklist={blacklist}
-				checkboxToggle={checkboxToggle}
-			/>
-			<br />
+				{/* ------- Include blacklist checkbox ------- */}
+				<IncludeBlacklist
+					blacklist={blacklist}
+					checkboxToggle={checkboxToggle}
+				/>
+			</Typography>
 
 			{/* ------- Maps through champions ------- */}
 			<div style={{ textAlign: 'center' }}>
-			{
-				displayedChampions.map((champion) => (
-					<ChampionItem
-						key={champion.id}
-						champion={champion}
-					/>
-				))
-			}
+				{
+					displayedChampions.map((champion) => (
+						<ChampionItem
+							key={champion.id}
+							champion={champion}
+						/>
+					))
+				}
 			</div>
-			<br /><br /><br />
+			<br />
 
 			{/* ------- Roll button ------- */}
 			<RollButton
