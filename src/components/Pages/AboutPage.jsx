@@ -16,7 +16,7 @@ function AboutPage() {
 					<br />
 					<li>
 						Some of the technologies I used to build this app include React,
-						Redux, Node, Express, Material UI, and SQL.
+						Redux, Redux-Saga, Node, Express, Material UI, and SQL.
 					</li>
 					<br />
 					<li>

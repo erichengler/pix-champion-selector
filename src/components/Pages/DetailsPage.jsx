@@ -91,11 +91,11 @@ function DetailsPage() {
                 <div style={{ textAlign: 'center' }}>
                     <Typography>
                         {/* This turns "{Enchanter,Warden}" into "Enchanter, Warden" */}
-                        Class: {champion[0].class.slice(1, -1)
+                        <b>Class:</b> {champion[0].class.slice(1, -1)
                             .split(',').map(classItem => classItem
                                 .trim()).join(', ')} &nbsp; • &nbsp;
-                        Difficulty: {champion[0].difficulty} &nbsp; • &nbsp;
-                        Region: {champion[0].region}
+                        <b>Difficulty:</b> {champion[0].difficulty} &nbsp; • &nbsp;
+                        <b>Region:</b> {champion[0].region}
                     </Typography>
                     <br />
 

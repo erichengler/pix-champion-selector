@@ -2,12 +2,9 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // ------- MaterialUI Imports -------
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
+import { Box, Typography, Modal, Button } from '@mui/material';
 import NoteAddOutlinedIcon from '@mui/icons-material/NoteAddOutlined';
 import DescriptionIcon from '@mui/icons-material/Description';
-import { Button } from '@mui/material';
 
 // ------- Modal styling -------
 const style = {
@@ -18,10 +15,28 @@ const style = {
     bgcolor: 'background.paper',
     border: '1px solid #000',
     boxShadow: 10,
-    p: 4,
-};
+    padding: '30px 35px 20px 35px'
+}
 
-function NotesButton({ champion, favorite, name, result, stylez }) {
+// ------- Details page note icon style -------
+const noteStyleOne = {
+    transform: 'scale(1.65)',
+    marginLeft: '15px',
+    marginRight: '15px',
+    marginTop: '12px',
+    cursor: 'pointer',
+}
+
+// ------- Favorites page note icon style -------
+const noteStyleTwo = {
+    transform: 'scale(1.18)',
+    cursor: 'pointer',
+    position: 'absolute',
+    top: 8,
+    left: 37,
+}
+
+function NotesButton({ champion, favorite, name, result }) {
 
     const dispatch = useDispatch();
 
@@ -77,8 +92,10 @@ function NotesButton({ champion, favorite, name, result, stylez }) {
 
     // ------- Creates notes for the champion -------
     const createNotes = (event) => {
+
         // ------- Grabs note from modal textfield -------
         let note = event.target.parentElement.children[1].value;
+
         // ------- Prevents creating an empty note -------
         if (note === '') {
             alert('Cannot create empty note.')
@@ -93,8 +110,10 @@ function NotesButton({ champion, favorite, name, result, stylez }) {
 
     // ------- Updates notes for the champion -------
     const updateNotes = (event) => {
+
         // ------- Grabs note from modal textfield -------
         let note = event.target.parentElement.children[1].value;
+
         // ------- Prevents updating to an empty note -------
         if (note === '') {
             alert('Cannot update to an empty note.')
@@ -120,52 +139,29 @@ function NotesButton({ champion, favorite, name, result, stylez }) {
         <>
             {/* ------- Add note or Edit note button ------- */}
             {favorite === undefined
+            
                 // ------- Checking if a note exists -------
                 ? (thisNote === undefined 
                     ? <NoteAddOutlinedIcon 
                         className="note-icon" 
                         onClick={handleOpen} 
-                        sx={{
-                            transform: 'scale(1.65)',
-                            marginLeft: '15px',
-                            marginRight: '15px',
-                            marginTop: '12px',
-                            cursor: 'pointer',
-                        }}
+                        sx={noteStyleOne}
                     />
                     : <DescriptionIcon 
                         className="note-icon" 
                         onClick={handleOpen} 
-                        sx={{
-                            transform: 'scale(1.65)',
-                            marginLeft: '15px',
-                            marginRight: '15px',
-                            marginTop: '12px',
-                            cursor: 'pointer',
-                        }}
+                        sx={noteStyleOne}
                     />)
                 : (favorite.note == undefined 
                     ? <NoteAddOutlinedIcon 
                         className="note-icon" 
                         onClick={handleOpen} 
-                        sx={{
-                            transform: 'scale(1.18)',
-                            cursor: 'pointer',
-                            position: 'absolute',
-                            top: 8,
-                            left: 37,
-                        }}
+                        sx={noteStyleTwo}
                     /> 
                     : <DescriptionIcon 
                         className="note-icon" 
                         onClick={handleOpen}
-                        sx={{
-                            transform: 'scale(1.18)',
-                            cursor: 'pointer',
-                            position: 'absolute',
-                            top: 8,
-                            left: 37,
-                        }} 
+                        sx={noteStyleTwo} 
                     />)
             }
 
@@ -190,7 +186,8 @@ function NotesButton({ champion, favorite, name, result, stylez }) {
                             border: '1px solid black',
                             fontSize: '16px',
                             maxWidth: '500px',
-                            maxHeight: '280px'
+                            maxHeight: '280px',
+                            padding: '10px'
                         }}
                     >
                     </textarea>

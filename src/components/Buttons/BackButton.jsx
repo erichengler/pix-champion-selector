@@ -19,7 +19,7 @@ function BackButton() {
             color='inherit'
             onClick={back}
             variant="outlined"
-            sx={{ boxShadow: 3, backgroundColor: 'white' }}
+            sx={{ boxShadow: 3, backgroundColor: '#a7a7cc' }}
         >
             Back
         </Button>

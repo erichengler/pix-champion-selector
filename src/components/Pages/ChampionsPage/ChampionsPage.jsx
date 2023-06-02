@@ -7,7 +7,7 @@ import DisableFilter from '../../Checkboxes/DisableFilter';
 import IncludeBlacklist from '../../Checkboxes/IncludeBlacklist';
 import RollButton from '../../Buttons/RollButton';
 
-import { Typography } from '@mui/material';
+import { Typography, TextField } from '@mui/material';
 
 function ChampionsPage() {
 
@@ -61,14 +61,14 @@ function ChampionsPage() {
 	);
 
 	return (
-		<div className="container">
-			<Typography variant="h3" sx={{ textAlign: 'center' }}>
+		<div className="container" style={{ textAlign: 'center' }}>
+			<Typography variant="h3">
 				Champions
 			</Typography>
 			<br /><br />
 
 			{/* ------- User filter ------- */}
-			<div style={{ textAlign: 'center' }}>
+			<div>
 				<ChampionFilter
 					champions={champions}
 					notes={notes}
@@ -99,6 +99,7 @@ function ChampionsPage() {
 			<br />
 
 			{/* ------- Maps through champions ------- */}
+			<div style={{ textAlign: 'center' }}>
 			{
 				displayedChampions.map((champion) => (
 					<ChampionItem
@@ -107,6 +108,7 @@ function ChampionsPage() {
 					/>
 				))
 			}
+			</div>
 			<br /><br /><br />
 
 			{/* ------- Roll button ------- */}
@@ -115,7 +117,6 @@ function ChampionsPage() {
 				style={{}}
 			/>
 		</div>
-
 	);
 }
 

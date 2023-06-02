@@ -203,7 +203,7 @@ function ChampionFilter({ champions, notes, filter }) {
 
                 {/* ------- Reset button ------- */}
                 <Button 
-                    sx={{ boxShadow: 3, backgroundColor: 'white' }}
+                    sx={{ boxShadow: 3, backgroundColor: '#a7a7cc' }}
                     color="inherit"
                     variant='outlined'
                     onClick={resetFilter}
