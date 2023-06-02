@@ -16,8 +16,10 @@ function BackButton() {
     return (
         // ------- Back button -------
         <Button 
+            color='inherit'
             onClick={back}
             variant="outlined"
+            sx={{ boxShadow: 3, backgroundColor: 'white' }}
         >
             Back
         </Button>

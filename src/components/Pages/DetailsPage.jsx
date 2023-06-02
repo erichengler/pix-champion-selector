@@ -25,6 +25,10 @@ function DetailsPage() {
     const champion = useSelector(store => store.thisChampion);
 
     return (
+        // ------- Checking reducer -------
+        champion.length === 0 
+            ? <h2>Loading...</h2>
+            :
         <Container sx={{
             display: 'flex',
             justifyContent: 'center'
@@ -35,6 +39,7 @@ function DetailsPage() {
                 paddingTop: '22px',
                 marginTop: '35px',
                 boxShadow: 6,
+                backgroundColor: '#a7a7cc',
             }}>
                 <Grid container spacing={2}>
                     <Grid item xs={10}>

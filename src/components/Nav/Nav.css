@@ -4,7 +4,7 @@
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 3px;
-	background-color: #354458;
+	background-color: #3f5475;
 	overflow: hidden;
 }
 
@@ -23,7 +23,7 @@
 .navLink {
 	display: inline-block;
 	color: #f2f2f2;
-	background-color: #354458;
+	background-color: #3f5475;
 	text-align: center;
 	padding: 25px 20px;
 	text-decoration: none;
@@ -31,7 +31,7 @@
 }
 
 .navLink:hover {
-	background-color: #415669;
+	background-color: #496083;
 }
 
 .signed-in-section {

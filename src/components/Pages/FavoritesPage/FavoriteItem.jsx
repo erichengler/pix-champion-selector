@@ -43,7 +43,8 @@ function FavoriteItem({ favorite, champions }) {
                 paddingLeft: '12px',
                 paddingRight: '12px',
                 boxShadow: 6,
-                textAlign: 'center'
+                textAlign: 'center',
+                backgroundColor: '#a7a7cc',
             }}>
                 <CardContent>
 

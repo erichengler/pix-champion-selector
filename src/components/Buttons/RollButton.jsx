@@ -76,6 +76,8 @@ function RollButton({ favorites, championPool, result }) {
     return (
         <>
             <Button
+                sx={{ boxShadow: 3, backgroundColor: 'white' }}
+                color="inherit"
                 variant="outlined"
                 onClick={result == undefined
                     ? roll

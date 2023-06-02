@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import NoteAddOutlinedIcon from '@mui/icons-material/NoteAddOutlined';
 import DescriptionIcon from '@mui/icons-material/Description';
+import { Button } from '@mui/material';
 
 // ------- Modal styling -------
 const style = {
@@ -175,10 +176,10 @@ function NotesButton({ champion, favorite, name, result, stylez }) {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={style}>
+                <Box sx={style} textAlign='center'>
 
                     {/* ------- Modal header ------- */}
-                    <Typography variant="h6">
+                    <Typography variant="h6" textAlign='left'>
                         Notes for {notesHeader()}
                     </Typography>
 
@@ -194,12 +195,14 @@ function NotesButton({ champion, favorite, name, result, stylez }) {
                     >
                     </textarea>
                     <br />
-
+                    
+                    
                     {/* ------- Checking what page we're on ------- */}
                     {favorite === undefined ? (
                         <>
                             {/* ------- Cancel or Delete button ------- */}
-                            <button
+                            <Button
+                                color="inherit"
                                 onClick={thisNote === undefined
                                     ? handleClose
                                     : deleteNotes
@@ -209,10 +212,11 @@ function NotesButton({ champion, favorite, name, result, stylez }) {
                                     ? 'Cancel'
                                     : 'Delete'
                                 }
-                            </button>
+                            </Button>
 
                             {/* ------- Submit or Save button ------- */}
-                            <button
+                            <Button
+                                color="inherit"                            
                                 onClick={thisNote === undefined
                                     ? createNotes
                                     : updateNotes
@@ -222,12 +226,13 @@ function NotesButton({ champion, favorite, name, result, stylez }) {
                                     ? 'Submit'
                                     : 'Save'
                                 }
-                            </button>
+                            </Button>
                         </>
                     ) : (
                         <>
                             {/* ------- Cancel or Delete button ------- */}
-                            <button
+                            <Button
+                                color="inherit"
                                 onClick={favorite.note == undefined
                                     ? handleClose
                                     : deleteNotes
@@ -236,10 +241,11 @@ function NotesButton({ champion, favorite, name, result, stylez }) {
                                 {favorite.note == undefined
                                     ? 'Cancel'
                                     : 'Delete'}
-                            </button>
+                            </Button>
 
                             {/* ------- Submit or Save button ------- */}
-                            <button
+                            <Button
+                                color="inherit"
                                 onClick={favorite.note == undefined
                                     ? createNotes
                                     : updateNotes
@@ -249,7 +255,7 @@ function NotesButton({ champion, favorite, name, result, stylez }) {
                                     ? 'Submit'
                                     : 'Save'
                                 }
-                            </button>
+                            </Button>
                         </>
                     )}
                 </Box>
