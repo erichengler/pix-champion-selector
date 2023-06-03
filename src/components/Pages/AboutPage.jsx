@@ -36,7 +36,7 @@ function AboutPage() {
 					</li>
 					<br /><br />
 					<center>
-						<img src="/images/QRcodes.png" />
+						<img src="/images/QRcodes.png" width='600px' />
 					</center>
 					<br /><br />
 					<li>
