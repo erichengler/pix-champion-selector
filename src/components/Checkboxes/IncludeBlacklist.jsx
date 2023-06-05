@@ -12,6 +12,7 @@ function IncludeBlacklist({ blacklist, checkboxToggle }) {
 
     return (
         <>
+            &nbsp;&nbsp;
             {/* ------- Include blacklist checkbox ------- */}
             {blacklist.length === 0
                 ? ''

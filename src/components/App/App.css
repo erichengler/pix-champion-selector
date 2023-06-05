@@ -60,7 +60,6 @@ Button
 	text-decoration: none;
 }
 
-/* This line makes the "Register" and "Login" buttons look like links */
 .btn_asLink {
 	padding: 0;
 	border-width: 0;
@@ -110,6 +109,6 @@ Form Treatment
 }
 
 input {
-	margin: 5px;
+	margin: 2px;
 	margin-bottom: 10px;
 }

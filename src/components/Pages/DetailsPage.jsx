@@ -25,91 +25,96 @@ function DetailsPage() {
     const champion = useSelector(store => store.thisChampion);
 
     return (
-        // ------- Checking reducer -------
-        champion.length === 0 
-            ? <h2>Loading...</h2>
-            :
-        <Container sx={{
-            display: 'flex',
-            justifyContent: 'center'
-        }}>
-            <Card sx={{
-                width: '800px',
-                padding: '32px',
-                paddingTop: '22px',
-                marginTop: '35px',
-                boxShadow: 6,
-                backgroundColor: '#a7a7cc',
-            }}>
-                <Grid container spacing={2}>
-                    <Grid item xs={10}>
+        <>
+            {/* ------- Checking reducer ------- */}
+            {champion.length === 0
+                ? <h2>Loading...</h2>
+                :
+                <Container sx={{
+                    display: 'flex',
+                    justifyContent: 'center'
+                }}>
+                    <Card sx={{
+                        width: '800px',
+                        padding: '32px',
+                        paddingTop: '22px',
+                        marginTop: '35px',
+                        boxShadow: 6,
+                        backgroundColor: '#a7a7cc',
+                    }}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={10}>
 
-                        {/* ------- Champion name ------- */}
-                        <Typography variant="h4">
-                            <b>{champion[0].name}</b>
-                        </Typography>
+                                {/* ------- Champion name ------- */}
+                                <Typography variant="h4">
+                                    <b>{champion[0].name}</b>
+                                </Typography>
 
-                        {/* ------- Champion title ------- */}
-                        <Typography>
-                            <i>{champion[0].title}</i>
-                        </Typography>
-                    </Grid>
+                                {/* ------- Champion title ------- */}
+                                <Typography>
+                                    <i>{champion[0].title}</i>
+                                </Typography>
+                            </Grid>
 
-                    <Grid item xs={2} style={{ marginTop: '25px' }}>
+                            <Grid item xs={2} style={{ marginTop: '25px' }}>
 
-                        {/* ------- Favorite button ------- */}
-                        <FavoriteButton
-                            id={id}
-                        />
+                                {/* ------- Favorite button ------- */}
+                                <FavoriteButton
+                                    id={id}
+                                />
 
-                        {/* ------- Notes button ------- */}
-                        <NotesButton
-                            champion={champion}
-                        />
+                                {/* ------- Notes button ------- */}
+                                <NotesButton
+                                    champion={champion}
+                                />
 
-                        {/* ------- Blacklist button ------- */}
-                        <BlacklistButton
-                            id={id}
-                        />
-                    </Grid>
-                </Grid>
+                                {/* ------- Blacklist button ------- */}
+                                <BlacklistButton
+                                    id={id}
+                                />
+                            </Grid>
+                        </Grid>
 
-                {/* ------- Champion image ------- */}
-                <CardMedia>
-                    <img
-                        src={champion[0].imageSplash}
-                        style={{
-                            width: '798px',
-                            marginBottom: '7px',
-                            marginTop: '7px',
-                            border: '1px solid black',
-                        }}
-                    />
-                </CardMedia>
+                        {/* ------- Champion image ------- */}
+                        <CardMedia>
+                            <img
+                                src={champion[0].imageSplash}
+                                style={{
+                                    width: '798px',
+                                    marginBottom: '7px',
+                                    marginTop: '7px',
+                                    border: '1px solid black',
+                                }}
+                            />
+                        </CardMedia>
 
-                {/* ------- Class, difficulty and region ------- */}
-                <div style={{ textAlign: 'center' }}>
-                    <Typography>
-                        {/* This turns "{Enchanter,Warden}" into "Enchanter, Warden" */}
-                        <b>Class:</b> {champion[0].class.slice(1, -1)
-                            .split(',').map(classItem => classItem
-                                .trim()).join(', ')} &nbsp; • &nbsp;
-                        <b>Difficulty:</b> {champion[0].difficulty} &nbsp; • &nbsp;
-                        <b>Region:</b> {champion[0].region}
-                    </Typography>
-                    <br />
+                        {/* ------- Class, difficulty and region ------- */}
+                        <div style={{ textAlign: 'center' }}>
+                            <Typography>
+                                {/* This turns "{Enchanter,Warden}" into "Enchanter, Warden" */}
+                                <b>Class:</b> {champion[0].class.slice(1, -1)
+                                    .split(',').map(classItem => classItem
+                                        .trim()).join(', ')} &nbsp; • &nbsp;
+                                <b>Difficulty:</b> {champion[0].difficulty} &nbsp; • &nbsp;
+                                <b>Region:</b> {champion[0].region}
+                            </Typography>
+                            <br />
 
-                    {/* ------- Champion lore ------- */}
-                    <Typography>
-                        {champion[0].lore}
-                    </Typography>
-                    <br />
+                            {/* ------- Champion lore ------- */}
+                            <Typography>
+                                {champion[0].lore}
+                            </Typography>
+                        </div>
+                    </Card>
+                </Container>
+            }
+            <br />
 
-                    {/* ------- Back button ------- */}
-                    <BackButton />
-                </div>
-            </Card>
-        </Container>
+            {/* ------- Back button ------- */}
+            <div style={{ textAlign: 'center' }}>
+                <BackButton />
+            </div>
+        </>
     );
 }
 

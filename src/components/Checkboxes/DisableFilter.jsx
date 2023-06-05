@@ -11,6 +11,7 @@ function DisableFilter({ emptyFilter, checkboxToggle }) {
 
     return (
         <>
+            &nbsp;&nbsp;
             {/* ------- Disable filter checkbox ------- */}
             {emptyFilter
                 ? ''

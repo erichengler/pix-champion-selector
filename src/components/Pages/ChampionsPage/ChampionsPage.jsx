@@ -84,13 +84,14 @@ function ChampionsPage() {
 					value={searchQuery}
 					onChange={(e) => setSearchQuery(e.target.value)}
 					placeholder="Search by name..."
-				/>
+				/> 
 
 				{/* ------- Disable filter checkbox ------- */}
 				<DisableFilter
 					emptyFilter={emptyFilter}
 					checkboxToggle={checkboxToggle}
 				/>
+
 
 				{/* ------- Include blacklist checkbox ------- */}
 				<IncludeBlacklist
