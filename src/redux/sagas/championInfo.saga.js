@@ -27,6 +27,7 @@ function* fetchChampionInfo() {
 
 // ! ------- Change this to your version ------- !
 const version = '12.6.1';
+
 const processedChampions = [];
 
 function* fetchInfoByName(fetchedName) {

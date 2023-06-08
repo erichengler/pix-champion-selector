@@ -1,4 +1,6 @@
--- ! RUN THE FOLLOWING BEFORE REGISTERING / LOGGING IN
+-- ! ///////////////////////////////////////////////// ! --
+-- ! RUN THE FOLLOWING BEFORE REGISTERING / LOGGING IN ! --
+-- ! ///////////////////////////////////////////////// ! --
 
 ------- Create user table -------
 CREATE TABLE "user" (
@@ -43,8 +45,10 @@ CREATE TABLE "blacklist" (
 	"champion_id" INT REFERENCES "champions"
 );
 
--- ! UPON LOGIN, CHAMPIONS DATABASE WILL BE POPULATED
--- ! AFTER LOGIN, RUN THE FOLLOWING:
+-- ! ////////////////////////////////////////////////// ! --
+-- !  UPON LOGIN, CHAMPIONS DATABASE WILL BE POPULATED  ! --
+-- !        AFTER POPULATING, RUN THE FOLLOWING:        ! --
+-- ! ////////////////////////////////////////////////// ! --
 
 ------- Riot forgot to give these champions a difficulty -------
 UPDATE champions
