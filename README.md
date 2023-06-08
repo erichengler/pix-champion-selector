@@ -33,9 +33,9 @@ This application was designed to help players decide which champion to pick for 
 2. Create a database named `pix_app`.
 3. Refer to the `database.sql` file and use the first 5 queries to create the database tables.
 
------------------------ *** WARNING *** -----------------------
+-----------------------------------------------------------------
 - DO NOT run the rest of the queries yet! Only run the first 5 queries to create the database tables. We will return to run the rest of the queries in step 10.
----------------------------------------------------------------
+-----------------------------------------------------------------
 
 4. Run `npm install` in your terminal .
 5. Run `npm run server` in your terminal.
@@ -45,7 +45,7 @@ This application was designed to help players decide which champion to pick for 
 
 9. After logging in and landing on the User Page (You will be greeted by Pix at this point), the database will automatically populate every champion's `name`, `title`, `imageSplash`, `imageTile`, `imageSmall`, `difficulty` and `lore` from the Data Dragon API Library (by Riot Games).
 
------------------------ *** IMPORTANT *** -----------------------
+-----------------------------------------------------------------
 - At the time this application was created, the most recent Data Dragon version was `12.6.1`. This version contains 159 different champions from the game. Please ensure that all 159 champions are populated in the database before leaving the `User Page`. This may take up to a minute or so depending on your internet connection. If you leave the `User Page` before all the data is populated, please delete and recreate the `champions` database table and then return to the `User Page` to start the population process again.
 
 - I will try to update this application when newer versions of Data Dragon are released by Riot Games. If I end up behind on this (quite likely), you may need to replace the version variables in `/src/data/fetchChampionNames.js` and `/src/redux/sagas/championInfo.saga.js` with the current version of Data Dragon. The application will still function on an older version, but you may encounter outdated information or missing champions that were added to the game in a newer version.
