@@ -29,26 +29,31 @@ This application was designed to help players decide which champion to pick for 
 
 ## Installation / Setup
 
-1. Clone down this repository. You will need `node` and `npm` installed globally on your machine
-2. Create a database named `pix_app`
-3. Refer to the `database.sql` file and use the queries to create the 5 database tables
-4. In your editor of choice, run `npm install` in your terminal 
-5. Run `npm run server` in your terminal
-6. In a new terminal window, run `npm run client`
-7. Once the application is up and running, you will be required to register
-8. After registering, log in using your new username and password
+1. Clone down this repository. You will need `node` and `npm` installed globally on your machine. Open it up in your editor of choice.
+2. Create a database named `pix_app`.
+3. Refer to the `database.sql` file and use the first 5 queries to create the database tables.
 
-9. After logging in and landing on the User Page (You will be greeted by Pix at this point), the database will automatically populate every champion's `name`, `title`, `imageSplash`, `imageTile`, `imageSmall`, `difficulty` and `lore` from the Data Dragon API Library (by Riot Games)
+----------------------- *** WARNING *** -----------------------
+- DO NOT run the rest of the queries yet! Only run the first 5 queries to create the database tables. We will return to run the rest of the queries in step 10.
+---------------------------------------------------------------
 
-!!! ----------------- *** IMPORTANT *** ----------------- !!!
+4. Run `npm install` in your terminal .
+5. Run `npm run server` in your terminal.
+6. In a new terminal window, run `npm run client`.
+7. Once the application is up and running, you will be required to register.
+8. After registering, log in using your new username and password.
 
-- At the time this application was created, the most recent Data Dragon version was `12.6.1`. This version contains `159` different champions from the game. Please ensure that all `159` champions are populated in the database before leaving the `User Page`. This may take up to a minute or so depending on your internet connection. If you leave the `User Page` before all the data is populated, please delete and recreate the `champions` database table and then return to the `User Page` to start the population process again.
+9. After logging in and landing on the User Page (You will be greeted by Pix at this point), the database will automatically populate every champion's `name`, `title`, `imageSplash`, `imageTile`, `imageSmall`, `difficulty` and `lore` from the Data Dragon API Library (by Riot Games).
+
+----------------------- *** IMPORTANT *** -----------------------
+- At the time this application was created, the most recent Data Dragon version was `12.6.1`. This version contains 159 different champions from the game. Please ensure that all 159 champions are populated in the database before leaving the `User Page`. This may take up to a minute or so depending on your internet connection. If you leave the `User Page` before all the data is populated, please delete and recreate the `champions` database table and then return to the `User Page` to start the population process again.
 
 - I will try to update this application when newer versions of Data Dragon are released by Riot Games. If I end up behind on this (quite likely), you may need to replace the version variables in `/src/data/fetchChampionNames.js` and `/src/redux/sagas/championInfo.saga.js` with the current version of Data Dragon. The application will still function on an older version, but you may encounter outdated information or missing champions that were added to the game in a newer version.
+-----------------------------------------------------------------
 
-!!! ----------------------------------------------------- !!!
+10. After the database has been fully populated, refer back to the `database.sql` file and run the queries to update `difficulty` (where it is missing from), `class` and `region` in the champions table. 
 
-10. After the database has been fully populated, refer back to the `database.sql` file and run the queries to update `difficulty` (where it is missing from), `class` and `region` in the champions table.
+- At this point, if there is any missing information in the champions table (more likely if you had to update to a newer version), feel free to add your own values. The class of a champion can be found at `https://leagueoflegends.fandom.com/wiki/(CHAMPION_NAME)/LoL` and the region of a champion can be found at `https://www.leagueoflegends.com/en-us/champions/(CHAMPION_NAME)`. Replace (CHAMPION_NAME) with the name of the champion.
 
 ## Usage
 
@@ -80,11 +85,13 @@ This application was designed to help players decide which champion to pick for 
 
 ## Challenges / What I Learned
 
-This was my first time working with an API in a project and it was a lot more work than I thought to populate my database with all of the champion images and information from Riot Games. I could have just manually entered all of this information but I wanted a challenge and thats what I got. It felt great to get it working in the end.
+- This was my first time working with an API in a project and it was a lot more work than I thought to populate my database with all of the champion images and information from Riot Games. I could have just manually entered all of this information but I wanted a challenge and thats what I got. It felt great to get it working in the end.
 
-I ended up wanting to use information that the API did not contain such as `Region` and `Class` as well (the region each champion is from was obtained from the League of Legends website but was missing from the API. And the class information was obtained from the League of Legends wiki page).
+- Building the filter on the champions page also pushed me out of my comfort zone quite a bit. Originally I had the filter on a separate page and this ended up not making sense. I wanted to see the list of champions being filtered in real time. I am really satisfied with the result and I so was excited when I finally nailed it.
 
-The amount of things I learned while working on this app is insane! I feel like I now have a really good handle on how to use props in combination with conditional (ternary) operators.
+- The amount of things I learned while working on this app is insane! I feel like I now have a really good handle on how to use props in combination with conditional (ternary) operators. I have also improved my overall thinking process when creating a project and I fully understand how important planning is when it comes to saving time and building applications in an efficient way. 
+
+- After being quite obsessed with this project for a couple weeks, I have also learned that it is important to balance how much time I am putting into a project with other aspects of my life. 
 
 ## Deployment
 
