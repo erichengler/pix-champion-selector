@@ -91,6 +91,11 @@ function AboutPage() {
 						short time. Its been quite the journey so far, and I'm excited
 						to see where this path takes me into the future.
 					</li>
+					<br />
+					<li>
+						Thanks to my family who have been incredibly supportive during
+						this journey of mine. I wouldn't be here without your support.
+					</li>
 				</ul>
 			</Typography>
 		</div>

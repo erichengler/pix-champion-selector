@@ -34,7 +34,7 @@ This application was designed to help players decide which champion to pick for 
 
 1. Clone down this repository. You will need `node` and `npm` installed globally on your machine. Open it up in your editor of choice.
 2. Create a database named `pix_app`.
-3. Refer to the `database.sql` file and use the first 5 queries to create the database tables.
+3. Refer to the `database.sql` file and run the first 5 queries to create the database tables.
 
 -----------------------------------------------------------------
 - DO NOT run the rest of the queries yet! Only run the first 5 queries to create the database tables. We will return to run the rest of the queries in step 10.
@@ -68,17 +68,46 @@ This application was designed to help players decide which champion to pick for 
 
 ## Usage
 
+1. As a new user on the `Home` page, I will need to register to use the application. I can click the `Register` link to create a username and password. After registering, I will be logged in automatically and taken to the `User` page.
 
+2. As a user who is already registered, I can log in using my username and password on the `Home` page. After logging in, I will be brought to the `User` page.
+
+3. As a user who is logged in, I want to click the picture of Pix to be taken to the `Champions` page.
+
+4. As a user on the `Champions` page, I can use the filter at the top of the page to filter the list of champions below. If I select a certain `class` and/or `region`, only champions who have been assigned that class and/or region will be displayed in the list. I can also change the `difficulty` range and the list will update accordingly. If I want to filter by `notes`, I can type something into the notes input field and only champions with a note that contains the word(s) I typed will be displayed. I can use any or all of these filtering methods at the same time. 
+
+5. As a user on the `Champions` page, I can reset the current filter by clicking the `Reset` button. If I want to temporarily disable the filter, I can do so by checking the `Disable Filter` checkbox just above the list of champions. If I want to include champions that I have blacklisted in my results, I can check the `Include blacklisted` checkbox just above the list of champions.
+
+6. As a user on the `Champions` page who wishes to find a certain champion quickly, I can use the input field labeled `Search by name...` by typing in the champion's name.
+
+7. As a user on the `Champions` page, I can click the `Roll` button to be taken to the `Result` page, where a random champion from the current list will be selected for me to play in my next League of Legends match.
+
+8. As a user on the `Champions` page, I can click the portrait of a champion to be taken to the `Details` page for that champion. On this page, I can find information about the champion such as `title`, `class`, `difficulty`, `region` and `lore`.
+
+9. As a user on the `Details` page of a champion, I can click the `Heart` icon to add this champion to my favorites. If the champion is already in my favorites (the heart icon will be filled in), I can click the filled in icon to remove the champion from my favorites. I can click the `Note` icon to bring up a modal. If I type something into the input field on the modal and then click the `Submit` button, I can create a note for that champion. If the champion already has a note, (the note icon will be filled in) I can click the filled in icon to edit or delete the `Note`. If I wish to add the champion to my blacklist, I can click the `Blacklist` icon. If the champion is already in my blacklist (the blacklist icon will be filled in), I can click the filled in icon to remove the champion from my blacklist. Clicking the `Back` button will return me to the `Champions` page.
+
+10. As a user, I can navigate to the `Favorites` page using the navbar at the top of the application. On this page, I can view the champions I have added to my `Favorites`. If I wish to remove a champion from my favorites, I can click the `X` in the top right corner of the card for that champion. If I wish to go to the `Details` page of a champion in my favorites, I can click the `Profile` icon in the top left corner of that champion's card. There is also a `Note` icon that functions identically to the `Note` icon from the `Details` page.
+
+11. As a user on the `Favorites` page, I can click the `Roll` button to be taken to the `Result` page, where a random champion from my current list of favorites will be selected for me to play in my next League of Legends match.
+
+12. As a user on the `Result` page, the resulting champion can be added to or removed from my favorites list using the `Heart` icon. I can create a note or edit/delete an existing note that is attached to the resulting champion using the `Note` icon. And the resulting champion can be added to or removed from my blacklist using the `Blacklist` icon.
+
+13. As a user on the `Result` page, I can click the `Roll` button to get a new result. If the original roll came from the `Champions` page, the pool of potential results will contain the champions currently displayed on the `Champions` page. If the original roll came from the `Favorites` page, the pool of potential results will contain the champions currently on my favorites. I can click the `Back` button to return to the previous page.
+
+14. As a user, I can navigate to the `About` page using the navbar at the top of the application. On this page, I can find information about how the app was created, contact information, future plans for the app, and acknowledgements.
 
 ## Built With
 
-- Javascript
-- React
-- Redux w/ Sagas
-- Node
-- Express
+- ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+- ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+- ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+- ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+- ![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)
+- ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+- ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
+- ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
+- SQL
 - Axios
-- PostgreSQL
 - Passport
 - Material UI
 
@@ -98,7 +127,7 @@ This application was designed to help players decide which champion to pick for 
 
 - This was my first time working with an API in a project and it was a lot more work than I thought to populate my database with all of the champion images and information from Riot Games. I could have just manually entered all of this information but I wanted a challenge and thats what I got. It felt great to get it working in the end.
 
-- Building the filter on the champions page also pushed me out of my comfort zone quite a bit. Originally I had the filter on a separate page and this ended up not making sense. I wanted to see the list of champions being filtered in real time. I am really satisfied with the result and I so was excited when I finally nailed it.
+- Building the filter on the champions page also pushed me out of my comfort zone quite a bit. Originally I had the filter on a separate page and this ended up not making sense. I wanted to see the list of champions being filtered in real time. I am really satisfied with the result and I was so excited when I finally nailed it.
 
 - The amount of things I learned while working on this app is insane! I feel like I now have a really good handle on how to use props in combination with conditional (ternary) operators. I have also improved my overall thinking process when creating a project and I fully understand how important planning is when it comes to saving time and building applications in an efficient way. 
 
