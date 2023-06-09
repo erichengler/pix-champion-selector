@@ -26,14 +26,18 @@ function FavoritesPage() {
             {/* ------- Checking for champions ------- */}
             {champions.length === 0 ? (
                 <div className="container">
-                    <h2>Loading...</h2>
+                    <Typography variant="h3" textAlign='center'>
+                        Loading...
+                    </Typography>
                 </div>
             ) : (
 
                 // ------- Checking for favorites -------
                 favorites.length === 0 ? (
                     <div className="container">
-                        <h2>No Favorites</h2>
+                        <Typography variant="h3" textAlign='center'>
+                            No Favorites
+                        </Typography>
                     </div>
                 ) : (
 

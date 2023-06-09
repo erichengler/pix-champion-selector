@@ -102,7 +102,7 @@ function DetailsPage() {
 
                             {/* ------- Champion lore ------- */}
                             <Typography>
-                                {champion[0].lore}
+                                <div dangerouslySetInnerHTML={{ __html: champion[0].lore}} />
                             </Typography>
                         </div>
                     </Card>

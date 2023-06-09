@@ -25,6 +25,9 @@ This application was designed to help players decide which champion to pick for 
 ![Favorites Preview](./public/images/screenshots/favorites_page.png)
 <br /><br />
 
+![Notes Preview](./public/images/screenshots/notes.png)
+<br /><br />
+
 ![Result Preview](./public/images/screenshots/result_page.png)
 
 ## Installation / Setup
@@ -46,11 +49,11 @@ This application was designed to help players decide which champion to pick for 
 9. After logging in and landing on the User Page (You will be greeted by Pix at this point), the database will automatically populate every champion's `name`, `title`, `imageSplash`, `imageTile`, `imageSmall`, `difficulty` and `lore` from the Data Dragon API Library (by Riot Games).
 
 -----------------------------------------------------------------
-- At the time this application was created, the most recent Data Dragon version was `12.6.1`. This version contains 159 different champions from the game. Please ensure that all 159 champions are populated in the database before leaving the `User Page`. This may take up to a minute or so depending on your internet connection. If you leave the `User Page` before all the data is populated, please delete and recreate the `champions` database table and then return to the `User Page` to start the population process again.
+- At the time this application was created, the most recent Data Dragon version was `13.11.1`. This version contains 163 different champions from the game. Please ensure that all 163 champions are populated in the database before leaving the `User Page`. This may take up to a minute or so depending on your internet connection. If you leave the `User Page` before all the data is populated, please delete and recreate the `champions` database table and then return to the `User Page` to start the population process again.
 
 - I will try to update this application when newer versions of Data Dragon are released by Riot Games. If I end up behind on this (quite likely), you may need to replace the version variables in `/src/data/fetchChampionNames.js` and `/src/redux/sagas/championInfo.saga.js` with the current version of Data Dragon. The application will still function on an older version, but you may encounter outdated information or missing champions that were added to the game in a newer version.
 
-- You can visit this URL to find the latest version: `https://ddragon.leagueoflegends.com/api/versions.json` (The first number in the array is the newest version)
+- You can visit this URL to find the latest version: `https://ddragon.leagueoflegends.com/api/versions.json` (The first number in the array is the newest version).
 -----------------------------------------------------------------
 
 10. After the database has been fully populated, refer back to the `database.sql` file and run the queries to update `difficulty` (where it is missing from), `class` and `region` in the champions table. 

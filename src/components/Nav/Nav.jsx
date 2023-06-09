@@ -22,7 +22,9 @@ function Nav() {
 			<Typography className="nav">
 				{/* ------- Title header ------- */}
 				<Link to="/home">
-					<h2 className="nav-title">Pix</h2>
+					<Typography className="nav-title" variant="h4">
+						Pix
+					</Typography >
 				</Link>
 				<div>
 					{/* ------- If no user is logged in, show these ------- */}
