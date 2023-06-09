@@ -49,11 +49,19 @@ This application was designed to help players decide which champion to pick for 
 - At the time this application was created, the most recent Data Dragon version was `12.6.1`. This version contains 159 different champions from the game. Please ensure that all 159 champions are populated in the database before leaving the `User Page`. This may take up to a minute or so depending on your internet connection. If you leave the `User Page` before all the data is populated, please delete and recreate the `champions` database table and then return to the `User Page` to start the population process again.
 
 - I will try to update this application when newer versions of Data Dragon are released by Riot Games. If I end up behind on this (quite likely), you may need to replace the version variables in `/src/data/fetchChampionNames.js` and `/src/redux/sagas/championInfo.saga.js` with the current version of Data Dragon. The application will still function on an older version, but you may encounter outdated information or missing champions that were added to the game in a newer version.
+
+- You can visit this URL to find the latest version: `https://ddragon.leagueoflegends.com/api/versions.json` (The first number in the array is the newest version)
 -----------------------------------------------------------------
 
 10. After the database has been fully populated, refer back to the `database.sql` file and run the queries to update `difficulty` (where it is missing from), `class` and `region` in the champions table. 
 
-- At this point, if there is any missing information in the champions table (more likely if you had to update to a newer version), feel free to add your own values. The class of a champion can be found at `https://leagueoflegends.fandom.com/wiki/(CHAMPION_NAME)/LoL` and the region of a champion can be found at `https://www.leagueoflegends.com/en-us/champions/(CHAMPION_NAME)`. Replace (CHAMPION_NAME) with the name of the champion.
+-----------------------------------------------------------------
+- At this point, if there is any missing information in the champions table (more likely if you had to update to a newer version), feel free to add your own values. 
+
+- The class of a champion can be found at `https://leagueoflegends.fandom.com/wiki/(CHAMPION_NAME)/LoL`. Replace (CHAMPION_NAME) with the name of the champion.
+
+- The region of a champion can be found at `https://www.leagueoflegends.com/en-us/champions/(CHAMPION_NAME)`. Replace (CHAMPION_NAME) with the name of the champion.
+-----------------------------------------------------------------
 
 ## Usage
 
