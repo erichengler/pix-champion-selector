@@ -140,7 +140,10 @@ This application was designed to help players decide which champion to pick for 
 
 ## Deployment
 
-Heroku deployment coming soon!
+This application has been deployed to Heroku. You can find it at the following URL:
+
+`https://pix-champion-selector.herokuapp.com/`
+
 
 ## Acknowledgement
 
